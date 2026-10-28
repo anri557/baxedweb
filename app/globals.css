@@ -1118,21 +1118,23 @@ header {
 }
 
 .hero .btn-hero {
+  width: 100%;
   min-width: 320px;
-  background: linear-gradient(90deg, #b99a35 0%, #d3bc70 50%, #ae912b 100%);
+  background: linear-gradient(100deg, #5900a8 0%, #8525dc 48%, #e8a7ff 100%);
   border: 0;
+  color: #fff;
   padding: 16px 48px;
   font-size: 13px;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-align: center;
-  box-shadow: 0 4px 20px rgba(201, 169, 75, 0.25);
+  box-shadow: 0 4px 24px rgba(155, 54, 255, 0.34);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .hero .btn-hero:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 24px rgba(201, 169, 75, 0.35);
+  box-shadow: 0 6px 30px rgba(190, 103, 255, 0.52);
 }
 
 /* ==========================================================================
