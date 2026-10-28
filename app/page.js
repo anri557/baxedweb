@@ -409,9 +409,6 @@ export default function Home() {
             <a href="#sets" className="nav-link">
               Sets
             </a>
-            <Link href="/products/shower-duo" className="nav-link" style={{ color: "var(--gold2)", fontWeight: 600 }}>
-              Shower Duo
-            </Link>
           </nav>
         </div>
 
@@ -1396,24 +1393,16 @@ export default function Home() {
             <h3>Customer Care</h3>
             <ul className="footer-links">
               <li>
-                <a href="#news">Contact Us</a>
+                <Link href="/contact">Contact Us</Link>
               </li>
               <li>
-                <a href="#news">FAQs</a>
+                <Link href="/faq">FAQs</Link>
               </li>
               <li>
-                <a
-                  href="#shop"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handleCategoryFilter("all");
-                  }}
-                >
-                  Size Guide
-                </a>
+                <Link href="/size-guide">Size Guide</Link>
               </li>
               <li>
-                <a href="#news">Shipping &amp; Returns</a>
+                <Link href="/shipping-returns">Shipping &amp; Returns</Link>
               </li>
             </ul>
           </nav>

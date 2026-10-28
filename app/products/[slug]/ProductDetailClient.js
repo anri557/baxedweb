@@ -863,9 +863,10 @@ export default function ProductDetailClient({ slug }) {
           <nav className="footer-column" aria-label="Customer care">
             <h3>Customer Care</h3>
             <ul className="footer-links">
-              <li><Link href="/">Contact Us</Link></li>
-              <li><Link href="/">FAQs</Link></li>
-              <li><Link href="/">Shipping &amp; Returns</Link></li>
+              <li><Link href="/contact">Contact Us</Link></li>
+              <li><Link href="/faq">FAQs</Link></li>
+              <li><Link href="/size-guide">Size Guide</Link></li>
+              <li><Link href="/shipping-returns">Shipping &amp; Returns</Link></li>
             </ul>
           </nav>
           <nav className="footer-column" aria-label="Quick links">
