@@ -7,9 +7,9 @@
   --line: #2a2a2a;
   --text: #f2efe8;
   --muted: #9a968c;
-  --gold1: #c9a94b;
-  --gold2: #e8d08a;
-  --ink: #1a1405;
+  --gold1: #7118c9;
+  --gold2: #f3eaff;
+  --ink: #ffffff;
   --page-gutter: clamp(24px, 4.5vw, 72px);
 
   color-scheme: dark;
@@ -64,8 +64,8 @@ button {
    Shared Component Utilities & Buttons
    ========================================================================== */
 .gold {
-  background: linear-gradient(90deg, var(--gold1), var(--gold2) 50%, var(--gold1));
-  color: var(--ink);
+  background: linear-gradient(100deg, #5900a8 0%, #8525dc 48%, #e8a7ff 100%);
+  color: #ffffff;
 }
 
 .btn {
@@ -81,7 +81,7 @@ button {
 .btn:focus-visible,
 .tab:focus-visible,
 a:focus-visible {
-  outline: 2px solid var(--gold2);
+  outline: 2px solid #e8a7ff;
   outline-offset: 3px;
 }
 
@@ -342,8 +342,8 @@ header {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.16);
+    background: linear-gradient(100deg, #5900a8 0%, #8525dc 48%, #e8a7ff 100%);
+    border: 0;
     padding: 9px 18px;
     border-radius: 4px;
     color: #f2efe8;
@@ -355,9 +355,9 @@ header {
   }
 
   .nav-pill-btn:hover {
-    background: rgba(255, 255, 255, 0.1);
-    border-color: var(--gold1);
-    color: var(--gold2);
+    background: linear-gradient(100deg, #5900a8 0%, #8525dc 48%, #e8a7ff 100%);
+    border-color: transparent;
+    color: #ffffff;
   }
 
   .nav-pill-btn .pill-icon {
@@ -623,9 +623,9 @@ header {
 .cart-continue-btn {
   min-height: 42px;
   padding: 0 20px;
-  border: 1px solid #3a3a3a;
-  background: transparent;
-  color: var(--text);
+  border: 0;
+  background: linear-gradient(100deg, #5900a8 0%, #8525dc 48%, #e8a7ff 100%);
+  color: #ffffff;
   font: 500 12px/1 Montserrat, sans-serif;
   letter-spacing: 0.02em;
   cursor: pointer;
@@ -633,8 +633,7 @@ header {
 }
 
 .cart-continue-btn:hover {
-  border-color: #777;
-  background: rgba(255, 255, 255, 0.04);
+  filter: brightness(1.12);
 }
 
 .cart-items {
@@ -679,8 +678,8 @@ header {
 .cart-set-promo {
   margin: 14px 0;
   padding: 12px;
-  border: 1px solid rgba(201, 169, 75, 0.65);
-  background: linear-gradient(120deg, rgba(201, 169, 75, 0.1), rgba(201, 169, 75, 0.015));
+  border: 1px solid rgba(155, 54, 255, 0.5);
+  background: linear-gradient(120deg, rgba(155, 54, 255, 0.12), rgba(155, 54, 255, 0.015));
 }
 
 .cart-set-eyebrow {
@@ -856,9 +855,9 @@ header {
   gap: 12px;
   padding: 0 12px;
   border: 0;
-  background: #171612;
-  border: 1px solid #c9a94b;
-  color: #e8d08a;
+  background: linear-gradient(100deg, #5900a8 0%, #8525dc 48%, #e8a7ff 100%);
+  border: 0;
+  color: #ffffff;
   font: 700 12px/1 Montserrat, sans-serif;
   text-align: left;
   cursor: pointer;
@@ -1096,7 +1095,7 @@ header {
 }
 
 .hero h1 span {
-  background: linear-gradient(90deg, #c9a94b 0%, #ecd79b 50%, #c9a94b 100%);
+  background: linear-gradient(90deg, #c785ff 0%, #ffffff 50%, #c785ff 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -1149,7 +1148,7 @@ header {
   gap: 16px;
   flex-wrap: wrap;
   color: #f2efe8;
-  background: linear-gradient(100deg, #2a2112, #5b4719 60%, #8a6d26);
+  background: linear-gradient(100deg, #210d35, #42126b 60%, #7023a9);
 }
 
 .banner b {
@@ -1338,8 +1337,8 @@ h2 {
 }
 
 .shop-section .tab[aria-pressed="true"] {
-  background: linear-gradient(90deg, #b99a35 0%, #d3bc70 50%, #ae912b 100%);
-  color: var(--ink);
+  background: linear-gradient(100deg, #5900a8 0%, #8525dc 48%, #e8a7ff 100%);
+  color: #ffffff;
   border-color: transparent;
 }
 
@@ -1423,8 +1422,8 @@ h2 {
 .shop-section .card .btn {
   padding: 10px 12px;
   border: 1px solid transparent;
-  background: linear-gradient(90deg, var(--gold1), var(--gold2));
-  color: var(--ink);
+  background: linear-gradient(100deg, #5900a8 0%, #8525dc 48%, #e8a7ff 100%);
+  color: #ffffff;
   font-size: 10px;
   letter-spacing: 0.08em;
   transition: filter 0.2s ease, transform 0.2s ease;
@@ -1749,8 +1748,8 @@ h2 {
   z-index: 0;
   inset: 0 auto 0 40%;
   width: 34%;
-  background: linear-gradient(180deg, #e8c978 0%, #fff0c5 100%);
-  box-shadow: 12px 12px 24px rgba(232, 201, 120, 0.12);
+  background: linear-gradient(180deg, #8525dc 0%, #e8a7ff 100%);
+  box-shadow: 12px 12px 24px rgba(155, 54, 255, 0.18);
   content: "";
 }
 
@@ -1930,7 +1929,7 @@ h2 {
 }
 
 .proof-number {
-  color: #e8dfc5;
+  color: #f3eaff;
   font-size: clamp(36px, 4.5vw, 68px);
   font-weight: 600;
   line-height: 1;
@@ -2408,11 +2407,11 @@ footer {
   bottom: 16px;
   left: 16px;
   z-index: 10;
-  background: rgba(14, 14, 14, 0.9);
+  background: linear-gradient(100deg, #5900a8 0%, #8525dc 48%, #e8a7ff 100%);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  border: 1px solid #333;
-  color: #dedede;
+  border: 0;
+  color: #ffffff;
   font-size: 12px;
   font-weight: 500;
   padding: 8px 14px;
@@ -2425,9 +2424,7 @@ footer {
 }
 
 .pdp-whats-included-btn:hover {
-  border-color: var(--gold1);
-  color: #ffffff;
-  background: rgba(22, 22, 22, 0.95);
+  filter: brightness(1.12);
 }
 
 .pdp-whats-included-panel {
@@ -2630,8 +2627,8 @@ footer {
   gap: 12px;
   padding: 0 24px;
   border: 0;
-  background: linear-gradient(100deg, #b99a35, #e8d08a 50%, #ae912b);
-  color: #151105;
+  background: linear-gradient(100deg, #5900a8 0%, #8525dc 48%, #e8a7ff 100%);
+  color: #ffffff;
   font-weight: 700;
   font-size: 13.5px;
   letter-spacing: 0.05em;
@@ -2641,8 +2638,8 @@ footer {
 }
 
 .pdp-cta-button:hover {
-  background: #c9a94b;
-  color: #151105;
+  filter: brightness(1.12);
+  color: #ffffff;
   transform: translateY(-1px);
 }
 
@@ -2655,7 +2652,7 @@ footer {
 
 .pdp-cta-original-price {
   text-decoration: line-through;
-  color: rgba(232, 208, 138, 0.72);
+  color: rgba(255, 255, 255, 0.72);
   font-weight: 600;
   font-size: 12.5px;
   margin-left: 6px;
@@ -2664,8 +2661,8 @@ footer {
 .pdp-promo-card {
   margin-top: 14px;
   padding: 14px 18px;
-  border: 1px solid rgba(201, 169, 75, 0.45);
-  background: linear-gradient(120deg, rgba(201, 169, 75, 0.08) 0%, rgba(201, 169, 75, 0.015) 100%);
+  border: 1px solid rgba(155, 54, 255, 0.4);
+  background: linear-gradient(120deg, rgba(155, 54, 255, 0.1) 0%, rgba(155, 54, 255, 0.015) 100%);
   border-radius: 2px;
 }
 
@@ -2818,8 +2815,8 @@ footer {
 .pdp-switch-btn {
   width: 100%;
   min-height: 52px;
-  background: linear-gradient(100deg, #b99a35, #e8d08a 50%, #ae912b);
-  color: #151105;
+  background: linear-gradient(100deg, #5900a8 0%, #8525dc 48%, #e8a7ff 100%);
+  color: #ffffff;
   font-weight: 700;
   font-size: 13px;
   letter-spacing: 0.08em;
