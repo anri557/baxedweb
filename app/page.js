@@ -949,7 +949,7 @@ export default function Home() {
           <b>The Winter Edit drops soon</b>
           <small>First 500 orders get a free wool scarf ($60 value).</small>
         </div>
-        <a className="btn gold" href="#news">
+        <a className="btn gold banner-cta" href="#news">
           Be the first to know
         </a>
       </div>
