@@ -322,14 +322,14 @@ export default function ProductDetailClient({ slug }) {
             <Link href="/" className="nav-link">
               Shop
             </Link>
-            <Link href="/" className="nav-link">
-              Hair
+            <Link href="/#shop" className="nav-link">
+              Tops
             </Link>
-            <Link href="/" className="nav-link">
-              Body
+            <Link href="/#shop" className="nav-link">
+              Bottoms
             </Link>
-            <Link href="/" className="nav-link">
-              Skin
+            <Link href="/#shop" className="nav-link">
+              Outerwear
             </Link>
             <Link href="/#sets" className="nav-link">
               Sets
@@ -857,7 +857,7 @@ export default function ProductDetailClient({ slug }) {
               </svg>
             </Link>
             <p className="footer-mission">
-              Essential grooming engineered for men. Peak performance with natural ingredients.
+              Thoughtful menswear, designed for a better fit and made for everyday wear.
             </p>
           </div>
           <nav className="footer-column" aria-label="Customer care">
@@ -873,14 +873,15 @@ export default function ProductDetailClient({ slug }) {
             <h3>Quick Links</h3>
             <ul className="footer-links">
               <li><Link href="/">Shop All</Link></li>
-              <li><Link href="/products/shower-duo">Shower Duo</Link></li>
+              <li><Link href="/#shop">Tops</Link></li>
+              <li><Link href="/#shop">Bottoms</Link></li>
               <li><Link href="/#sets">Build A Set</Link></li>
             </ul>
           </nav>
         </div>
         <div className="footer-bottom">
           <span>© 2026 BASED. All rights reserved.</span>
-          <span>Made for everyday performance.</span>
+          <span>Made for everyday wear.</span>
         </div>
       </footer>
 

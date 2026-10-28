@@ -27,51 +27,46 @@ const FAQ_DATA = [
     a: "Our warehouse operates on rapid automated fulfillment. If you need to make changes to your delivery address, size selection, or cancel an order, please submit a message via our Contact Us page within 1 hour of placing the order."
   },
 
-  // Products & Formulas
+  // Materials & Garment Care
   {
-    category: "Products & Formulas",
-    q: "What makes BASED grooming formulas different?",
-    a: "Engineered specifically for men's hair, scalp, and skin biology. Our formulas are powered by clean, concentrated botanical actives—free of sulfates, parabens, phthalates, synthetic dyes, and heavy silicones. They deliver maximum lather and cleansing performance without stripping essential natural oils."
+    category: "Materials & Garment Care",
+    q: "What fabrics and materials are used in your collection?",
+    a: "Our menswear is crafted from premium natural textiles: 280gsm heavyweight combed cotton for our tees, 100% fine Italian merino wool for our knitwear, and durable high-twist stretch twill for our chinos and outerwear. Everything is engineered for durability, structure, and everyday comfort."
   },
   {
-    category: "Products & Formulas",
-    q: "How long does a bottle of the Shower Duo last?",
-    a: "With daily use, each 8.4 fl oz (250 ml) bottle lasts approximately 6 to 8 weeks. Because our formulas are highly concentrated, a nickel-sized amount provides a rich lather."
+    category: "Materials & Garment Care",
+    q: "Are BASED garments pre-shrunk?",
+    a: "Yes. All our cotton tees, shirts, and fleece undergo garment pre-washing and pre-shrinking. As long as standard cold care instructions are followed, your garments will maintain their true-to-size fit."
   },
   {
-    category: "Products & Formulas",
-    q: "Are BASED grooming products cruelty-free?",
-    a: "Yes, 100%. We never test our formulas or ingredients on animals, and we strictly partner with certified cruelty-free suppliers."
-  },
-  {
-    category: "Products & Formulas",
-    q: "What fabrics are used in your apparel collection?",
-    a: "Our menswear is crafted from premium natural textiles: 280gsm heavyweight combed cotton for our tees, 100% fine Italian merino wool for our knitwear, and durable high-twist twill for our chinos and outerwear. Everything is pre-shrunk for consistent fit wash after wash."
-  },
-  {
-    category: "Products & Formulas",
+    category: "Materials & Garment Care",
     q: "How should I wash and care for my garments?",
-    a: "We recommend washing cold with like colors inside out, and hanging to dry or tumble drying on low heat. Avoid chlorine bleach. Iron on low heat if needed."
+    a: "We recommend machine washing cold inside out with similar colors, and hanging to dry or tumble drying on low heat. Avoid chlorine bleach. Use a low iron if needed."
+  },
+  {
+    category: "Materials & Garment Care",
+    q: "Where is BASED menswear engineered and produced?",
+    a: "Our silhouettes and patterns are developed in-house with a modern athletic profile. We partner exclusively with certified ethical mills and textile producers who meet strict quality and environmental benchmarks."
   },
 
-  // Returns & Guarantee
+  // Returns & Exchanges
   {
-    category: "Returns & Guarantee",
-    q: "What is your 60-Day Satisfaction Guarantee?",
-    a: "We believe in our products completely. If you do not love how your hair, scalp, or body feels after using our grooming essentials within 60 days, email our customer care team and we will issue a full refund—no return shipping required for first-time bottles."
+    category: "Returns & Exchanges",
+    q: "What is your 30-Day Fit & Satisfaction Guarantee?",
+    a: "We want every piece you wear to fit perfectly. If an item does not fit or meet your expectations, you may return or exchange it within 30 days of delivery, provided it is unworn with tags attached."
   },
   {
-    category: "Returns & Guarantee",
-    q: "What is the return window for apparel and footwear?",
-    a: "Garments and footwear may be returned or exchanged within 30 days of delivery. Items must be in their original unworn condition with tags attached and packaging preserved."
+    category: "Returns & Exchanges",
+    q: "Are size exchanges free?",
+    a: "Yes. Size exchanges are 100% free on all domestic orders. We provide a prepaid shipping label to make swapping for your ideal size completely seamless."
   },
   {
-    category: "Returns & Guarantee",
-    q: "Are return shipments free?",
-    a: "Size exchanges are 100% free on all domestic orders. For standard refunds on apparel, a flat $6.95 return shipping fee is deducted from your refund amount when using our prepaid shipping label."
+    category: "Returns & Exchanges",
+    q: "What is the return process for refunds?",
+    a: "For standard refunds to your original payment method, a flat $6.95 return shipping fee is deducted from your refund when using our prepaid return label. Alternatively, you can opt for 100% store credit with zero return fees."
   },
   {
-    category: "Returns & Guarantee",
+    category: "Returns & Exchanges",
     q: "How quickly are refunds processed?",
     a: "Once your returned package is received and checked in at our fulfillment facility, refunds are issued to your original payment method within 3 to 5 business days."
   },
@@ -84,16 +79,16 @@ const FAQ_DATA = [
   },
   {
     category: "Sizing & Fit",
-    q: "What if an item does not fit the way I expected?",
-    a: "We provide seamless, hassle-free size exchanges. Simply get in touch with our customer care team or visit our Shipping & Returns section to request an exchange for another size."
+    q: "What if I am between sizes?",
+    a: "If you prefer a relaxed, draped aesthetic, we recommend sizing up. For a sharp, fitted look, stay with your measured true size. Remember that domestic size exchanges are always free."
   }
 ];
 
 const CATEGORIES = [
   "All",
   "Orders & Shipping",
-  "Products & Formulas",
-  "Returns & Guarantee",
+  "Materials & Garment Care",
+  "Returns & Exchanges",
   "Sizing & Fit"
 ];
 
@@ -124,7 +119,7 @@ export default function FaqClient() {
     <CustomerCareLayout
       activeKey="faq"
       pageTitle="Frequently Asked Questions"
-      pageSubtitle="Find instant answers to common questions about our products, order fulfillment, 60-day satisfaction guarantee, and sizing."
+      pageSubtitle="Find instant answers to common questions about our menswear collection, order fulfillment, 30-day fit guarantee, and sizing."
     >
       {/* Search & Category Filter Toolbar */}
       <div className="cc-toolbar">

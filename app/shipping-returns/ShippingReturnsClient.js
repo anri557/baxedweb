@@ -8,7 +8,7 @@ export default function ShippingReturnsClient() {
     <CustomerCareLayout
       activeKey="shipping-returns"
       pageTitle="Shipping & Returns"
-      pageSubtitle="Fast fulfillment, global delivery, and our risk-free 60-day satisfaction guarantee."
+      pageSubtitle="Fast fulfillment, global delivery, and our risk-free 30-day fit & quality guarantee."
     >
       {/* 4 Policy Highlights */}
       <div className="cc-grid-4" style={{ marginBottom: "52px" }}>
@@ -46,9 +46,9 @@ export default function ShippingReturnsClient() {
               <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
             </svg>
           </div>
-          <h3 className="cc-card-title">60-Day Guarantee</h3>
+          <h3 className="cc-card-title">30-Day Guarantee</h3>
           <p className="cc-card-desc">
-            100% risk-free guarantee on all grooming products. Full refund if you are not satisfied.
+            100% risk-free fit guarantee on all menswear. Free size exchanges and easy returns.
           </p>
         </div>
 
@@ -129,24 +129,24 @@ export default function ShippingReturnsClient() {
         </div>
       </section>
 
-      {/* 60-Day Satisfaction Guarantee Feature */}
+      {/* 30-Day Fit Guarantee Feature */}
       <section style={{ marginBottom: "56px" }}>
         <div className="cc-card" style={{ background: "linear-gradient(135deg, #141414 0%, #171120 100%)", borderColor: "rgba(113, 24, 201, 0.4)", padding: "clamp(28px, 4vw, 44px)" }}>
           <div style={{ display: "inline-block", background: "var(--gold1)", color: "#fff", fontSize: "11px", fontWeight: 800, letterSpacing: "0.12em", textTransform: "uppercase", padding: "4px 10px", borderRadius: "2px", marginBottom: "16px" }}>
-            GROOMING PROMISE
+            PERFECT FIT PROMISE
           </div>
           <h2 style={{ fontSize: "clamp(22px, 2.5vw, 32px)", fontWeight: 800, letterSpacing: "-0.03em", color: "#ffffff", margin: "0 0 12px 0" }}>
-            The 60-Day Satisfaction Guarantee
+            The 30-Day Fit &amp; Satisfaction Guarantee
           </h2>
           <p style={{ fontSize: "14.5px", color: "#c8c4bc", lineHeight: "1.7", maxWidth: "800px", margin: "0 0 20px 0" }}>
-            We want you to experience our formulas risk-free. If you don&rsquo;t love how your hair and scalp look and feel after using our Shower Duo or grooming essentials, simply email our customer care team within 60 days of purchase. We will issue a 100% refund—no return shipping required for first-time bottles.
+            We want every garment you purchase to fit cleanly and comfortably. If your items aren&rsquo;t quite the right size or cut, simply contact our customer care team within 30 days of delivery. We provide 100% free size exchanges and prepaid return labels.
           </p>
           <div style={{ display: "flex", gap: "16px", flexWrap: "wrap", alignItems: "center" }}>
             <Link href="/contact" className="cc-submit-btn" style={{ textDecoration: "none" }}>
-              Claim Guarantee Refund
+              Request an Exchange
             </Link>
             <span style={{ fontSize: "12px", color: "var(--muted)" }}>
-              Applies to your first purchase of any grooming product.
+              Free size exchanges on all domestic US orders.
             </span>
           </div>
         </div>

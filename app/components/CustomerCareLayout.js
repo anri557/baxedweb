@@ -65,14 +65,14 @@ export default function CustomerCareLayout({
             <Link href="/" className="nav-link">
               Shop
             </Link>
-            <Link href="/products/shower-duo" className="nav-link">
-              Hair
+            <Link href="/#shop" className="nav-link">
+              Tops
             </Link>
-            <Link href="/products/shower-duo" className="nav-link">
-              Body
+            <Link href="/#shop" className="nav-link">
+              Bottoms
             </Link>
-            <Link href="/" className="nav-link">
-              Skin
+            <Link href="/#shop" className="nav-link">
+              Outerwear
             </Link>
             <Link href="/#sets" className="nav-link">
               Sets
@@ -202,8 +202,14 @@ export default function CustomerCareLayout({
             <Link href="/" onClick={() => setIsNavDrawerOpen(false)} style={{ fontSize: "14px", fontWeight: 600, letterSpacing: "0.04em", textTransform: "uppercase" }}>
               Shop All
             </Link>
-            <Link href="/products/shower-duo" onClick={() => setIsNavDrawerOpen(false)} style={{ fontSize: "14px", fontWeight: 600, letterSpacing: "0.04em", textTransform: "uppercase" }}>
-              Shower Duo
+            <Link href="/#shop" onClick={() => setIsNavDrawerOpen(false)} style={{ fontSize: "14px", fontWeight: 600, letterSpacing: "0.04em", textTransform: "uppercase" }}>
+              Tops
+            </Link>
+            <Link href="/#shop" onClick={() => setIsNavDrawerOpen(false)} style={{ fontSize: "14px", fontWeight: 600, letterSpacing: "0.04em", textTransform: "uppercase" }}>
+              Bottoms
+            </Link>
+            <Link href="/#shop" onClick={() => setIsNavDrawerOpen(false)} style={{ fontSize: "14px", fontWeight: 600, letterSpacing: "0.04em", textTransform: "uppercase" }}>
+              Outerwear
             </Link>
             <Link href="/#sets" onClick={() => setIsNavDrawerOpen(false)} style={{ fontSize: "14px", fontWeight: 600, letterSpacing: "0.04em", textTransform: "uppercase" }}>
               Build A Set
@@ -332,7 +338,7 @@ export default function CustomerCareLayout({
               </svg>
             </Link>
             <p className="footer-mission">
-              Essential grooming engineered for men. Peak performance with natural ingredients.
+              Thoughtful menswear, designed for a better fit and made for everyday wear.
             </p>
             <div className="footer-socials" aria-hidden="true">
               <span>
@@ -379,7 +385,10 @@ export default function CustomerCareLayout({
                 <Link href="/">Shop All</Link>
               </li>
               <li>
-                <Link href="/products/shower-duo">Shower Duo</Link>
+                <Link href="/#shop">Tops</Link>
+              </li>
+              <li>
+                <Link href="/#shop">Bottoms</Link>
               </li>
               <li>
                 <Link href="/#sets">Build A Set</Link>
@@ -388,8 +397,8 @@ export default function CustomerCareLayout({
           </nav>
         </div>
         <div className="footer-bottom">
-          <span>© 2026 BASED. All rights reserved.</span>
-          <span>Made for everyday performance.</span>
+          <span>© 2026 BAXED. All rights reserved.</span>
+          <span>Made for everyday wear.</span>
         </div>
       </footer>
 

@@ -39,7 +39,7 @@ export default function ContactClient() {
     <CustomerCareLayout
       activeKey="contact"
       pageTitle="Contact Us"
-      pageSubtitle="Have a question about your order, our grooming formulas, or sizing? Our customer care team is here to assist."
+      pageSubtitle="Have a question about your order, garment sizing, or materials? Our customer care team is here to assist."
     >
       {/* 3 Contact Info Cards */}
       <div className="cc-grid-3" style={{ marginBottom: "48px" }}>
@@ -88,7 +88,7 @@ export default function ContactClient() {
           </div>
           <h3 className="cc-card-title">Returns &amp; Guarantee</h3>
           <p className="cc-card-desc">
-            Looking to initiate a return or exchange under our 60-Day Satisfaction Guarantee? Check our guidelines.
+            Looking to initiate a return or exchange under our 30-Day Guarantee? Check our guidelines.
           </p>
           <Link href="/shipping-returns" className="cc-card-link">
             Shipping &amp; Returns Policy &rarr;
@@ -185,9 +185,9 @@ export default function ContactClient() {
                   >
                     <option value="General Inquiry">General Inquiry</option>
                     <option value="Order Tracking & Status">Order Tracking &amp; Status</option>
-                    <option value="Returns & Exchanges">Returns &amp; Exchanges (60-Day Guarantee)</option>
+                    <option value="Returns & Exchanges">Returns &amp; Exchanges (30-Day Guarantee)</option>
                     <option value="Sizing & Fit Advice">Sizing &amp; Fit Advice</option>
-                    <option value="Product & Formulation Questions">Product &amp; Formulation Questions</option>
+                    <option value="Product & Fabric Questions">Product &amp; Fabric Questions</option>
                     <option value="Wholesale & Press">Wholesale &amp; Press</option>
                   </select>
                 </div>
