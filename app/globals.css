@@ -89,20 +89,28 @@ a:focus-visible {
    Header & Top Navigation (Reference Design)
    ========================================================================== */
 .promo {
+  position: sticky;
+  top: env(safe-area-inset-top, 0px);
+  z-index: 101;
+  display: flex;
+  min-height: 36px;
+  align-items: center;
+  justify-content: center;
   text-align: center;
   font-size: 9px;
   letter-spacing: 0.12em;
   padding: 7px var(--page-gutter);
-  background: rgba(10, 10, 10, 0.55);
+  background: rgba(25, 22, 19, 0.72);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--line);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   color: white;
 }
 
 header {
   position: sticky;
-  top: env(safe-area-inset-top, 0px);
+  top: calc(env(safe-area-inset-top, 0px) + 36px);
   z-index: 100;
   display: grid;
   grid-template-columns: 1fr auto 1fr;
