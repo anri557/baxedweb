@@ -327,12 +327,17 @@ export default function CustomerCareLayout({
 
       {/* Footer */}
       <footer id="footer">
-        <div className="footer-watermark" aria-hidden="true">
-          BAXED
-        </div>
+        {/* Mobile watermark: standing on the right side, fading out */}
+        <img
+          src="/footer-watermark-mobile.svg"
+          alt=""
+          className="footer-watermark-mobile"
+          aria-hidden="true"
+        />
+
         <div className="footer-main">
           <div className="footer-brand">
-            <Link className="footer-brand-name" href="/" aria-label="BAXED home">
+            <Link className="footer-brand-name" href="/" aria-label="BASED home">
               <svg viewBox="65 20 895 185" fill="currentColor" aria-hidden="true">
                 <path fillRule="evenodd" d={LOGO_PATH} />
               </svg>
@@ -396,6 +401,16 @@ export default function CustomerCareLayout({
             </ul>
           </nav>
         </div>
+
+        {/* Desktop watermark: wide logo fading underneath */}
+        <div className="footer-watermark-wrap" aria-hidden="true">
+          <img
+            src="/footer-watermark.svg"
+            alt=""
+            className="footer-watermark-desktop"
+          />
+        </div>
+
         <div className="footer-bottom">
           <span>© 2026 BAXED. All rights reserved.</span>
           <span>Made for everyday wear.</span>

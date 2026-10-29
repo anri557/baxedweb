@@ -128,10 +128,10 @@ export default function Home() {
   const [openSubmenu, setOpenSubmenu] = useState(null);
   const [toastMessage, setToastMessage] = useState("");
   const [isToastActive, setIsToastActive] = useState(false);
-  const [emailInput, setEmailInput] = useState("");
 
   const [stat1, setStat1] = useState("3,000,000+");
   const [stat2, setStat2] = useState("200,000+");
+  const [statProgress, setStatProgress] = useState(1);
 
   const toastTimeoutRef = useRef(null);
   const proofSectionRef = useRef(null);
@@ -184,37 +184,46 @@ export default function Home() {
       return;
     }
 
-    const animateNumber = (target, setNumber) => {
-      const duration = 1800;
-      let startTime = null;
-      setNumber("0+");
-
-      const updateCount = (timestamp) => {
-        if (!startTime) startTime = timestamp;
-        const progress = Math.min((timestamp - startTime) / duration, 1);
-        const easedProgress = 1 - Math.pow(1 - progress, 3);
-        const currentValue = Math.round(target * easedProgress);
-        setNumber(`${currentValue.toLocaleString()}+`);
-
-        if (progress < 1) {
-          window.requestAnimationFrame(updateCount);
-        }
-      };
-
-      window.requestAnimationFrame(updateCount);
-    };
-
     if ("IntersectionObserver" in window && proofSectionRef.current) {
+      setStat1("0+");
+      setStat2("0+");
+      setStatProgress(0);
+
       const observer = new IntersectionObserver(
         (entries) => {
           if (entries.some((entry) => entry.isIntersecting)) {
             hasAnimatedStatsRef.current = true;
-            animateNumber(3000000, setStat1);
-            animateNumber(200000, setStat2);
             observer.disconnect();
+
+            const duration = 2000;
+            let startTime = null;
+
+            const updateCount = (timestamp) => {
+              if (!startTime) startTime = timestamp;
+              const progress = Math.min((timestamp - startTime) / duration, 1);
+              // Smooth cubic ease out
+              const eased = 1 - Math.pow(1 - progress, 3);
+
+              const val1 = Math.round(3000000 * eased);
+              const val2 = Math.round(200000 * eased);
+
+              setStat1(`${val1.toLocaleString()}+`);
+              setStat2(`${val2.toLocaleString()}+`);
+              setStatProgress(eased);
+
+              if (progress < 1) {
+                window.requestAnimationFrame(updateCount);
+              } else {
+                setStat1("3,000,000+");
+                setStat2("200,000+");
+                setStatProgress(1);
+              }
+            };
+
+            window.requestAnimationFrame(updateCount);
           }
         },
-        { threshold: 0.25 }
+        { threshold: 0.2 }
       );
       observer.observe(proofSectionRef.current);
       return () => observer.disconnect();
@@ -262,14 +271,6 @@ export default function Home() {
 
   const toggleSubmenu = (category) => {
     setOpenSubmenu((prev) => (prev === category ? null : category));
-  };
-
-  const handleNewsletterSubmit = (e) => {
-    e.preventDefault();
-    if (emailInput.trim()) {
-      showToast("You’re on the list");
-      setEmailInput("");
-    }
   };
 
   const handleAccountClick = (e) => {
@@ -529,7 +530,7 @@ export default function Home() {
           </div>
         </div>
         <nav className="nav-drawer-links" id="drawerNav">
-          <div className="drawer-category">
+          <div className={`drawer-category ${openSubmenu === "Tops" ? "is-expanded" : ""}`}>
             <button
               className="drawer-category-toggle"
               type="button"
@@ -537,48 +538,57 @@ export default function Home() {
               aria-controls="drawer-submenu-tops"
               onClick={() => toggleSubmenu("Tops")}
             >
-              Tops <span className="drawer-category-chevron" aria-hidden="true"></span>
+              <span>Tops</span>
+              <span className="drawer-category-chevron" aria-hidden="true"></span>
             </button>
-            <div className="drawer-submenu" id="drawer-submenu-tops" hidden={openSubmenu !== "Tops"}>
-              <a
-                href="#shop"
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleCategoryFilter("Tops");
-                }}
-              >
-                T-Shirts &amp; Basics
-              </a>
-              <a
-                href="#shop"
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleCategoryFilter("Tops");
-                }}
-              >
-                Blouses &amp; Shirts
-              </a>
-              <a
-                href="#shop"
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleCategoryFilter("Tops");
-                }}
-              >
-                Sweaters &amp; Knitwear
-              </a>
-              <a
-                href="#shop"
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleCategoryFilter("Tops");
-                }}
-              >
-                Casual &amp; Sleeveless Wear
-              </a>
+            <div
+              className={`drawer-submenu-wrapper ${openSubmenu === "Tops" ? "is-open" : ""}`}
+              id="drawer-submenu-tops"
+              aria-hidden={openSubmenu !== "Tops"}
+            >
+              <div className="drawer-submenu-inner">
+                <div className="drawer-submenu-list">
+                  <a
+                    href="#shop"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleCategoryFilter("Tops");
+                    }}
+                  >
+                    T-Shirts &amp; Basics
+                  </a>
+                  <a
+                    href="#shop"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleCategoryFilter("Tops");
+                    }}
+                  >
+                    Blouses &amp; Shirts
+                  </a>
+                  <a
+                    href="#shop"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleCategoryFilter("Tops");
+                    }}
+                  >
+                    Sweaters &amp; Knitwear
+                  </a>
+                  <a
+                    href="#shop"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleCategoryFilter("Tops");
+                    }}
+                  >
+                    Casual &amp; Sleeveless Wear
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
-          <div className="drawer-category">
+          <div className={`drawer-category ${openSubmenu === "Bottoms" ? "is-expanded" : ""}`}>
             <button
               className="drawer-category-toggle"
               type="button"
@@ -586,48 +596,57 @@ export default function Home() {
               aria-controls="drawer-submenu-bottoms"
               onClick={() => toggleSubmenu("Bottoms")}
             >
-              Bottoms <span className="drawer-category-chevron" aria-hidden="true"></span>
+              <span>Bottoms</span>
+              <span className="drawer-category-chevron" aria-hidden="true"></span>
             </button>
-            <div className="drawer-submenu" id="drawer-submenu-bottoms" hidden={openSubmenu !== "Bottoms"}>
-              <a
-                href="#shop"
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleCategoryFilter("Bottoms");
-                }}
-              >
-                Jeans &amp; Denim
-              </a>
-              <a
-                href="#shop"
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleCategoryFilter("Bottoms");
-                }}
-              >
-                Trousers &amp; Chinos
-              </a>
-              <a
-                href="#shop"
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleCategoryFilter("Bottoms");
-                }}
-              >
-                Shorts
-              </a>
-              <a
-                href="#shop"
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleCategoryFilter("Bottoms");
-                }}
-              >
-                Joggers &amp; Sweatpants
-              </a>
+            <div
+              className={`drawer-submenu-wrapper ${openSubmenu === "Bottoms" ? "is-open" : ""}`}
+              id="drawer-submenu-bottoms"
+              aria-hidden={openSubmenu !== "Bottoms"}
+            >
+              <div className="drawer-submenu-inner">
+                <div className="drawer-submenu-list">
+                  <a
+                    href="#shop"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleCategoryFilter("Bottoms");
+                    }}
+                  >
+                    Jeans &amp; Denim
+                  </a>
+                  <a
+                    href="#shop"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleCategoryFilter("Bottoms");
+                    }}
+                  >
+                    Trousers &amp; Chinos
+                  </a>
+                  <a
+                    href="#shop"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleCategoryFilter("Bottoms");
+                    }}
+                  >
+                    Shorts
+                  </a>
+                  <a
+                    href="#shop"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleCategoryFilter("Bottoms");
+                    }}
+                  >
+                    Joggers &amp; Sweatpants
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
-          <div className="drawer-category">
+          <div className={`drawer-category ${openSubmenu === "Outerwear" ? "is-expanded" : ""}`}>
             <button
               className="drawer-category-toggle"
               type="button"
@@ -635,48 +654,57 @@ export default function Home() {
               aria-controls="drawer-submenu-outerwear"
               onClick={() => toggleSubmenu("Outerwear")}
             >
-              Outerwear <span className="drawer-category-chevron" aria-hidden="true"></span>
+              <span>Outerwear</span>
+              <span className="drawer-category-chevron" aria-hidden="true"></span>
             </button>
-            <div className="drawer-submenu" id="drawer-submenu-outerwear" hidden={openSubmenu !== "Outerwear"}>
-              <a
-                href="#shop"
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleCategoryFilter("Outerwear");
-                }}
-              >
-                Jackets
-              </a>
-              <a
-                href="#shop"
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleCategoryFilter("Outerwear");
-                }}
-              >
-                Coats
-              </a>
-              <a
-                href="#shop"
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleCategoryFilter("Outerwear");
-                }}
-              >
-                Overshirts
-              </a>
-              <a
-                href="#shop"
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleCategoryFilter("Outerwear");
-                }}
-              >
-                Hoodies &amp; Sweatshirts
-              </a>
+            <div
+              className={`drawer-submenu-wrapper ${openSubmenu === "Outerwear" ? "is-open" : ""}`}
+              id="drawer-submenu-outerwear"
+              aria-hidden={openSubmenu !== "Outerwear"}
+            >
+              <div className="drawer-submenu-inner">
+                <div className="drawer-submenu-list">
+                  <a
+                    href="#shop"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleCategoryFilter("Outerwear");
+                    }}
+                  >
+                    Jackets
+                  </a>
+                  <a
+                    href="#shop"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleCategoryFilter("Outerwear");
+                    }}
+                  >
+                    Coats
+                  </a>
+                  <a
+                    href="#shop"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleCategoryFilter("Outerwear");
+                    }}
+                  >
+                    Overshirts
+                  </a>
+                  <a
+                    href="#shop"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleCategoryFilter("Outerwear");
+                    }}
+                  >
+                    Hoodies &amp; Sweatshirts
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
-          <div className="drawer-category">
+          <div className={`drawer-category ${openSubmenu === "Footwear" ? "is-expanded" : ""}`}>
             <button
               className="drawer-category-toggle"
               type="button"
@@ -684,55 +712,66 @@ export default function Home() {
               aria-controls="drawer-submenu-footwear"
               onClick={() => toggleSubmenu("Footwear")}
             >
-              Footwear <span className="drawer-category-chevron" aria-hidden="true"></span>
+              <span>Footwear</span>
+              <span className="drawer-category-chevron" aria-hidden="true"></span>
             </button>
-            <div className="drawer-submenu" id="drawer-submenu-footwear" hidden={openSubmenu !== "Footwear"}>
-              <a
-                href="#shop"
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleCategoryFilter("Footwear");
-                }}
-              >
-                Sneakers
-              </a>
-              <a
-                href="#shop"
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleCategoryFilter("Footwear");
-                }}
-              >
-                Boots
-              </a>
-              <a
-                href="#shop"
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleCategoryFilter("Footwear");
-                }}
-              >
-                Loafers
-              </a>
-              <a
-                href="#shop"
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleCategoryFilter("Footwear");
-                }}
-              >
-                Sandals
-              </a>
+            <div
+              className={`drawer-submenu-wrapper ${openSubmenu === "Footwear" ? "is-open" : ""}`}
+              id="drawer-submenu-footwear"
+              aria-hidden={openSubmenu !== "Footwear"}
+            >
+              <div className="drawer-submenu-inner">
+                <div className="drawer-submenu-list">
+                  <a
+                    href="#shop"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleCategoryFilter("Footwear");
+                    }}
+                  >
+                    Sneakers
+                  </a>
+                  <a
+                    href="#shop"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleCategoryFilter("Footwear");
+                    }}
+                  >
+                    Boots
+                  </a>
+                  <a
+                    href="#shop"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleCategoryFilter("Footwear");
+                    }}
+                  >
+                    Loafers
+                  </a>
+                  <a
+                    href="#shop"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleCategoryFilter("Footwear");
+                    }}
+                  >
+                    Sandals
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
           <a
             href="#sets"
+            className="drawer-direct-link"
             onClick={() => setIsNavDrawerOpen(false)}
           >
             Shop by category
           </a>
           <a
-            href="#news"
+            href="#shop"
+            className="drawer-direct-link"
             onClick={() => setIsNavDrawerOpen(false)}
           >
             Early Access
@@ -742,7 +781,7 @@ export default function Home() {
           <p style={{ margin: "0 0 12px" }}>Free worldwide shipping over $100.</p>
           <div>
             <a
-              href="#news"
+              href="#shop"
               id="drawerAccountLink"
               onClick={() => setIsNavDrawerOpen(false)}
             >
@@ -946,7 +985,7 @@ export default function Home() {
           <b>The Winter Edit drops soon</b>
           <small>First 500 orders get a free wool scarf ($60 value).</small>
         </div>
-        <a className="btn gold banner-cta" href="#news">
+        <a className="btn gold banner-cta" href="#shop">
           Be the first to know
         </a>
       </div>
@@ -1040,7 +1079,17 @@ export default function Home() {
           }}
         >
           <span className="cat-banner-content">
-            Shop tops <span className="cat-arrow">&rarr;</span>
+            Shop tops{" "}
+            <span className="cat-arrow" aria-hidden="true">
+              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor">
+                <path
+                  d="M6 10h8m-3.5-3.5l3.5 3.5-3.5 3.5"
+                  strokeWidth="2.2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </span>
           </span>
         </a>
 
@@ -1056,7 +1105,17 @@ export default function Home() {
           }}
         >
           <span className="cat-banner-content">
-            Shop bottoms <span className="cat-arrow">&rarr;</span>
+            Shop bottoms{" "}
+            <span className="cat-arrow" aria-hidden="true">
+              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor">
+                <path
+                  d="M6 10h8m-3.5-3.5l3.5 3.5-3.5 3.5"
+                  strokeWidth="2.2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </span>
           </span>
         </a>
 
@@ -1072,7 +1131,17 @@ export default function Home() {
           }}
         >
           <span className="cat-banner-content">
-            Shop outerwear <span className="cat-arrow">&rarr;</span>
+            Shop outerwear{" "}
+            <span className="cat-arrow" aria-hidden="true">
+              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor">
+                <path
+                  d="M6 10h8m-3.5-3.5l3.5 3.5-3.5 3.5"
+                  strokeWidth="2.2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </span>
           </span>
         </a>
       </div>
@@ -1080,7 +1149,16 @@ export default function Home() {
       {/* Why BAXED comparison */}
       <section className="why-section" aria-labelledby="why-heading">
         <h2 className="why-heading" id="why-heading">
-          Why BAXED
+          Why{" "}
+          <svg
+            className="why-heading-logo"
+            viewBox="65 20 895 185"
+            fill="currentColor"
+            aria-label="BAXED"
+            role="img"
+          >
+            <path fillRule="evenodd" d={LOGO_PATH} />
+          </svg>
         </h2>
         <p className="why-subtitle">Here is why 3,000,000+ chose BAXED.</p>
 
@@ -1158,29 +1236,29 @@ export default function Home() {
           <h2>
             Because confidence shouldn&#39;t come at the <span>cost of your health.</span>
           </h2>
-          <a
-            className="proof-link"
-            href="#shop"
-            onClick={(e) => {
-              e.preventDefault();
-              handleCategoryFilter("all");
-            }}
-          >
-            Shop All
-          </a>
         </div>
         <div className="proof-stat">
           <div className="proof-number" data-count="3000000" aria-label="3,000,000+">
             {stat1}
           </div>
-          <div className="proof-rule" aria-hidden="true"></div>
+          <div className="proof-rule" aria-hidden="true">
+            <div
+              className="proof-rule-fill"
+              style={{ transform: `scaleX(${statProgress})` }}
+            />
+          </div>
           <p className="proof-label">Have already chosen BAXED.</p>
         </div>
         <div className="proof-stat">
           <div className="proof-number" data-count="200000" aria-label="200,000+">
             {stat2}
           </div>
-          <div className="proof-rule" aria-hidden="true"></div>
+          <div className="proof-rule" aria-hidden="true">
+            <div
+              className="proof-rule-fill"
+              style={{ transform: `scaleX(${statProgress})` }}
+            />
+          </div>
           <p className="proof-label">5-star reviews worldwide.</p>
         </div>
       </section>
@@ -1340,32 +1418,17 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Newsletter Signup */}
-      <div className="news" id="news">
-        <h2>Get 10% off your first order</h2>
-        <p style={{ color: "var(--muted)", margin: "8px 0 0" }}>
-          Join the list for early drops and member-only sets.
-        </p>
-        <form id="newsletterForm" onSubmit={handleNewsletterSubmit}>
-          <input
-            type="email"
-            required
-            placeholder="Email address"
-            aria-label="Email address"
-            value={emailInput}
-            onChange={(e) => setEmailInput(e.target.value)}
-          />
-          <button className="btn gold" type="submit">
-            Join
-          </button>
-        </form>
-      </div>
 
       {/* Footer */}
       <footer id="footer">
-        <div className="footer-watermark" aria-hidden="true">
-          BAXED
-        </div>
+        {/* Mobile watermark: standing on the right side, fading out */}
+        <img
+          src="/footer-watermark-mobile.svg"
+          alt=""
+          className="footer-watermark-mobile"
+          aria-hidden="true"
+        />
+
         <div className="footer-main">
           <div className="footer-brand">
             <a className="footer-brand-name" href="#" aria-label="BAXED home">
@@ -1451,6 +1514,16 @@ export default function Home() {
             </ul>
           </nav>
         </div>
+
+        {/* Desktop watermark: wide logo fading underneath */}
+        <div className="footer-watermark-wrap" aria-hidden="true">
+          <img
+            src="/footer-watermark.svg"
+            alt=""
+            className="footer-watermark-desktop"
+          />
+        </div>
+
         <div className="footer-bottom">
           <span>© 2026 BAXED. All rights reserved.</span>
           <span>Made for everyday wear.</span>
