@@ -1079,7 +1079,7 @@ export default function Home() {
           }}
         >
           <span className="cat-banner-content">
-            Shop tops{" "}
+            Shop tops
             <span className="cat-arrow" aria-hidden="true">
               <svg viewBox="0 0 20 20" fill="none" stroke="currentColor">
                 <path
@@ -1105,7 +1105,7 @@ export default function Home() {
           }}
         >
           <span className="cat-banner-content">
-            Shop bottoms{" "}
+            Shop bottoms
             <span className="cat-arrow" aria-hidden="true">
               <svg viewBox="0 0 20 20" fill="none" stroke="currentColor">
                 <path
@@ -1131,7 +1131,7 @@ export default function Home() {
           }}
         >
           <span className="cat-banner-content">
-            Shop outerwear{" "}
+            Shop outerwear
             <span className="cat-arrow" aria-hidden="true">
               <svg viewBox="0 0 20 20" fill="none" stroke="currentColor">
                 <path
