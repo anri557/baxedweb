@@ -2,6 +2,25 @@
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import Navbar from "@/app/components/Navbar";
+import Footer from "@/app/components/Footer";
+
+function BagPlusIcon({ className = "bag-icon cart-plus-icon" }) {
+  return (
+    <svg className={className} viewBox="0 0 15 17" fill="none" aria-hidden="true">
+      <path
+        d="M6.40625 0C7.42331 0 8.39893 0.403967 9.11816 1.12305C9.83733 1.84222 10.2421 2.81791 10.2422 3.83496V3.85645H12.8125V9.74414C12.6078 9.71838 12.3992 9.70312 12.1875 9.70312C11.9757 9.70313 11.7673 9.71835 11.5625 9.74414V5.10645H10.2422V6.40625H8.99219V5.10645H3.82129V6.40625H2.57129V5.10645H1.25V12.834C1.25005 13.1786 1.38716 13.5092 1.63086 13.7529C1.8746 13.9966 2.20513 14.1338 2.5498 14.1338H7.25977C7.24159 14.3063 7.23242 14.4818 7.23242 14.6592C7.23244 14.9053 7.25048 15.1473 7.28516 15.3838H2.5498C1.87361 15.3838 1.22523 15.1148 0.74707 14.6367C0.268949 14.1586 5.35364e-05 13.5102 0 12.834V3.85645H2.57129V3.83496C2.5714 2.81792 2.97517 1.84222 3.69434 1.12305C4.41355 0.403901 5.38918 5.04216e-05 6.40625 0ZM6.40625 1.25C5.7207 1.25005 5.06291 1.52211 4.57812 2.00684C4.09338 2.49158 3.8214 3.14944 3.82129 3.83496V3.85645H8.99219V3.83496C8.99208 3.14943 8.71913 2.49159 8.23438 2.00684C7.74956 1.52218 7.09178 1.25 6.40625 1.25Z"
+        fill="currentColor"
+      />
+      <path
+        d="M12.6758 12.501V14.0117H14.1875V14.8232H12.6758V16.335H11.8643V14.8232H10.3535V14.0117H11.8643V12.501H12.6758Z"
+        fill="currentColor"
+        stroke="currentColor"
+        strokeWidth="0.2"
+      />
+    </svg>
+  );
+}
 
 // Product catalog data
 const products = [
@@ -308,173 +327,26 @@ export default function Home() {
 
   return (
     <>
-      {/* Top Announcement Promo Bar */}
-      <div className="promo">BUILD YOUR OWN SET · SAVE UP TO 20% + 3 FREE GIFTS</div>
+      <Navbar
+        navItems={[
+          { label: "Shop", onSelect: "all" },
+          { label: "Tops", onSelect: "Tops" },
+          { label: "Bottoms", onSelect: "Bottoms" },
+          { label: "Outerwear", onSelect: "Outerwear" },
+          { label: "Sets", href: "/#sets" },
+        ]}
+        onItemSelect={handleCategoryFilter}
+        isNavDrawerOpen={isNavDrawerOpen}
+        onMenuToggle={() => {
+          if (!isNavDrawerOpen && isCartDrawerOpen) setIsCartDrawerOpen(false);
+          setIsNavDrawerOpen(!isNavDrawerOpen);
+        }}
+        onCartClick={() => setIsCartDrawerOpen(true)}
+        onAccountClick={() => showToast("Account portal opening soon")}
+        cartCount={cartCount}
+      />
 
-      {/* Primary Header & Navigation */}
-      <header className="header" role="banner">
-        {/* Left: 2-line minimalist menu toggle (Mobile) */}
-        <button
-          className="menu-toggle"
-          id="menuToggle"
-          aria-label="Open navigation menu"
-          aria-expanded={isNavDrawerOpen}
-          aria-controls="navDrawer"
-          onClick={() => {
-            if (!isNavDrawerOpen && isCartDrawerOpen) setIsCartDrawerOpen(false);
-            setIsNavDrawerOpen(!isNavDrawerOpen);
-          }}
-        >
-          <span className="bar"></span>
-          <span className="bar"></span>
-        </button>
-
-        {/* Left Group on Desktop: Logo + Category Links */}
-        <div className="nav-left">
-          <a className="logo" href="#" aria-label="BAXED">
-            <svg viewBox="65 20 895 185" fill="currentColor" aria-hidden="true">
-              <path fillRule="evenodd" d={LOGO_PATH} />
-            </svg>
-          </a>
-
-          {/* Desktop Nav Links */}
-          <nav className="desktop-nav" aria-label="Desktop Navigation">
-            <div className="nav-dropdown">
-              <a
-                href="#shop"
-                className="nav-link"
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleCategoryFilter("all");
-                }}
-              >
-                <span>Shop</span>
-                <svg className="dropdown-chevron" viewBox="0 0 10 6" fill="none">
-                  <path
-                    d="M1 1L5 5L9 1"
-                    stroke="currentColor"
-                    strokeWidth="1.6"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </a>
-              <div className="dropdown-menu">
-                <button type="button" onClick={() => handleCategoryFilter("all")}>
-                  All Items
-                </button>
-                <button type="button" onClick={() => handleCategoryFilter("Tops")}>
-                  Tops
-                </button>
-                <button type="button" onClick={() => handleCategoryFilter("Bottoms")}>
-                  Bottoms
-                </button>
-                <button type="button" onClick={() => handleCategoryFilter("Outerwear")}>
-                  Outerwear
-                </button>
-                <button type="button" onClick={() => handleCategoryFilter("Footwear")}>
-                  Footwear
-                </button>
-              </div>
-            </div>
-            <a
-              href="#shop"
-              className="nav-link"
-              onClick={(e) => {
-                e.preventDefault();
-                handleCategoryFilter("Tops");
-              }}
-            >
-              Tops
-            </a>
-            <a
-              href="#shop"
-              className="nav-link"
-              onClick={(e) => {
-                e.preventDefault();
-                handleCategoryFilter("Bottoms");
-              }}
-            >
-              Bottoms
-            </a>
-            <a
-              href="#shop"
-              className="nav-link"
-              onClick={(e) => {
-                e.preventDefault();
-                handleCategoryFilter("Outerwear");
-              }}
-            >
-              Outerwear
-            </a>
-            <a href="#sets" className="nav-link">
-              Sets
-            </a>
-          </nav>
-        </div>
-
-        {/* Right: Build Your Own Set pill button + Account Profile + Shopping Bag Cart */}
-        <div className="nav-actions">
-          <a href="#sets" className="nav-pill-btn">
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              className="pill-icon"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M12 2v20M2 12h20M4.93 4.93l14.14 14.14M4.93 19.07l14.14-14.14" />
-            </svg>
-            <span>BUILD YOUR OWN SET</span>
-          </a>
-          <a
-            href="#account"
-            className="nav-icon-btn"
-            aria-label="Account"
-            id="accountBtn"
-            onClick={handleAccountClick}
-          >
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.8"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-              <circle cx="12" cy="7" r="4" />
-            </svg>
-          </a>
-          <button
-            className="nav-icon-btn cart-btn"
-            id="cartBtn"
-            aria-label="Cart"
-            type="button"
-            onClick={openCart}
-          >
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.8"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
-              <line x1="3" y1="6" x2="21" y2="6" />
-              <path d="M16 10a4 4 0 0 1-8 0" />
-            </svg>
-            <span className="cart-badge" id="count">
-              {cartCount}
-            </span>
-          </button>
-        </div>
-      </header>
-
-      {/* Slide-out Navigation Drawer */}
+      {/* Slide-out Navigation Drawer (Mobile) */}
       <div
         className={`nav-drawer-backdrop ${isNavDrawerOpen ? "open" : ""}`}
         id="navDrawerBackdrop"
@@ -548,42 +420,30 @@ export default function Home() {
             >
               <div className="drawer-submenu-inner">
                 <div className="drawer-submenu-list">
-                  <a
-                    href="#shop"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      handleCategoryFilter("Tops");
-                    }}
+                  <Link
+                    href="/tops?filter=T-Shirts+%26+Basics"
+                    onClick={() => setIsNavDrawerOpen(false)}
                   >
                     T-Shirts &amp; Basics
-                  </a>
-                  <a
-                    href="#shop"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      handleCategoryFilter("Tops");
-                    }}
+                  </Link>
+                  <Link
+                    href="/tops?filter=Blouses+%26+Shirts"
+                    onClick={() => setIsNavDrawerOpen(false)}
                   >
                     Blouses &amp; Shirts
-                  </a>
-                  <a
-                    href="#shop"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      handleCategoryFilter("Tops");
-                    }}
+                  </Link>
+                  <Link
+                    href="/tops?filter=Sweaters+%26+Knitwear"
+                    onClick={() => setIsNavDrawerOpen(false)}
                   >
                     Sweaters &amp; Knitwear
-                  </a>
-                  <a
-                    href="#shop"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      handleCategoryFilter("Tops");
-                    }}
+                  </Link>
+                  <Link
+                    href="/tops?filter=Casual+%26+Sleeveless+Wear"
+                    onClick={() => setIsNavDrawerOpen(false)}
                   >
                     Casual &amp; Sleeveless Wear
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -606,42 +466,30 @@ export default function Home() {
             >
               <div className="drawer-submenu-inner">
                 <div className="drawer-submenu-list">
-                  <a
-                    href="#shop"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      handleCategoryFilter("Bottoms");
-                    }}
+                  <Link
+                    href="/bottoms?filter=Jeans+%26+Denim"
+                    onClick={() => setIsNavDrawerOpen(false)}
                   >
                     Jeans &amp; Denim
-                  </a>
-                  <a
-                    href="#shop"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      handleCategoryFilter("Bottoms");
-                    }}
+                  </Link>
+                  <Link
+                    href="/bottoms?filter=Trousers+%26+Chinos"
+                    onClick={() => setIsNavDrawerOpen(false)}
                   >
                     Trousers &amp; Chinos
-                  </a>
-                  <a
-                    href="#shop"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      handleCategoryFilter("Bottoms");
-                    }}
+                  </Link>
+                  <Link
+                    href="/bottoms?filter=Shorts"
+                    onClick={() => setIsNavDrawerOpen(false)}
                   >
                     Shorts
-                  </a>
-                  <a
-                    href="#shop"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      handleCategoryFilter("Bottoms");
-                    }}
+                  </Link>
+                  <Link
+                    href="/bottoms?filter=Joggers+%26+Sweatpants"
+                    onClick={() => setIsNavDrawerOpen(false)}
                   >
                     Joggers &amp; Sweatpants
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -664,42 +512,30 @@ export default function Home() {
             >
               <div className="drawer-submenu-inner">
                 <div className="drawer-submenu-list">
-                  <a
-                    href="#shop"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      handleCategoryFilter("Outerwear");
-                    }}
+                  <Link
+                    href="/outerwear?filter=Jackets"
+                    onClick={() => setIsNavDrawerOpen(false)}
                   >
                     Jackets
-                  </a>
-                  <a
-                    href="#shop"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      handleCategoryFilter("Outerwear");
-                    }}
+                  </Link>
+                  <Link
+                    href="/outerwear?filter=Coats"
+                    onClick={() => setIsNavDrawerOpen(false)}
                   >
                     Coats
-                  </a>
-                  <a
-                    href="#shop"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      handleCategoryFilter("Outerwear");
-                    }}
+                  </Link>
+                  <Link
+                    href="/outerwear?filter=Overshirts"
+                    onClick={() => setIsNavDrawerOpen(false)}
                   >
                     Overshirts
-                  </a>
-                  <a
-                    href="#shop"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      handleCategoryFilter("Outerwear");
-                    }}
+                  </Link>
+                  <Link
+                    href="/outerwear?filter=Hoodies+%26+Sweatshirts"
+                    onClick={() => setIsNavDrawerOpen(false)}
                   >
                     Hoodies &amp; Sweatshirts
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -859,13 +695,13 @@ export default function Home() {
                 <p className="cart-set-copy">
                   Save up to 20% and unlock 3 free gifts when you build your set.
                 </p>
-                <a
+                <Link
                   className="cart-set-link"
-                  href="#sets"
+                  href="/build-your-set"
                   onClick={() => setIsCartDrawerOpen(false)}
                 >
                   Build my set
-                </a>
+                </Link>
               </div>
               <div className="cart-item-list" id="cartItemList">
                 {groupedCartItems.map(({ product, quantity }) => {
@@ -972,9 +808,9 @@ export default function Home() {
             20% and unlock 3 free gifts.
           </p>
           <div className="hero-actions">
-            <a className="btn gold btn-hero" href="#sets">
+            <Link className="btn gold btn-hero" href="/build-your-set">
               BUILD MY SET
-            </a>
+            </Link>
           </div>
         </div>
       </div>
@@ -1050,14 +886,17 @@ export default function Home() {
                     </Link>
                   </h3>
                   <p>{product.description}</p>
-                  <div className="price">${product.price.toFixed(2)}</div>
+                  <div className="price">
+                    <span className="price-currency">$</span>{product.price.toFixed(2)}
+                  </div>
                 </div>
                 <button
                   className="btn gold"
                   type="button"
                   onClick={() => handleAddToCart(product)}
                 >
-                  Add to cart
+                  <span>ADD TO CART</span>
+                  <BagPlusIcon />
                 </button>
               </article>
             );
@@ -1068,85 +907,67 @@ export default function Home() {
       {/* Categories Showcase (Stacked Banners) */}
       <div id="sets" className="cats-stack">
         {/* Category 1: Tops (Left-aligned) */}
-        <a
+        <Link
           className="cat-banner cat-left cat-tops"
-          href="#shop"
+          href="/tops"
           data-cat="Tops"
           aria-label="Shop tops"
-          onClick={(e) => {
-            e.preventDefault();
-            handleCategoryFilter("Tops");
-          }}
         >
           <span className="cat-banner-content">
             Shop tops
             <span className="cat-arrow" aria-hidden="true">
-              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor">
+              <svg viewBox="0 0 16 16" fill="none" focusable="false">
                 <path
-                  d="M6 10h8m-3.5-3.5l3.5 3.5-3.5 3.5"
-                  strokeWidth="2.2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
+                  d="M15.7071 8.70711C16.0976 8.31658 16.0976 7.68342 15.7071 7.29289L9.34315 0.928932C8.95262 0.538408 8.31946 0.538408 7.92893 0.928932C7.53841 1.31946 7.53841 1.95262 7.92893 2.34315L13.5858 8L7.92893 13.6569C7.53841 14.0474 7.53841 14.6805 7.92893 15.0711C8.31946 15.4616 8.95262 15.4616 9.34315 15.0711L15.7071 8.70711ZM0 8V9H15V8V7H0V8Z"
+                  fill="currentColor"
                 />
               </svg>
             </span>
           </span>
-        </a>
+        </Link>
 
         {/* Category 2: Bottoms (Right-aligned) */}
-        <a
+        <Link
           className="cat-banner cat-right cat-bottoms"
-          href="#shop"
+          href="/bottoms"
           data-cat="Bottoms"
           aria-label="Shop bottoms"
-          onClick={(e) => {
-            e.preventDefault();
-            handleCategoryFilter("Bottoms");
-          }}
         >
           <span className="cat-banner-content">
             Shop bottoms
             <span className="cat-arrow" aria-hidden="true">
-              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor">
+              <svg viewBox="0 0 16 16" fill="none" focusable="false">
                 <path
-                  d="M6 10h8m-3.5-3.5l3.5 3.5-3.5 3.5"
-                  strokeWidth="2.2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
+                  d="M15.7071 8.70711C16.0976 8.31658 16.0976 7.68342 15.7071 7.29289L9.34315 0.928932C8.95262 0.538408 8.31946 0.538408 7.92893 0.928932C7.53841 1.31946 7.53841 1.95262 7.92893 2.34315L13.5858 8L7.92893 13.6569C7.53841 14.0474 7.53841 14.6805 7.92893 15.0711C8.31946 15.4616 8.95262 15.4616 9.34315 15.0711L15.7071 8.70711ZM0 8V9H15V8V7H0V8Z"
+                  fill="currentColor"
                 />
               </svg>
             </span>
           </span>
-        </a>
+        </Link>
 
         {/* Category 3: Outerwear (Left-aligned) */}
-        <a
+        <Link
           className="cat-banner cat-left cat-outerwear"
-          href="#shop"
+          href="/outerwear"
           data-cat="Outerwear"
           aria-label="Shop outerwear"
-          onClick={(e) => {
-            e.preventDefault();
-            handleCategoryFilter("Outerwear");
-          }}
         >
           <span className="cat-banner-content">
             Shop outerwear
             <span className="cat-arrow" aria-hidden="true">
-              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor">
+              <svg viewBox="0 0 16 16" fill="none" focusable="false">
                 <path
-                  d="M6 10h8m-3.5-3.5l3.5 3.5-3.5 3.5"
-                  strokeWidth="2.2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
+                  d="M15.7071 8.70711C16.0976 8.31658 16.0976 7.68342 15.7071 7.29289L9.34315 0.928932C8.95262 0.538408 8.31946 0.538408 7.92893 0.928932C7.53841 1.31946 7.53841 1.95262 7.92893 2.34315L13.5858 8L7.92893 13.6569C7.53841 14.0474 7.53841 14.6805 7.92893 15.0711C8.31946 15.4616 8.95262 15.4616 9.34315 15.0711L15.7071 8.70711ZM0 8V9H15V8V7H0V8Z"
+                  fill="currentColor"
                 />
               </svg>
             </span>
           </span>
-        </a>
+        </Link>
       </div>
 
-      {/* Why BAXED comparison */}
+      {/* Why BASED comparison */}
       <section className="why-section" aria-labelledby="why-heading">
         <h2 className="why-heading" id="why-heading">
           Why{" "}
@@ -1154,15 +975,15 @@ export default function Home() {
             className="why-heading-logo"
             viewBox="65 20 895 185"
             fill="currentColor"
-            aria-label="BAXED"
+            aria-label="BASED"
             role="img"
           >
             <path fillRule="evenodd" d={LOGO_PATH} />
           </svg>
         </h2>
-        <p className="why-subtitle">Here is why 3,000,000+ chose BAXED.</p>
+        <p className="why-subtitle">Here is why 3,000,000+ chose BASED.</p>
 
-        <table className="why-table" aria-label="BAXED product standards compared with others">
+        <table className="why-table" aria-label="BASED product standards compared with others">
           <colgroup>
             <col />
             <col />
@@ -1176,7 +997,7 @@ export default function Home() {
                   className="why-brand-logo"
                   viewBox="65 20 895 185"
                   fill="currentColor"
-                  aria-label="BAXED"
+                  aria-label="BASED"
                   role="img"
                 >
                   <path fillRule="evenodd" d={LOGO_PATH} />
@@ -1189,37 +1010,69 @@ export default function Home() {
             <tr>
               <th scope="row">No Parabens</th>
               <td>
-                <span className="why-check" role="img" aria-label="Yes"></span>
+                <span className="why-check" role="img" aria-label="Yes">
+                  <svg className="why-check-icon" viewBox="0 0 34 34" fill="none" aria-hidden="true">
+                    <path d="M3 17.5L12.3 27L31 8" stroke="#0a0a0a" strokeWidth="2.2" strokeMiterlimit="10"/>
+                  </svg>
+                </span>
               </td>
               <td>
-                <span className="why-cross" role="img" aria-label="No"></span>
+                <span className="why-cross" role="img" aria-label="No">
+                  <svg className="why-cross-icon" viewBox="0 0 34 34" fill="none" aria-hidden="true">
+                    <path d="M26 8L8 26M8 8L26 26" stroke="currentColor" strokeWidth="1.6" strokeMiterlimit="10" strokeLinecap="round"/>
+                  </svg>
+                </span>
               </td>
             </tr>
             <tr>
               <th scope="row">No Sulfates</th>
               <td>
-                <span className="why-check" role="img" aria-label="Yes"></span>
+                <span className="why-check" role="img" aria-label="Yes">
+                  <svg className="why-check-icon" viewBox="0 0 34 34" fill="none" aria-hidden="true">
+                    <path d="M3 17.5L12.3 27L31 8" stroke="#0a0a0a" strokeWidth="2.2" strokeMiterlimit="10"/>
+                  </svg>
+                </span>
               </td>
               <td>
-                <span className="why-cross" role="img" aria-label="No"></span>
+                <span className="why-cross" role="img" aria-label="No">
+                  <svg className="why-cross-icon" viewBox="0 0 34 34" fill="none" aria-hidden="true">
+                    <path d="M26 8L8 26M8 8L26 26" stroke="currentColor" strokeWidth="1.6" strokeMiterlimit="10" strokeLinecap="round"/>
+                  </svg>
+                </span>
               </td>
             </tr>
             <tr>
               <th scope="row">Full Ingredient Transparency</th>
               <td>
-                <span className="why-check" role="img" aria-label="Yes"></span>
+                <span className="why-check" role="img" aria-label="Yes">
+                  <svg className="why-check-icon" viewBox="0 0 34 34" fill="none" aria-hidden="true">
+                    <path d="M3 17.5L12.3 27L31 8" stroke="#0a0a0a" strokeWidth="2.2" strokeMiterlimit="10"/>
+                  </svg>
+                </span>
               </td>
               <td>
-                <span className="why-cross" role="img" aria-label="No"></span>
+                <span className="why-cross" role="img" aria-label="No">
+                  <svg className="why-cross-icon" viewBox="0 0 34 34" fill="none" aria-hidden="true">
+                    <path d="M26 8L8 26M8 8L26 26" stroke="currentColor" strokeWidth="1.6" strokeMiterlimit="10" strokeLinecap="round"/>
+                  </svg>
+                </span>
               </td>
             </tr>
             <tr>
               <th scope="row">Formulated &amp; Filled in USA</th>
               <td>
-                <span className="why-check" role="img" aria-label="Yes"></span>
+                <span className="why-check" role="img" aria-label="Yes">
+                  <svg className="why-check-icon" viewBox="0 0 34 34" fill="none" aria-hidden="true">
+                    <path d="M3 17.5L12.3 27L31 8" stroke="#0a0a0a" strokeWidth="2.2" strokeMiterlimit="10"/>
+                  </svg>
+                </span>
               </td>
               <td>
-                <span className="why-cross" role="img" aria-label="No"></span>
+                <span className="why-cross" role="img" aria-label="No">
+                  <svg className="why-cross-icon" viewBox="0 0 34 34" fill="none" aria-hidden="true">
+                    <path d="M26 8L8 26M8 8L26 26" stroke="currentColor" strokeWidth="1.6" strokeMiterlimit="10" strokeLinecap="round"/>
+                  </svg>
+                </span>
               </td>
             </tr>
           </tbody>
@@ -1229,7 +1082,7 @@ export default function Home() {
       {/* Brand confidence and social proof */}
       <section
         className="proof-section"
-        aria-label="BAXED customer community"
+        aria-label="BASED customer community"
         ref={proofSectionRef}
       >
         <div className="proof-intro">
@@ -1238,26 +1091,30 @@ export default function Home() {
           </h2>
         </div>
         <div className="proof-stat">
-          <div className="proof-number" data-count="3000000" aria-label="3,000,000+">
-            {stat1}
+          <div className="proof-figure">
+            <div className="proof-number" data-count="3000000" aria-label="3,000,000+">
+              {stat1}
+            </div>
+            <div className="proof-rule" aria-hidden="true">
+              <div
+                className="proof-rule-fill"
+                style={{ transform: `scaleX(${statProgress})` }}
+              />
+            </div>
           </div>
-          <div className="proof-rule" aria-hidden="true">
-            <div
-              className="proof-rule-fill"
-              style={{ transform: `scaleX(${statProgress})` }}
-            />
-          </div>
-          <p className="proof-label">Have already chosen BAXED.</p>
+          <p className="proof-label">Have already chosen BASED.</p>
         </div>
         <div className="proof-stat">
-          <div className="proof-number" data-count="200000" aria-label="200,000+">
-            {stat2}
-          </div>
-          <div className="proof-rule" aria-hidden="true">
-            <div
-              className="proof-rule-fill"
-              style={{ transform: `scaleX(${statProgress})` }}
-            />
+          <div className="proof-figure">
+            <div className="proof-number proof-number-sm" data-count="200000" aria-label="200,000+">
+              {stat2}
+            </div>
+            <div className="proof-rule" aria-hidden="true">
+              <div
+                className="proof-rule-fill"
+                style={{ transform: `scaleX(${statProgress})` }}
+              />
+            </div>
           </div>
           <p className="proof-label">5-star reviews worldwide.</p>
         </div>
@@ -1268,7 +1125,13 @@ export default function Home() {
         <div className="head">
           <h2>Featured Sets</h2>
           <a className="featured-shop-link" href="#sets">
-            Shop Sets <span aria-hidden="true">→</span>
+            Shop Sets{" "}
+            <svg className="featured-shop-arrow" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path
+                d="M15.7071 8.70711C16.0976 8.31658 16.0976 7.68342 15.7071 7.29289L9.34315 0.928932C8.95262 0.538408 8.31946 0.538408 7.92893 0.928932C7.53841 1.31946 7.53841 1.95262 7.92893 2.34315L13.5858 8L7.92893 13.6569C7.53841 14.0474 7.53841 14.6805 7.92893 15.0711C8.31946 15.4616 8.95262 15.4616 9.34315 15.0711L15.7071 8.70711ZM0 8V9H15V8V7H0V8Z"
+                fill="currentColor"
+              />
+            </svg>
           </a>
         </div>
         <div className="featured-grid">
@@ -1304,7 +1167,8 @@ export default function Home() {
               type="button"
               onClick={() => handleAddFeaturedSet("The Everyday Uniform")}
             >
-              Add to cart
+              <span>ADD TO CART</span>
+              <BagPlusIcon />
             </button>
           </article>
 
@@ -1340,7 +1204,8 @@ export default function Home() {
               type="button"
               onClick={() => handleAddFeaturedSet("Weekend Layers")}
             >
-              Add to cart
+              <span>ADD TO CART</span>
+              <BagPlusIcon />
             </button>
           </article>
 
@@ -1376,7 +1241,8 @@ export default function Home() {
               type="button"
               onClick={() => handleAddFeaturedSet("Clean Essentials")}
             >
-              Add to cart
+              <span>ADD TO CART</span>
+              <BagPlusIcon />
             </button>
           </article>
 
@@ -1412,7 +1278,8 @@ export default function Home() {
               type="button"
               onClick={() => handleAddFeaturedSet("The Layered Edit")}
             >
-              Add to cart
+              <span>ADD TO CART</span>
+              <BagPlusIcon />
             </button>
           </article>
         </div>
@@ -1420,115 +1287,7 @@ export default function Home() {
 
 
       {/* Footer */}
-      <footer id="footer">
-        {/* Mobile watermark: standing on the right side, fading out */}
-        <img
-          src="/footer-watermark-mobile.svg"
-          alt=""
-          className="footer-watermark-mobile"
-          aria-hidden="true"
-        />
-
-        <div className="footer-main">
-          <div className="footer-brand">
-            <a className="footer-brand-name" href="#" aria-label="BAXED home">
-              <svg viewBox="65 20 895 185" fill="currentColor" aria-hidden="true">
-                <path fillRule="evenodd" d={LOGO_PATH} />
-              </svg>
-            </a>
-            <p className="footer-mission">
-              Thoughtful menswear, designed for a better fit and made for everyday wear.
-            </p>
-            <div className="footer-socials" aria-hidden="true">
-              <span>
-                <svg viewBox="0 0 24 24">
-                  <path d="M19.6 7.1a5.2 5.2 0 0 1-3.8-4.8h-3.5v13.1a2.9 2.9 0 1 1-2.9-2.9c.4 0 .8.1 1.1.2V9.1a6.4 6.4 0 1 0 5.3 6.3V8.7a8.6 8.6 0 0 0 5.1 1.7V7a5.3 5.3 0 0 1-1.3.1Z" />
-                </svg>
-              </span>
-              <span>
-                <svg viewBox="0 0 24 24">
-                  <path d="M23.2 6.2a3 3 0 0 0-2.1-2.1C19.2 3.6 12 3.6 12 3.6s-7.2 0-9.1.5A3 3 0 0 0 .8 6.2C.3 8 .3 12 .3 12s0 4 .5 5.8a3 3 0 0 0 2.1 2.1c1.9.5 9.1.5 9.1.5s7.2 0 9.1-.5a3 3 0 0 0 2.1-2.1c.5-1.8.5-5.8.5-5.8s0-4-.5-5.8ZM9.7 15.6V8.4l6.2 3.6-6.2 3.6Z" />
-                </svg>
-              </span>
-            </div>
-          </div>
-          <nav className="footer-column" aria-label="Customer care">
-            <h3>Customer Care</h3>
-            <ul className="footer-links">
-              <li>
-                <Link href="/contact">Contact Us</Link>
-              </li>
-              <li>
-                <Link href="/faq">FAQs</Link>
-              </li>
-              <li>
-                <Link href="/size-guide">Size Guide</Link>
-              </li>
-              <li>
-                <Link href="/shipping-returns">Shipping &amp; Returns</Link>
-              </li>
-            </ul>
-          </nav>
-          <nav className="footer-column" aria-label="Quick links">
-            <h3>Quick Links</h3>
-            <ul className="footer-links">
-              <li>
-                <a
-                  href="#shop"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handleCategoryFilter("all");
-                  }}
-                >
-                  Shop All
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#shop"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handleCategoryFilter("Tops");
-                  }}
-                >
-                  Shop Tops
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#shop"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handleCategoryFilter("Bottoms");
-                  }}
-                >
-                  Shop Bottoms
-                </a>
-              </li>
-              <li>
-                <a href="#sets">Shop by Category</a>
-              </li>
-              <li>
-                <a href="#featured-sets">Featured Sets</a>
-              </li>
-            </ul>
-          </nav>
-        </div>
-
-        {/* Desktop watermark: wide logo fading underneath */}
-        <div className="footer-watermark-wrap" aria-hidden="true">
-          <img
-            src="/footer-watermark.svg"
-            alt=""
-            className="footer-watermark-desktop"
-          />
-        </div>
-
-        <div className="footer-bottom">
-          <span>© 2026 BAXED. All rights reserved.</span>
-          <span>Made for everyday wear.</span>
-        </div>
-      </footer>
+      <Footer />
 
       {/* Notification Toast */}
       <div className={`toast gold ${isToastActive ? "on" : ""}`} id="toast" role="status">

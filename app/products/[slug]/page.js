@@ -29,7 +29,7 @@ export async function generateMetadata({ params }) {
 
   return {
     title: `${title} — BASED`,
-    description: `Shop the essential ${title} for hair, scalp, and body care.`
+    description: `Shop the essential ${title} crafted for modern menswear styling and everyday fit.`
   };
 }
 
