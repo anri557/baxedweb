@@ -5300,7 +5300,7 @@ footer {
 }
 
 .cat-banner-title {
-  font-size: clamp(24px, 2.7vw, 36px);
+  font-size: clamp(24px, 2.8vw, 36px);
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: -0.01em;
