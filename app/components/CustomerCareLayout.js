@@ -220,7 +220,7 @@ export default function CustomerCareLayout({
         {/* Header Hero Area */}
         <section className="cc-hero-section">
           <div className="cc-hero-container">
-            <span className="cc-hero-badge">BASED CUSTOMER CARE</span>
+            <span className="cc-hero-badge">BAXED CUSTOMER CARE</span>
             <h1 className="cc-hero-title">{pageTitle}</h1>
             {pageSubtitle && <p className="cc-hero-subtitle">{pageSubtitle}</p>}
           </div>

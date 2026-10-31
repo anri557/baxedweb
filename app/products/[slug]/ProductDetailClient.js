@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import Navbar from "@/app/components/Navbar";
@@ -74,14 +74,14 @@ const benefitItems = [
 const faqItems = [
   {
     q: "What makes this shampoo and conditioner different from drugstore ones?",
-    a: "Conventional drugstore products often rely on harsh sulfates, synthetic silicones, and parabens that strip your natural scalp barrier and coat hair strands in heavy residue. BASED formulas use 100% naturally-derived botanical surfactants, essential oils, and targeted amino acids to nourish and restore hair health from root to tip without toxic buildup."
+    a: "Conventional drugstore products often rely on harsh sulfates, synthetic silicones, and parabens that strip your natural scalp barrier and coat hair strands in heavy residue. BAXED formulas use 100% naturally-derived botanical surfactants, essential oils, and targeted amino acids to nourish and restore hair health from root to tip without toxic buildup."
   },
   {
     q: "Will this shampoo clean my hair as effectively as drugstore shampoos?",
     a: "Yes, absolutely. We use high-performance plant-derived surfactants like sodium cocoyl isethionate and decyl glucoside that produce a rich, luxurious micro-foam. It thoroughly eliminates excess sebum, sweat, and environmental impurities while maintaining your scalp's optimal pH balance."
   },
   {
-    q: "How long will it take to see results after switching to BASED?",
+    q: "How long will it take to see results after switching to BAXED?",
     a: "Most customers notice an immediate difference in scalp comfort and hair softness from the very first wash. Because your scalp is detoxing from synthetic silicones and sulfates, optimal hair strength and fullness typically shine through within 2 to 3 weeks of consistent daily or alternate-day use."
   },
   {
@@ -94,7 +94,7 @@ const faqItems = [
   },
   {
     q: "How does the price compare to conventional hair care products?",
-    a: "A single 250ml bottle of BASED lasts between 60 to 90 days with normal usage due to its concentrated, water-efficient formula. Cost per wash comes out to less than $0.50—comparable to drugstore products while delivering clinical-grade botanicals."
+    a: "A single 250ml bottle of BAXED lasts between 60 to 90 days with normal usage due to its concentrated, water-efficient formula. Cost per wash comes out to less than $0.50—comparable to drugstore products while delivering clinical-grade botanicals."
   },
   {
     q: "What if it's not a fit for me?",
@@ -185,6 +185,12 @@ export default function ProductDetailClient({ slug }) {
       ? "Shower Duo"
       : slugTitle;
   const isClothingProduct = rawSlug !== "shower-duo";
+  const [storeProduct, setStoreProduct] = useState(null);
+  const displayedTitle = storeProduct?.name || productTitle;
+  const displayedPrice = storeProduct?.price ?? 50.4;
+  const displayedGallery = storeProduct?.image
+    ? [{ src: storeProduct.image, alt: storeProduct.name }]
+    : galleryImages;
   const displayedBenefitItems = isClothingProduct
     ? [
         { ...benefitItems[0], title: "Comfort-First Fabrics", desc: "Soft, breathable materials chosen for all-day wear." },
@@ -205,6 +211,22 @@ export default function ProductDetailClient({ slug }) {
   const [isToastActive, setIsToastActive] = useState(false);
   const [faqTab, setFaqTab] = useState("faqs");
   const [openFaqIndex, setOpenFaqIndex] = useState(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    fetch("/api/products", { cache: "no-store" })
+      .then((response) => response.ok ? response.json() : [])
+      .then((products) => {
+        if (!cancelled && Array.isArray(products)) {
+          const matchingProduct = products.find((product) => product.slug === rawSlug) || null;
+          setStoreProduct(matchingProduct);
+          if (matchingProduct) setActiveImageIndex(0);
+        }
+      })
+      .catch(() => {});
+
+    return () => { cancelled = true; };
+  }, [rawSlug]);
 
   const toggleSubmenu = (category) => {
     setOpenSubmenu((prev) => (prev === category ? null : category));
@@ -232,13 +254,13 @@ export default function ProductDetailClient({ slug }) {
     };
   }, [isNavDrawerOpen, isCartDrawerOpen]);
 
-  const handlePrevImage = () => {
-    setActiveImageIndex((prev) => (prev === 0 ? galleryImages.length - 1 : prev - 1));
-  };
+  const handlePrevImage = useCallback(() => {
+    setActiveImageIndex((prev) => (prev === 0 ? displayedGallery.length - 1 : prev - 1));
+  }, [displayedGallery.length]);
 
-  const handleNextImage = () => {
-    setActiveImageIndex((prev) => (prev === galleryImages.length - 1 ? 0 : prev + 1));
-  };
+  const handleNextImage = useCallback(() => {
+    setActiveImageIndex((prev) => (prev === displayedGallery.length - 1 ? 0 : prev + 1));
+  }, [displayedGallery.length]);
 
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -254,17 +276,36 @@ export default function ProductDetailClient({ slug }) {
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [isCartDrawerOpen, isNavDrawerOpen, showIncluded]);
+  }, [handleNextImage, handlePrevImage, isCartDrawerOpen, isNavDrawerOpen, showIncluded]);
 
   const handleAddToCart = () => {
     const productItem = {
-      name: productTitle,
+      id: storeProduct?.id || rawSlug,
+      name: displayedTitle,
       category: "Duo",
-      price: 50.4,
+      price: displayedPrice,
+      originalPrice: displayedPrice,
+      quantity: 1,
+      subtitle: storeProduct?.sub || "",
+      description: storeProduct?.description || "",
+      image: storeProduct?.image || galleryImages[0].src,
       color: "#222"
     };
+    try {
+      const storedCart = JSON.parse(localStorage.getItem("baxed_cart") || "[]");
+      const currentItems = Array.isArray(storedCart) ? storedCart : [];
+      const existing = currentItems.find((item) => item.id === productItem.id);
+      const nextItems = existing
+        ? currentItems.map((item) => item.id === productItem.id
+          ? { ...item, quantity: Number(item.quantity || item.qty || 1) + 1 }
+          : item)
+        : [...currentItems, productItem];
+      localStorage.setItem("baxed_cart", JSON.stringify(nextItems));
+    } catch {
+      // Keep the product page usable when browser storage is unavailable.
+    }
     setCartItems((prev) => [...prev, productItem]);
-    showToast(`${productTitle} added to cart`);
+    showToast(`${displayedTitle} added to cart`);
     setIsCartDrawerOpen(true);
   };
 
@@ -317,8 +358,8 @@ export default function ProductDetailClient({ slug }) {
             <div className="pdp-carousel-wrapper">
               <div className="pdp-main-image-box">
                 <Image
-                  src={galleryImages[activeImageIndex].src}
-                  alt={galleryImages[activeImageIndex].alt}
+                  src={displayedGallery[activeImageIndex].src}
+                  alt={displayedGallery[activeImageIndex].alt}
                   fill
                   priority
                   sizes="(max-width: 900px) 100vw, 550px"
@@ -327,7 +368,7 @@ export default function ProductDetailClient({ slug }) {
 
                 {/* Image Counter Badge */}
                 <div className="pdp-image-counter" aria-hidden="true">
-                  {activeImageIndex + 1} / {galleryImages.length}
+                  {activeImageIndex + 1} / {displayedGallery.length}
                 </div>
 
                 {/* Prev & Next Image Navigation Buttons */}
@@ -401,7 +442,7 @@ export default function ProductDetailClient({ slug }) {
 
             {/* Thumbnails Row */}
             <div className="pdp-thumbnails">
-              {galleryImages.map((img, idx) => (
+              {displayedGallery.map((img, idx) => (
                 <button
                   key={idx}
                   type="button"
@@ -440,7 +481,8 @@ export default function ProductDetailClient({ slug }) {
               <span className="pdp-reviews-count">2573 reviews</span>
             </div>
 
-            <h1 className="pdp-title">{productTitle}</h1>
+            <h1 className="pdp-title">{displayedTitle}</h1>
+            {storeProduct?.description && <p className="admin-store-product-description">{storeProduct.description}</p>}
 
             <div className="pdp-highlights">
               <div className="pdp-highlight-item">
@@ -472,8 +514,8 @@ export default function ProductDetailClient({ slug }) {
 
             {/* Price */}
             <div className="price pdp-price">
-              <span className="price-currency">$</span>50.40
-              <span className="pdp-original-price">$56.00</span>
+              <span className="price-currency">$</span>{displayedPrice.toFixed(2)}
+              {!storeProduct && <span className="pdp-original-price">$56.00</span>}
             </div>
 
             {/* Primary CTA Button */}
@@ -549,9 +591,9 @@ export default function ProductDetailClient({ slug }) {
         {/* Frequently Asked Questions Section */}
 
 
-        {/* Section 2: Why BASED / 3,000,000+ have chosen BASED */}
+        {/* Section 2: Why BAXED / 3,000,000+ have chosen BAXED */}
         <section className="pdp-reasons-section">
-          <h2 className="pdp-reasons-heading">3,000,000+ have already chosen {isClothingProduct ? "BAXED" : "BASED"}</h2>
+          <h2 className="pdp-reasons-heading">3,000,000+ have already chosen BAXED</h2>
           <p className="pdp-reasons-sub">
             {isClothingProduct
               ? "Everyday essentials, thoughtfully made for comfort and lasting style."
@@ -684,7 +726,7 @@ export default function ProductDetailClient({ slug }) {
           <Link
             className="nav-drawer-title"
             href="/"
-            aria-label="BASED home"
+            aria-label="BAXED home"
             onClick={() => setIsNavDrawerOpen(false)}
           >
             <svg viewBox="65 20 895 185" fill="currentColor" aria-hidden="true">
@@ -1009,14 +1051,15 @@ export default function ProductDetailClient({ slug }) {
                   <span>Subtotal</span>
                   <strong>{displayedSubtotal}</strong>
                 </div>
-                <button
+                <Link
                   className="cart-checkout-btn"
-                  type="button"
-                  onClick={() => showToast("Checkout is coming soon")}
+                  id="cartCheckout"
+                  href="/cart"
+                  onClick={() => setIsCartDrawerOpen(false)}
                 >
                   <span>Continue to checkout</span>
                   <span>{displayedSubtotal}</span>
-                </button>
+                </Link>
               </div>
             </div>
           )}

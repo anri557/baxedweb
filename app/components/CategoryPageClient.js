@@ -385,6 +385,19 @@ function CategoryPageContent({ categoryType = "tops" }) {
   const [openSubmenu, setOpenSubmenu] = useState(config.categoryKey);
   const [toastMessage, setToastMessage] = useState("");
   const [isToastActive, setIsToastActive] = useState(false);
+  const [adminProducts, setAdminProducts] = useState([]);
+
+  useEffect(() => {
+    let cancelled = false;
+    fetch("/api/products", { cache: "no-store" })
+      .then((response) => response.ok ? response.json() : [])
+      .then((products) => {
+        if (!cancelled && Array.isArray(products)) setAdminProducts(products);
+      })
+      .catch(() => {});
+
+    return () => { cancelled = true; };
+  }, []);
 
   // Sync with searchParams if changed
   useEffect(() => {
@@ -429,7 +442,31 @@ function CategoryPageContent({ categoryType = "tops" }) {
       }
       return [...prev, { ...product, qty: 1 }];
     });
+    try {
+      const storedCart = JSON.parse(localStorage.getItem("baxed_cart") || "[]");
+      const currentItems = Array.isArray(storedCart) ? storedCart : [];
+      const existing = currentItems.find((item) => item.id === product.id);
+      const nextItems = existing
+        ? currentItems.map((item) => item.id === product.id
+          ? { ...item, quantity: Number(item.quantity || item.qty || 1) + 1 }
+          : item)
+        : [...currentItems, {
+            id: product.id,
+            name: product.name,
+            subtitle: product.sub,
+            description: product.description,
+            price: product.price,
+            originalPrice: product.price,
+            quantity: 1,
+            category: product.category || config.categoryKey,
+            image: product.image,
+          }];
+      localStorage.setItem("baxed_cart", JSON.stringify(nextItems));
+    } catch {
+      // Keep the in-page cart working if browser storage is unavailable.
+    }
     showToast(`Added ${product.name} to cart`);
+    setIsCartDrawerOpen(true);
   };
 
   const updateCartQty = (id, delta) => {
@@ -463,14 +500,22 @@ function CategoryPageContent({ categoryType = "tops" }) {
   const amountToFreeShipping = Math.max(0, freeShippingThreshold - cartSubtotal);
 
   // Filtered Products
+  const catalogProducts = useMemo(() => {
+    const categoryKey = categoryType === "outwears" ? "outerwear" : categoryType;
+    return [
+      ...config.products,
+      ...adminProducts.filter((product) => product.category === categoryKey),
+    ];
+  }, [adminProducts, categoryType, config.products]);
+
   const filteredProducts = useMemo(() => {
     if (activeSubcategory === "All") {
-      return config.products;
+      return catalogProducts;
     }
-    return config.products.filter(
+    return catalogProducts.filter(
       (p) => p.sub.toLowerCase() === activeSubcategory.toLowerCase()
     );
-  }, [config.products, activeSubcategory]);
+  }, [catalogProducts, activeSubcategory]);
 
   const toggleSubmenu = (category) => {
     setOpenSubmenu(openSubmenu === category ? null : category);
@@ -832,13 +877,13 @@ function CategoryPageContent({ categoryType = "tops" }) {
               </span>
             </div>
             <p className="cart-shipping-note">Shipping &amp; taxes calculated at checkout.</p>
-            <button
-              type="button"
+            <Link
+              href="/cart"
               className="btn gold cart-checkout-btn"
-              onClick={() => showToast("Checkout initiated")}
+              onClick={() => setIsCartDrawerOpen(false)}
             >
               CHECKOUT
-            </button>
+            </Link>
           </div>
         )}
       </aside>

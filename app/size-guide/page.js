@@ -1,8 +1,8 @@
 import SizeGuideClient from "./SizeGuideClient";
 
 export const metadata = {
-  title: "Size Guide — BASED",
-  description: "Accurate garment sizing, measurements, and fit recommendations for BASED tops, bottoms, outerwear, and footwear.",
+  title: "Size Guide — BAXED",
+  description: "Accurate garment sizing, measurements, and fit recommendations for BAXED tops, bottoms, outerwear, and footwear.",
 };
 
 export default function SizeGuidePage() {

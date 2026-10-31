@@ -610,7 +610,7 @@ export default function BuildYourSetPage() {
             <h2 className="byob-hero-title-accent">Curate your look</h2>
           </div>
           <p className="byob-hero-body">
-            Mix and match essential tops, bottoms, outwears, and footwear to create your personal 4-piece BASED set.
+            Mix and match essential tops, bottoms, outwears, and footwear to create your personal 4-piece BAXED set.
           </p>
         </div>
       </section>

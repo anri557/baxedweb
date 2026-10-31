@@ -35,7 +35,7 @@ const FAQ_DATA = [
   },
   {
     category: "Materials & Garment Care",
-    q: "Are BASED garments pre-shrunk?",
+    q: "Are BAXED garments pre-shrunk?",
     a: "Yes. All our cotton tees, shirts, and fleece undergo garment pre-washing and pre-shrinking. As long as standard cold care instructions are followed, your garments will maintain their true-to-size fit."
   },
   {
@@ -45,7 +45,7 @@ const FAQ_DATA = [
   },
   {
     category: "Materials & Garment Care",
-    q: "Where is BASED menswear engineered and produced?",
+    q: "Where is BAXED menswear engineered and produced?",
     a: "Our silhouettes and patterns are developed in-house with a modern athletic profile. We partner exclusively with certified ethical mills and textile producers who meet strict quality and environmental benchmarks."
   },
 
@@ -74,7 +74,7 @@ const FAQ_DATA = [
   // Sizing & Fit
   {
     category: "Sizing & Fit",
-    q: "How do BASED garments fit?",
+    q: "How do BAXED garments fit?",
     a: "Our apparel is engineered with an athletic, tailored cut true to standard US sizing. It offers clean lines through the shoulders and torso without feeling restrictive. Please consult our detailed Size Guide for chest, shoulder, sleeve, and waist measurements."
   },
   {

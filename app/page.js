@@ -778,15 +778,15 @@ export default function Home() {
                   <span id="cartSubtotalLabel">Subtotal</span>
                   <strong id="cartSubtotal">{displayedSubtotal}</strong>
                 </div>
-                <button
+                <Link
                   className="cart-checkout-btn"
                   id="cartCheckout"
-                  type="button"
-                  onClick={() => showToast("Checkout is coming soon")}
+                  href="/cart"
+                  onClick={() => setIsCartDrawerOpen(false)}
                 >
                   <span>Continue to checkout</span>
                   <span id="cartCheckoutTotal">{displayedSubtotal}</span>
-                </button>
+                </Link>
               </div>
             </div>
           )}
@@ -967,7 +967,7 @@ export default function Home() {
         </Link>
       </div>
 
-      {/* Why BASED comparison */}
+      {/* Why BAXED comparison */}
       <section className="why-section" aria-labelledby="why-heading">
         <h2 className="why-heading" id="why-heading">
           Why{" "}
@@ -975,15 +975,15 @@ export default function Home() {
             className="why-heading-logo"
             viewBox="65 20 895 185"
             fill="currentColor"
-            aria-label="BASED"
+            aria-label="BAXED"
             role="img"
           >
             <path fillRule="evenodd" d={LOGO_PATH} />
           </svg>
         </h2>
-        <p className="why-subtitle">Here is why 3,000,000+ chose BASED.</p>
+        <p className="why-subtitle">Here is why 3,000,000+ chose BAXED.</p>
 
-        <table className="why-table" aria-label="BASED product standards compared with others">
+        <table className="why-table" aria-label="BAXED product standards compared with others">
           <colgroup>
             <col />
             <col />
@@ -997,7 +997,7 @@ export default function Home() {
                   className="why-brand-logo"
                   viewBox="65 20 895 185"
                   fill="currentColor"
-                  aria-label="BASED"
+                  aria-label="BAXED"
                   role="img"
                 >
                   <path fillRule="evenodd" d={LOGO_PATH} />
@@ -1082,7 +1082,7 @@ export default function Home() {
       {/* Brand confidence and social proof */}
       <section
         className="proof-section"
-        aria-label="BASED customer community"
+        aria-label="BAXED customer community"
         ref={proofSectionRef}
       >
         <div className="proof-intro">
@@ -1102,7 +1102,7 @@ export default function Home() {
               />
             </div>
           </div>
-          <p className="proof-label">Have already chosen BASED.</p>
+          <p className="proof-label">Have already chosen BAXED.</p>
         </div>
         <div className="proof-stat">
           <div className="proof-figure">

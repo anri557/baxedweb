@@ -54,8 +54,8 @@ export default function ContactClient() {
           <p className="cc-card-desc">
             Directly email our care team for order inquiries, returns, or product advice. We reply within 24 hours.
           </p>
-          <a href="mailto:support@basedmenswear.com" className="cc-card-link">
-            support@basedmenswear.com &rarr;
+          <a href="mailto:support@baxedmenswear.com" className="cc-card-link">
+            support@baxedmenswear.com &rarr;
           </a>
         </div>
 
@@ -115,7 +115,7 @@ export default function ContactClient() {
               </div>
               <h3>Message Received</h3>
               <p>
-                Thank you for contacting BASED Customer Care. We have received your inquiry regarding <strong>{formData.topic}</strong> and will get back to you at <strong>{formData.email}</strong> within 24 hours.
+                Thank you for contacting BAXED Customer Care. We have received your inquiry regarding <strong>{formData.topic}</strong> and will get back to you at <strong>{formData.email}</strong> within 24 hours.
               </p>
               <button
                 type="button"

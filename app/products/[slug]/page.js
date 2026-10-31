@@ -28,7 +28,7 @@ export async function generateMetadata({ params }) {
           .replace(/\b\w/g, (c) => c.toUpperCase());
 
   return {
-    title: `${title} — BASED`,
+    title: `${title} — BAXED`,
     description: `Shop the essential ${title} crafted for modern menswear styling and everyday fit.`
   };
 }
