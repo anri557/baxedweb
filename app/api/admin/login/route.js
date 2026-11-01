@@ -34,7 +34,8 @@ export async function POST(request) {
 
   const address = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
   const attempts = getAttemptRecord(address);
-  if (attempts.count >= MAX_ATTEMPTS) {
+  const isDev = process.env.NODE_ENV !== "production";
+  if (!isDev && attempts.count >= MAX_ATTEMPTS) {
     return NextResponse.json({ error: "Too many sign-in attempts. Try again later." }, { status: 429 });
   }
 

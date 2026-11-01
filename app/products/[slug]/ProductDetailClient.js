@@ -228,6 +228,36 @@ export default function ProductDetailClient({ slug }) {
     return () => { cancelled = true; };
   }, [rawSlug]);
 
+  // Load stored cart on mount
+  useEffect(() => {
+    try {
+      const stored = localStorage.getItem("baxed_cart");
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        if (Array.isArray(parsed)) {
+          const flatItems = [];
+          parsed.forEach((item) => {
+            const count = Number(item.quantity || item.qty || 1);
+            for (let i = 0; i < count; i++) {
+              flatItems.push({
+                id: item.id || String(item.name).toLowerCase().replace(/\s+/g, "-"),
+                name: item.name || item.title || "Product",
+                category: item.category || "Apparel",
+                description: item.description || item.subtitle || "",
+                price: typeof item.price === "number" ? item.price : parseFloat(item.price) || 0,
+                color: item.color || "#222",
+                image: item.image,
+              });
+            }
+          });
+          setCartItems(flatItems);
+        }
+      }
+    } catch {
+      // Storage unavailable
+    }
+  }, []);
+
   const toggleSubmenu = (category) => {
     setOpenSubmenu((prev) => (prev === category ? null : category));
   };
@@ -309,15 +339,50 @@ export default function ProductDetailClient({ slug }) {
     setIsCartDrawerOpen(true);
   };
 
+  const syncCartToStorage = (items) => {
+    try {
+      const grouped = items.reduce((acc, it) => {
+        const found = acc.find((g) => g.name === it.name);
+        if (found) {
+          found.quantity += 1;
+        } else {
+          acc.push({
+            id: it.id || String(it.name).toLowerCase().replace(/\s+/g, "-"),
+            name: it.name,
+            subtitle: it.description || it.subtitle || it.category,
+            price: typeof it.price === "number" ? it.price : 0,
+            originalPrice: it.price,
+            quantity: 1,
+            category: it.category,
+            image: it.image,
+          });
+        }
+        return acc;
+      }, []);
+      localStorage.setItem("baxed_cart", JSON.stringify(grouped));
+    } catch {
+      // Storage unavailable
+    }
+  };
+
   const handleRemoveFromCart = (productName) => {
-    setCartItems((prev) => prev.filter((item) => item.name !== productName));
+    setCartItems((prev) => {
+      const next = prev.filter((item) => item.name !== productName);
+      syncCartToStorage(next);
+      return next;
+    });
   };
 
   const handleAddQuantity = (productName) => {
-    const item = cartItems.find((i) => i.name === productName);
-    if (item) {
-      setCartItems((prev) => [...prev, item]);
-    }
+    setCartItems((prev) => {
+      const item = prev.find((i) => i.name === productName);
+      if (item) {
+        const next = [...prev, item];
+        syncCartToStorage(next);
+        return next;
+      }
+      return prev;
+    });
   };
 
   const cartCount = cartItems.length;

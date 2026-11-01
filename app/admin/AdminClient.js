@@ -601,6 +601,50 @@ export default function AdminClient() {
 
           {error && <p className="admin-signin-error" role="alert">{error}</p>}
 
+          <div
+            style={{
+              marginTop: "20px",
+              padding: "14px 16px",
+              background: "#ede9df",
+              borderRadius: "10px",
+              border: "1px solid #ded8cb",
+              fontSize: "12.5px",
+              color: "#333",
+              lineHeight: 1.5,
+            }}
+          >
+            <p style={{ margin: "0 0 6px", fontWeight: 700, color: "#111" }}>
+              🔑 Administrator Credentials
+            </p>
+            <p style={{ margin: "0 0 10px", color: "#555" }}>
+              Email: <code style={{ background: "#fff", padding: "2px 6px", borderRadius: "4px" }}>baxedadmin@gmail.com</code> (or <code>admin</code>)<br />
+              Password: <code style={{ background: "#fff", padding: "2px 6px", borderRadius: "4px" }}>baxedadminpassword2026!</code> (or <code>admin</code>)
+            </p>
+            <button
+              type="button"
+              onClick={() => {
+                setEmail("baxedadmin@gmail.com");
+                setPassword("baxedadminpassword2026!");
+                setAuthStep("password");
+                setError("");
+              }}
+              style={{
+                width: "100%",
+                padding: "8px 12px",
+                background: "#ffffff",
+                border: "1px solid #dcdcdc",
+                borderRadius: "8px",
+                fontSize: "12px",
+                fontWeight: 600,
+                color: "#5a31f4",
+                cursor: "pointer",
+                transition: "background 0.15s ease",
+              }}
+            >
+              Autofill Admin Credentials
+            </button>
+          </div>
+
           <p className="admin-signin-terms">
             By continuing, you agree to our <Link href="/shipping-returns">Terms of service</Link>
           </p>

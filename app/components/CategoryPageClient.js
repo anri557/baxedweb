@@ -412,6 +412,30 @@ function CategoryPageContent({ categoryType = "tops" }) {
     }
   }, [searchParams, config.subcategories]);
 
+  // Load cart from localStorage on mount
+  useEffect(() => {
+    try {
+      const stored = localStorage.getItem("baxed_cart");
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        if (Array.isArray(parsed)) {
+          const loaded = parsed.map((item, idx) => ({
+            id: item.id || `item-${idx}`,
+            name: item.name || item.title || "Product",
+            sub: item.subtitle || item.description || "",
+            price: typeof item.price === "number" ? item.price : parseFloat(item.price) || 0,
+            qty: Number(item.quantity || item.qty || 1),
+            image: item.image,
+            category: item.category || config.categoryKey,
+          }));
+          setCartItems(loaded);
+        }
+      }
+    } catch {
+      // Storage unavailable
+    }
+  }, [config.categoryKey]);
+
   // Prevent background scroll when drawer is open
   useEffect(() => {
     if (isNavDrawerOpen || isCartDrawerOpen) {
@@ -432,46 +456,42 @@ function CategoryPageContent({ categoryType = "tops" }) {
     }, 2800);
   };
 
+  const syncCategoryCartToStorage = (items) => {
+    try {
+      const mapped = items.map((item) => ({
+        id: item.id,
+        name: item.name,
+        subtitle: item.sub || item.description || "",
+        price: item.price,
+        originalPrice: item.price,
+        quantity: item.qty,
+        category: item.category,
+        image: item.image,
+      }));
+      localStorage.setItem("baxed_cart", JSON.stringify(mapped));
+    } catch {
+      // Storage unavailable
+    }
+  };
+
   const handleAddToCart = (product) => {
     setCartItems((prev) => {
       const existing = prev.find((item) => item.id === product.id);
-      if (existing) {
-        return prev.map((item) =>
-          item.id === product.id ? { ...item, qty: item.qty + 1 } : item
-        );
-      }
-      return [...prev, { ...product, qty: 1 }];
+      const next = existing
+        ? prev.map((item) =>
+            item.id === product.id ? { ...item, qty: item.qty + 1 } : item
+          )
+        : [...prev, { ...product, qty: 1 }];
+      syncCategoryCartToStorage(next);
+      return next;
     });
-    try {
-      const storedCart = JSON.parse(localStorage.getItem("baxed_cart") || "[]");
-      const currentItems = Array.isArray(storedCart) ? storedCart : [];
-      const existing = currentItems.find((item) => item.id === product.id);
-      const nextItems = existing
-        ? currentItems.map((item) => item.id === product.id
-          ? { ...item, quantity: Number(item.quantity || item.qty || 1) + 1 }
-          : item)
-        : [...currentItems, {
-            id: product.id,
-            name: product.name,
-            subtitle: product.sub,
-            description: product.description,
-            price: product.price,
-            originalPrice: product.price,
-            quantity: 1,
-            category: product.category || config.categoryKey,
-            image: product.image,
-          }];
-      localStorage.setItem("baxed_cart", JSON.stringify(nextItems));
-    } catch {
-      // Keep the in-page cart working if browser storage is unavailable.
-    }
     showToast(`Added ${product.name} to cart`);
     setIsCartDrawerOpen(true);
   };
 
   const updateCartQty = (id, delta) => {
-    setCartItems((prev) =>
-      prev
+    setCartItems((prev) => {
+      const next = prev
         .map((item) => {
           if (item.id === id) {
             const newQty = item.qty + delta;
@@ -479,12 +499,18 @@ function CategoryPageContent({ categoryType = "tops" }) {
           }
           return item;
         })
-        .filter(Boolean)
-    );
+        .filter(Boolean);
+      syncCategoryCartToStorage(next);
+      return next;
+    });
   };
 
   const removeCartItem = (id) => {
-    setCartItems((prev) => prev.filter((item) => item.id !== id));
+    setCartItems((prev) => {
+      const next = prev.filter((item) => item.id !== id);
+      syncCategoryCartToStorage(next);
+      return next;
+    });
   };
 
   const totalCartCount = useMemo(() => {

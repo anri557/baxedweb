@@ -210,19 +210,23 @@ export default function CartClient() {
       const stored = localStorage.getItem("baxed_cart");
       if (stored) {
         const parsed = JSON.parse(stored);
-        if (Array.isArray(parsed) && parsed.length > 0) {
-          // Normalize items
-          const normalized = parsed.map((item, idx) => ({
-            id: item.id || `cart-item-${idx}`,
-            name: item.name || item.title || "BAXED Item",
-            subtitle: item.subtitle || item.description || "BAXED Premium Grooming",
-            price: typeof item.price === "number" ? item.price : 42.3,
-            originalPrice: item.originalPrice || (typeof item.price === "number" ? item.price + 5 : 47.0),
-            savings: item.savings || 4.7,
-            quantity: item.quantity || item.qty || 1,
-            category: item.category || "Apparel",
-          }));
-          setCartItems(normalized);
+        if (Array.isArray(parsed)) {
+          if (parsed.length > 0) {
+            // Normalize items
+            const normalized = parsed.map((item, idx) => ({
+              id: item.id || `cart-item-${idx}`,
+              name: item.name || item.title || "BAXED Item",
+              subtitle: item.subtitle || item.description || "BAXED Premium Grooming",
+              price: typeof item.price === "number" ? item.price : 42.3,
+              originalPrice: item.originalPrice || (typeof item.price === "number" ? item.price + 5 : 47.0),
+              savings: item.savings || 4.7,
+              quantity: item.quantity || item.qty || 1,
+              category: item.category || "Apparel",
+            }));
+            setCartItems(normalized);
+          } else {
+            setCartItems([]);
+          }
         }
       }
     } catch {

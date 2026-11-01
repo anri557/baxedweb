@@ -103,7 +103,7 @@ export default function CheckoutClient() {
       <div className="checkout-layout">
         <form className="checkout-form" onSubmit={handleSubmit}>
           <section className="checkout-section">
-            <div className="checkout-section-heading"><h1>Contact</h1><a href="#contact-email">Sign in</a></div>
+            <div className="checkout-section-heading"><h1>Contact</h1><Link href="/signin">Sign in</Link></div>
             <label className="checkout-field-label" htmlFor="contact-email">Email</label>
             <input id="contact-email" name="email" className="checkout-field" type="email" placeholder="Email" required />
           </section>

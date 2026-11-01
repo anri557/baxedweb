@@ -249,29 +249,98 @@ export default function Home() {
     }
   }, []);
 
+  // Load cart from localStorage on mount
+  useEffect(() => {
+    try {
+      const stored = localStorage.getItem("baxed_cart");
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        if (Array.isArray(parsed)) {
+          const flatItems = [];
+          parsed.forEach((item) => {
+            const count = Number(item.quantity || item.qty || 1);
+            for (let i = 0; i < count; i++) {
+              flatItems.push({
+                name: item.name || item.title || "Product",
+                category: item.category || "Apparel",
+                description: item.description || item.subtitle || "",
+                price: typeof item.price === "number" ? item.price : parseFloat(item.price) || 0,
+                color: item.color || "#2b2b2b",
+                image: item.image,
+              });
+            }
+          });
+          setCartItems(flatItems);
+        }
+      }
+    } catch {
+      // Storage unavailable
+    }
+  }, []);
+
+  const saveCartToStorage = (items) => {
+    try {
+      const grouped = items.reduce((acc, it) => {
+        const found = acc.find((g) => g.name === it.name);
+        if (found) {
+          found.quantity += 1;
+        } else {
+          acc.push({
+            id: it.id || String(it.name).toLowerCase().replace(/\s+/g, "-"),
+            name: it.name,
+            subtitle: it.description || it.subtitle || it.category,
+            price: typeof it.price === "number" ? it.price : 0,
+            originalPrice: it.price,
+            quantity: 1,
+            category: it.category,
+            image: it.image,
+          });
+        }
+        return acc;
+      }, []);
+      localStorage.setItem("baxed_cart", JSON.stringify(grouped));
+    } catch {
+      // Storage unavailable
+    }
+  };
+
   // Cart operations
   const handleAddToCart = (product) => {
-    setCartItems((prev) => [...prev, product]);
+    setCartItems((prev) => {
+      const next = [...prev, product];
+      saveCartToStorage(next);
+      return next;
+    });
     showToast(`${product.name} added to cart`);
   };
 
   const handleAddFeaturedSet = (setName) => {
-    setCartItems((prev) => [
-      ...prev,
-      { name: setName, category: "Set", price: null }
-    ]);
+    setCartItems((prev) => {
+      const next = [...prev, { name: setName, category: "Set", price: null }];
+      saveCartToStorage(next);
+      return next;
+    });
     showToast(`${setName} added to cart`);
   };
 
   const handleRemoveFromCart = (productName) => {
-    setCartItems((prev) => prev.filter((item) => item.name !== productName));
+    setCartItems((prev) => {
+      const next = prev.filter((item) => item.name !== productName);
+      saveCartToStorage(next);
+      return next;
+    });
   };
 
   const handleAddQuantity = (productName) => {
-    const item = cartItems.find((i) => i.name === productName);
-    if (item) {
-      setCartItems((prev) => [...prev, item]);
-    }
+    setCartItems((prev) => {
+      const item = prev.find((i) => i.name === productName);
+      if (item) {
+        const next = [...prev, item];
+        saveCartToStorage(next);
+        return next;
+      }
+      return prev;
+    });
   };
 
   const openCart = () => {
@@ -342,7 +411,6 @@ export default function Home() {
           setIsNavDrawerOpen(!isNavDrawerOpen);
         }}
         onCartClick={() => setIsCartDrawerOpen(true)}
-        onAccountClick={() => showToast("Account portal opening soon")}
         cartCount={cartCount}
       />
 
@@ -375,17 +443,17 @@ export default function Home() {
             </svg>
           </a>
           <div className="nav-drawer-actions">
-            <a
-              href="#account"
+            <Link
+              href="/signin"
               className="drawer-account"
               aria-label="Account"
-              onClick={handleAccountClick}
+              onClick={() => setIsNavDrawerOpen(false)}
             >
               <svg viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
                 <circle cx="12" cy="7" r="4" />
               </svg>
-            </a>
+            </Link>
             <button
               type="button"
               className="drawer-cart-btn"
