@@ -745,7 +745,9 @@ export default function CartClient() {
 
                 {/* Primary Continue to Checkout Button */}
                 <Link href="/checkout" className="cart-primary-checkout-btn">
-                  CONTINUE TO CHECKOUT | ${finalTotal.toFixed(2)}
+                  <span className="cart-primary-btn-label">Continue to Checkout</span>
+                  <span className="cart-primary-btn-divider" aria-hidden="true">|</span>
+                  <span className="cart-primary-btn-total">${finalTotal.toFixed(2)}</span>
                 </Link>
 
                 {/* Express Pay Options: BOG, TBC, Google Pay, Apple Pay */}

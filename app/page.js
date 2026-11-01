@@ -818,12 +818,16 @@ export default function Home() {
       {/* Promotional Banner */}
       <div className="banner gold" style={{ marginTop: "28px" }}>
         <div>
-          <b>The Winter Edit drops soon</b>
-          <small>First 500 orders get a free wool scarf ($60 value).</small>
+          <b className="banner-title">
+            <span className="banner-title-line">The Winter Edit</span>
+            <span className="banner-title-line">drops soon</span>
+          </b>
         </div>
-        <a className="btn gold banner-cta" href="#shop">
-          Be the first to know
-        </a>
+        <div>
+          <a className="btn gold banner-cta" href="#shop">
+            Be the first to know
+          </a>
+        </div>
       </div>
 
       {/* Best Sellers Catalog Section */}
@@ -1012,14 +1016,14 @@ export default function Home() {
               <td>
                 <span className="why-check" role="img" aria-label="Yes">
                   <svg className="why-check-icon" viewBox="0 0 34 34" fill="none" aria-hidden="true">
-                    <path d="M3 17.5L12.3 27L31 8" stroke="#0a0a0a" strokeWidth="2.2" strokeMiterlimit="10"/>
+                    <path d="M3 17.5L12.3 27L31 8" stroke="#0a0a0a" strokeWidth="2.2" strokeMiterlimit="10" />
                   </svg>
                 </span>
               </td>
               <td>
                 <span className="why-cross" role="img" aria-label="No">
                   <svg className="why-cross-icon" viewBox="0 0 34 34" fill="none" aria-hidden="true">
-                    <path d="M26 8L8 26M8 8L26 26" stroke="currentColor" strokeWidth="1.6" strokeMiterlimit="10" strokeLinecap="round"/>
+                    <path d="M26 8L8 26M8 8L26 26" stroke="currentColor" strokeWidth="1.6" strokeMiterlimit="10" strokeLinecap="round" />
                   </svg>
                 </span>
               </td>
@@ -1029,14 +1033,14 @@ export default function Home() {
               <td>
                 <span className="why-check" role="img" aria-label="Yes">
                   <svg className="why-check-icon" viewBox="0 0 34 34" fill="none" aria-hidden="true">
-                    <path d="M3 17.5L12.3 27L31 8" stroke="#0a0a0a" strokeWidth="2.2" strokeMiterlimit="10"/>
+                    <path d="M3 17.5L12.3 27L31 8" stroke="#0a0a0a" strokeWidth="2.2" strokeMiterlimit="10" />
                   </svg>
                 </span>
               </td>
               <td>
                 <span className="why-cross" role="img" aria-label="No">
                   <svg className="why-cross-icon" viewBox="0 0 34 34" fill="none" aria-hidden="true">
-                    <path d="M26 8L8 26M8 8L26 26" stroke="currentColor" strokeWidth="1.6" strokeMiterlimit="10" strokeLinecap="round"/>
+                    <path d="M26 8L8 26M8 8L26 26" stroke="currentColor" strokeWidth="1.6" strokeMiterlimit="10" strokeLinecap="round" />
                   </svg>
                 </span>
               </td>
@@ -1046,14 +1050,14 @@ export default function Home() {
               <td>
                 <span className="why-check" role="img" aria-label="Yes">
                   <svg className="why-check-icon" viewBox="0 0 34 34" fill="none" aria-hidden="true">
-                    <path d="M3 17.5L12.3 27L31 8" stroke="#0a0a0a" strokeWidth="2.2" strokeMiterlimit="10"/>
+                    <path d="M3 17.5L12.3 27L31 8" stroke="#0a0a0a" strokeWidth="2.2" strokeMiterlimit="10" />
                   </svg>
                 </span>
               </td>
               <td>
                 <span className="why-cross" role="img" aria-label="No">
                   <svg className="why-cross-icon" viewBox="0 0 34 34" fill="none" aria-hidden="true">
-                    <path d="M26 8L8 26M8 8L26 26" stroke="currentColor" strokeWidth="1.6" strokeMiterlimit="10" strokeLinecap="round"/>
+                    <path d="M26 8L8 26M8 8L26 26" stroke="currentColor" strokeWidth="1.6" strokeMiterlimit="10" strokeLinecap="round" />
                   </svg>
                 </span>
               </td>
@@ -1063,14 +1067,14 @@ export default function Home() {
               <td>
                 <span className="why-check" role="img" aria-label="Yes">
                   <svg className="why-check-icon" viewBox="0 0 34 34" fill="none" aria-hidden="true">
-                    <path d="M3 17.5L12.3 27L31 8" stroke="#0a0a0a" strokeWidth="2.2" strokeMiterlimit="10"/>
+                    <path d="M3 17.5L12.3 27L31 8" stroke="#0a0a0a" strokeWidth="2.2" strokeMiterlimit="10" />
                   </svg>
                 </span>
               </td>
               <td>
                 <span className="why-cross" role="img" aria-label="No">
                   <svg className="why-cross-icon" viewBox="0 0 34 34" fill="none" aria-hidden="true">
-                    <path d="M26 8L8 26M8 8L26 26" stroke="currentColor" strokeWidth="1.6" strokeMiterlimit="10" strokeLinecap="round"/>
+                    <path d="M26 8L8 26M8 8L26 26" stroke="currentColor" strokeWidth="1.6" strokeMiterlimit="10" strokeLinecap="round" />
                   </svg>
                 </span>
               </td>
