@@ -693,13 +693,7 @@ export default function AdminClient() {
               lineHeight: 1.5,
             }}
           >
-            <p style={{ margin: "0 0 6px", fontWeight: 700, color: "#111" }}>
-              🔑 Administrator Credentials
-            </p>
-            <p style={{ margin: "0 0 10px", color: "#555" }}>
-              Email: <code style={{ background: "#fff", padding: "2px 6px", borderRadius: "4px" }}>baxedadmin@gmail.com</code> (or <code>admin</code>)<br />
-              Password: <code style={{ background: "#fff", padding: "2px 6px", borderRadius: "4px" }}>baxedadminpassword2026!</code> (or <code>admin</code>)
-            </p>
+       
             <button
               type="button"
               onClick={() => {
