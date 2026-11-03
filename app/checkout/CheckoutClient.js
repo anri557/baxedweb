@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const CHECKOUT_RECOMMENDATIONS = [
   { id: "heavyweight-boxy-tee", name: "Heavyweight Boxy Tee", subtitle: "Everyday essential", price: 32, image: "/ShopTop.jpeg" },
@@ -34,6 +35,7 @@ function formatPrice(value) {
 }
 
 export default function CheckoutClient() {
+  const router = useRouter();
   const [items, setItems] = useState(INITIAL_CART);
   const [discountCode, setDiscountCode] = useState("");
   const [discountRate, setDiscountRate] = useState(0);
@@ -114,9 +116,45 @@ export default function CheckoutClient() {
     showNotice(`${product.name} added to your order`, 2400);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    showNotice("Checkout details saved. Payment processing is not configured yet.", 3200);
+
+    const formData = new FormData(event.currentTarget);
+    const payload = {
+      customer: {
+        firstName: formData.get("firstName"),
+        lastName: formData.get("lastName"),
+        email: formData.get("email"),
+        phone: formData.get("phone"),
+        address: formData.get("address"),
+        apartment: formData.get("apartment"),
+        city: formData.get("city"),
+        postalCode: formData.get("postalCode"),
+        country: formData.get("country"),
+      },
+      items,
+      discountCode: discountRate ? discountCode.trim().toUpperCase() : "",
+      paymentMethod,
+    };
+
+    try {
+      const response = await fetch("/api/orders", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.error || "Could not place your order. Please try again.");
+
+      try {
+        localStorage.removeItem("baxed_cart");
+      } catch {
+        // The saved order remains valid even when local storage is unavailable.
+      }
+      router.push("/order-success");
+    } catch (submitError) {
+      showNotice(submitError.message || "We couldn't save your order. Please check your connection and try again.", 4500);
+    }
   };
 
   const handleExpressCheckout = () => {
@@ -358,7 +396,7 @@ export default function CheckoutClient() {
                 <h2>Delivery</h2>
                 <div className="checkout-select-wrap">
                   <span className="checkout-floating-label">Country/Region</span>
-                  <select id="country" className="checkout-field checkout-select" defaultValue="Georgia">
+                  <select id="country" name="country" className="checkout-field checkout-select" defaultValue="Georgia">
                     <option>Georgia</option>
                     <option>United States</option>
                     <option>United Kingdom</option>
@@ -381,7 +419,7 @@ export default function CheckoutClient() {
                   <input className="checkout-field" name="city" placeholder="City" required />
                 </div>
                 <div className="checkout-input-wrap">
-                  <input className="checkout-field has-icon" name="phone" type="tel" placeholder="Phone" />
+                  <input className="checkout-field has-icon" name="phone" type="tel" placeholder="Phone" autoComplete="tel" required />
                   <span className="checkout-field-icon" aria-hidden="true">?</span>
                 </div>
                 <label className="checkout-checkbox">
@@ -465,7 +503,7 @@ export default function CheckoutClient() {
                   )}
                   <label
                     className={
-                      paymentMethod === "shop"
+                      paymentMethod === "cod"
                         ? "checkout-payment-option selected"
                         : "checkout-payment-option"
                     }
@@ -473,32 +511,14 @@ export default function CheckoutClient() {
                     <input
                       type="radio"
                       name="payment"
-                      value="shop"
-                      checked={paymentMethod === "shop"}
-                      onChange={() => setPaymentMethod("shop")}
+                      value="cod"
+                      checked={paymentMethod === "cod"}
+                      onChange={() => setPaymentMethod("cod")}
                     />
                     <div className="checkout-option-stack">
-                      <span>Shop Pay</span>
-                      <small>Pay in full or in installments</small>
+                      <span>Cash on Delivery</span>
+                      <small>Pay when your order arrives here</small>
                     </div>
-                    <span className="checkout-payment-brand">shop</span>
-                  </label>
-                  <label
-                    className={
-                      paymentMethod === "paypal"
-                        ? "checkout-payment-option selected"
-                        : "checkout-payment-option"
-                    }
-                  >
-                    <input
-                      type="radio"
-                      name="payment"
-                      value="paypal"
-                      checked={paymentMethod === "paypal"}
-                      onChange={() => setPaymentMethod("paypal")}
-                    />
-                    <span>PayPal</span>
-                    <span className="checkout-payment-brand paypal">PayPal</span>
                   </label>
                 </div>
               </section>
@@ -564,7 +584,7 @@ export default function CheckoutClient() {
               </div>
 
               <button type="submit" className="checkout-submit">
-                Pay now
+                {paymentMethod === "cod" ? "Place order" : "Pay now"}
               </button>
 
               {/* Mobile-only reviews & trust list below Pay Now */}

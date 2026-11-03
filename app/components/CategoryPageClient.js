@@ -817,7 +817,7 @@ function CategoryPageContent({ categoryType = "tops" }) {
         <div className="free-shipping-bar">
           <p className="free-shipping-text">
             {amountToFreeShipping > 0
-              ? `Add $${amountToFreeShipping.toFixed(2)} more to unlock free shipping`
+              ? `Add ₾${amountToFreeShipping.toFixed(2)} more to unlock free shipping`
               : "🎉 You have unlocked FREE shipping!"}
           </p>
           <div className="free-shipping-progress-bg">
@@ -883,7 +883,7 @@ function CategoryPageContent({ categoryType = "tops" }) {
                       </button>
                     </div>
                     <div className="cart-item-price">
-                      <span className="price-currency">$</span>
+                      <span className="price-currency">₾</span>
                       {(item.price * item.qty).toFixed(2)}
                     </div>
                   </div>
@@ -898,7 +898,7 @@ function CategoryPageContent({ categoryType = "tops" }) {
             <div className="cart-subtotal-row">
               <span>Subtotal</span>
               <span className="cart-subtotal-val">
-                <span className="price-currency">$</span>
+                <span className="price-currency">₾</span>
                 {cartSubtotal.toFixed(2)}
               </span>
             </div>
@@ -992,7 +992,7 @@ function CategoryPageContent({ categoryType = "tops" }) {
                   </h3>
                   <p className="cat-card-desc">{product.description}</p>
                   <div className="cat-card-price">
-                    <span className="price-currency">$</span>
+                    <span className="price-currency">₾</span>
                     {product.price.toFixed(2)}
                   </div>
                   <button

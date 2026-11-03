@@ -500,7 +500,7 @@ export default function BuildYourSetPage() {
           </Link>
         </nav>
         <div className="nav-drawer-footer">
-          <p style={{ margin: "0 0 12px" }}>Free worldwide shipping over $100.</p>
+          <p style={{ margin: "0 0 12px" }}>Free worldwide shipping over ₾100.</p>
           <div>
             <Link
               href="/#shop"
@@ -559,7 +559,7 @@ export default function BuildYourSetPage() {
                     <div className="cart-item-info">
                       <p className="cart-item-name">{item.name}</p>
                       <p className="cart-item-desc">{item.description}</p>
-                      <p className="cart-item-price">${item.price}</p>
+                      <p className="cart-item-price">₾{item.price}</p>
                     </div>
                     <button
                       type="button"
@@ -577,7 +577,7 @@ export default function BuildYourSetPage() {
               <div className="cart-footer">
                 <div className="cart-total-row">
                   <span>Subtotal</span>
-                  <span>${cartItems.reduce((s, it) => s + it.price * (it.quantity || 1), 0)}</span>
+                  <span>₾{cartItems.reduce((s, it) => s + it.price * (it.quantity || 1), 0)}</span>
                 </div>
                 <button
                   type="button"
@@ -678,7 +678,7 @@ export default function BuildYourSetPage() {
                         <h3 className="byob-card-title">{product.title}</h3>
                         <p className="byob-card-subtitle">{product.summary}</p>
                         <div className="byob-card-price">
-                          <span className="price-currency">$</span>{product.price.toFixed(2)}
+                          <span className="price-currency">₾</span>{product.price.toFixed(2)}
                         </div>
                       </div>
 
@@ -769,7 +769,7 @@ export default function BuildYourSetPage() {
                     ) : (
                       <span className="purple-text">Set Complete ({totalCount} items)</span>
                     )}
-                    {subtotal > 0 && <span> · ${subtotal.toFixed(2)}</span>}
+                    {subtotal > 0 && <span> · ₾{subtotal.toFixed(2)}</span>}
                   </div>
                 </div>
 
@@ -833,7 +833,7 @@ export default function BuildYourSetPage() {
                             <img src={item.image} alt="" className="byob-slot-thumb" />
                             <div className="byob-slot-info">
                               <span className="byob-slot-title">{item.title}</span>
-                              <span className="byob-slot-price">${item.price.toFixed(2)}</span>
+                              <span className="byob-slot-price">₾{item.price.toFixed(2)}</span>
                             </div>
                             <button
                               type="button"
@@ -866,11 +866,11 @@ export default function BuildYourSetPage() {
                 <div className="byob-totals">
                   <div className="byob-total-row">
                     <span>Subtotal</span>
-                    <span>${subtotal.toFixed(2)}</span>
+                    <span>₾{subtotal.toFixed(2)}</span>
                   </div>
                   <div className="byob-total-row grand-total-row">
                     <span>Total</span>
-                    <span>${subtotal.toFixed(2)}</span>
+                    <span>₾{subtotal.toFixed(2)}</span>
                   </div>
                 </div>
 
@@ -890,7 +890,7 @@ export default function BuildYourSetPage() {
                   {totalCount === 0 ? (
                     <span>SELECT PRODUCTS</span>
                   ) : (
-                    <span>ADD TO BAG · ${subtotal.toFixed(2)}</span>
+                    <span>ADD TO BAG · ₾{subtotal.toFixed(2)}</span>
                   )}
                 </button>
 

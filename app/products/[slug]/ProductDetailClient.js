@@ -94,7 +94,7 @@ const faqItems = [
   },
   {
     q: "How does the price compare to conventional hair care products?",
-    a: "A single 250ml bottle of BAXED lasts between 60 to 90 days with normal usage due to its concentrated, water-efficient formula. Cost per wash comes out to less than $0.50—comparable to drugstore products while delivering clinical-grade botanicals."
+    a: "A single 250ml bottle of BAXED lasts between 60 to 90 days with normal usage due to its concentrated, water-efficient formula. Cost per wash comes out to less than ₾0.50—comparable to drugstore products while delivering clinical-grade botanicals."
   },
   {
     q: "What if it's not a fit for me?",
@@ -109,7 +109,7 @@ const deliveryItems = [
   },
   {
     q: "Do you offer international shipping?",
-    a: "Yes, we ship worldwide! Orders over $100 qualify for free international shipping. Transit times range from 5 to 10 business days depending on customs clearance in your country."
+    a: "Yes, we ship worldwide! Orders over ₾100 qualify for free international shipping. Transit times range from 5 to 10 business days depending on customs clearance in your country."
   },
   {
     q: "What is your return & satisfaction policy?",
@@ -393,7 +393,7 @@ export default function ProductDetailClient({ slug }) {
   const shippingGoal = 100;
   const amountToFreeShipping = Math.max(0, shippingGoal - subtotal);
   const shippingProgress = Math.min(100, (subtotal / shippingGoal) * 100);
-  const displayedSubtotal = `$${subtotal.toFixed(2)}`;
+  const displayedSubtotal = `₾${subtotal.toFixed(2)}`;
 
   const groupedCartItems = cartItems.reduce((groups, product) => {
     const existing = groups.find((item) => item.product.name === product.name);
@@ -579,8 +579,8 @@ export default function ProductDetailClient({ slug }) {
 
             {/* Price */}
             <div className="price pdp-price">
-              <span className="price-currency">$</span>{displayedPrice.toFixed(2)}
-              {!storeProduct && <span className="pdp-original-price">$56.00</span>}
+              <span className="price-currency">₾</span>{displayedPrice.toFixed(2)}
+              {!storeProduct && <span className="pdp-original-price">₾56.00</span>}
             </div>
 
             {/* Primary CTA Button */}
@@ -628,7 +628,7 @@ export default function ProductDetailClient({ slug }) {
                     <path d="M3 8V5a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v3" />
                   </svg>
                 </span>
-                <span className="pdp-trust-text">Free US Shipping $30+</span>
+                <span className="pdp-trust-text">Free US Shipping ₾30+</span>
               </div>
               <div className="pdp-trust-col">
                 <span className="pdp-trust-icon">
@@ -637,7 +637,7 @@ export default function ProductDetailClient({ slug }) {
                     <path d="m22 2-7 20-4-9-9-4 20-7z" />
                   </svg>
                 </span>
-                <span className="pdp-trust-text">Free INTL Shipping $100+</span>
+                <span className="pdp-trust-text">Free INTL Shipping ₾100+</span>
               </div>
               <div className="pdp-trust-col">
                 <span className="pdp-trust-icon">
@@ -1054,7 +1054,7 @@ export default function ProductDetailClient({ slug }) {
                 <p className="cart-shipping-message">
                   {amountToFreeShipping > 0 ? (
                     <>
-                      Add <strong>${amountToFreeShipping.toFixed(2)}</strong> to unlock <strong>FREE SHIPPING</strong>
+                      Add <strong>₾{amountToFreeShipping.toFixed(2)}</strong> to unlock <strong>FREE SHIPPING</strong>
                     </>
                   ) : (
                     <>You unlocked <strong>FREE SHIPPING</strong></>
@@ -1086,7 +1086,7 @@ export default function ProductDetailClient({ slug }) {
                           <div className="cart-item-name">{product.name}</div>
                           <p className="cart-item-category">Shower Routine</p>
                         </div>
-                        <span className="cart-item-price">${(product.price * quantity).toFixed(2)}</span>
+                        <span className="cart-item-price">₾{(product.price * quantity).toFixed(2)}</span>
                       </div>
                       <div className="cart-item-controls">
                         <button

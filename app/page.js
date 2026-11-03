@@ -388,7 +388,7 @@ export default function Home() {
   const shippingGoal = 100;
   const amountToFreeShipping = Math.max(0, shippingGoal - subtotal);
   const shippingProgress = Math.min(100, (subtotal / shippingGoal) * 100);
-  const displayedSubtotal = hasUnknownPrice ? "Price varies" : `$${subtotal.toFixed(2)}`;
+  const displayedSubtotal = hasUnknownPrice ? "Price varies" : `₾${subtotal.toFixed(2)}`;
 
   const filteredProducts = products.filter(
     (product) => activeCategory === "all" || product.category === activeCategory
@@ -682,7 +682,7 @@ export default function Home() {
           </a>
         </nav>
         <div className="nav-drawer-footer">
-          <p style={{ margin: "0 0 12px" }}>Free worldwide shipping over $100.</p>
+          <p style={{ margin: "0 0 12px" }}>Free worldwide shipping over ₾100.</p>
           <div>
             <a
               href="#shop"
@@ -741,7 +741,7 @@ export default function Home() {
                     "Shipping progress updates once set pricing is confirmed"
                   ) : amountToFreeShipping > 0 ? (
                     <>
-                      Add <strong>${amountToFreeShipping.toFixed(2)}</strong> to unlock{" "}
+                      Add <strong>₾{amountToFreeShipping.toFixed(2)}</strong> to unlock{" "}
                       <strong>FREE SHIPPING</strong>
                     </>
                   ) : (
@@ -776,7 +776,7 @@ export default function Home() {
                   const isSet = product.category === "Set";
                   const itemPrice =
                     typeof product.price === "number" && Number.isFinite(product.price)
-                      ? `$${(product.price * quantity).toFixed(2)}`
+                      ? `₾${(product.price * quantity).toFixed(2)}`
                       : "Price varies";
                   const categoryLabel = isSet ? "Build your own set" : product.category;
 
@@ -959,7 +959,7 @@ export default function Home() {
                   </h3>
                   <p>{product.description}</p>
                   <div className="price">
-                    <span className="price-currency">$</span>{product.price.toFixed(2)}
+                    <span className="price-currency">₾</span>{product.price.toFixed(2)}
                   </div>
                 </div>
                 <button

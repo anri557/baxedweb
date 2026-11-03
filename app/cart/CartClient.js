@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import Navbar from "@/app/components/Navbar";
 import Footer from "@/app/components/Footer";
@@ -30,55 +31,6 @@ function ProductPlaceholder({ title = "Product", aspect = "1/1", className = "" 
         <span className="cart-placeholder-tag">BAXED</span>
       </div>
     </div>
-  );
-}
-
-// BOG (Bank of Georgia) Logo SVG
-function BogLogo() {
-  return (
-    <svg viewBox="0 0 120 32" className="pay-logo bog-logo" fill="currentColor" aria-hidden="true">
-      {/* Stylized BOG crest */}
-      <g fill="#FFFFFF">
-        <path d="M12 4C7.58 4 4 7.58 4 12V20C4 24.42 7.58 28 12 28H20C24.42 28 28 24.42 28 20V12C28 7.58 24.42 4 20 4H12ZM19.5 10.5C20.33 10.5 21 11.17 21 12C21 12.83 20.33 13.5 19.5 13.5C18.67 13.5 18 12.83 18 12C18 11.17 18.67 10.5 19.5 10.5ZM12.5 12C12.5 10.9 13.4 10 14.5 10H17.5V14H14.5C13.4 14 12.5 13.1 12.5 12ZM11 16H21V22H11V16Z" />
-      </g>
-      {/* BOG Pay Text */}
-      <text
-        x="36"
-        y="21"
-        fill="#FFFFFF"
-        fontSize="15"
-        fontWeight="800"
-        letterSpacing="0.05em"
-        fontFamily="var(--font-montserrat), sans-serif"
-      >
-        BOG pay
-      </text>
-    </svg>
-  );
-}
-
-// TBC Bank Logo SVG
-function TbcLogo() {
-  return (
-    <svg viewBox="0 0 120 32" className="pay-logo tbc-logo" fill="currentColor" aria-hidden="true">
-      {/* TBC Double geometric rhombus / chevron */}
-      <g fill="#FFFFFF">
-        <path d="M8 7L16 16L8 25H14L22 16L14 7H8Z" />
-        <path d="M17 7L25 16L17 25H23L31 16L23 7H17Z" />
-      </g>
-      {/* TBC PAY Text */}
-      <text
-        x="38"
-        y="21"
-        fill="#FFFFFF"
-        fontSize="15"
-        fontWeight="800"
-        letterSpacing="0.08em"
-        fontFamily="var(--font-montserrat), sans-serif"
-      >
-        TBC pay
-      </text>
-    </svg>
   );
 }
 
@@ -369,7 +321,7 @@ export default function CartClient() {
     setCheckoutModal({
       provider,
       title: `${provider} Checkout`,
-      message: `Connecting to ${provider} secure checkout for $${finalTotal.toFixed(2)} USD...`,
+      message: `Connecting to ${provider} secure checkout for ₾${finalTotal.toFixed(2)} GEL...`,
     });
   };
 
@@ -405,7 +357,7 @@ export default function CartClient() {
               <p className="cart-modal-text">{checkoutModal.message}</p>
               <div className="cart-modal-summary">
                 <span>Order Total:</span>
-                <strong>${finalTotal.toFixed(2)} USD</strong>
+                <strong>₾{finalTotal.toFixed(2)} GEL</strong>
               </div>
               <p className="cart-modal-note">
                 FREE Tbilisi Shipping is automatically applied to this order.
@@ -420,7 +372,7 @@ export default function CartClient() {
                   setCheckoutModal(null);
                 }}
               >
-                Confirm & Pay ${finalTotal.toFixed(2)}
+                Confirm & Pay ₾{finalTotal.toFixed(2)}
               </button>
               <button
                 type="button"
@@ -568,7 +520,7 @@ export default function CartClient() {
                     className="cart-shop-now-btn"
                     onClick={() => handleAddRecommended(RECOMMENDED_PRODUCTS[0])}
                   >
-                    Add {RECOMMENDED_PRODUCTS[0].name} ($28.00)
+                    Add {RECOMMENDED_PRODUCTS[0].name} (₾28.00)
                   </button>
                 </div>
               ) : (
@@ -592,19 +544,19 @@ export default function CartClient() {
                               <h3 className="cart-item-title">{item.name}</h3>
                               <p className="cart-item-subtitle">{item.subtitle}</p>
                             </div>
-                            <span className="cart-item-total-price">${itemTotal}</span>
+                            <span className="cart-item-total-price">₾{itemTotal}</span>
                           </div>
 
                           <div className="cart-item-pricing-row">
-                            <span className="cart-item-unit-price">${item.price.toFixed(2)}</span>
+                            <span className="cart-item-unit-price">₾{item.price.toFixed(2)}</span>
                             {item.originalPrice > item.price && (
                               <span className="cart-item-strikethrough">
-                                ${item.originalPrice.toFixed(2)}
+                                ₾{item.originalPrice.toFixed(2)}
                               </span>
                             )}
                             {Number(itemSavings) > 0 && (
                               <span className="cart-item-save-badge">
-                                (Save ${itemSavings})
+                                (Save ₾{itemSavings})
                               </span>
                             )}
                           </div>
@@ -713,7 +665,7 @@ export default function CartClient() {
                 {combinedSavings > 0 && (
                   <div className="cart-savings-highlight">
                     <span className="cart-savings-label">TOTAL SAVINGS</span>
-                    <span className="cart-savings-amount">${combinedSavings.toFixed(2)}</span>
+                    <span className="cart-savings-amount">₾{combinedSavings.toFixed(2)}</span>
                   </div>
                 )}
 
@@ -721,26 +673,10 @@ export default function CartClient() {
                 <div className="cart-total-row">
                   <span className="cart-total-label">Estimated total</span>
                   <div className="cart-total-price-group">
-                    <span className="cart-total-value">${finalTotal.toFixed(2)}</span>
-                    <span className="cart-total-currency">USD</span>
+                    <span className="cart-total-value">₾{finalTotal.toFixed(2)}</span>
+                    <span className="cart-total-currency">GEL</span>
                   </div>
                 </div>
-
-                {/* Installment note */}
-                <p className="cart-installments-text">
-                  Pay in 2 interest-free installments of <strong>${installmentAmount}</strong> with{" "}
-                  <span className="cart-shop-brand">shop</span>
-                  <button
-                    type="button"
-                    className="cart-info-circle-btn"
-                    aria-label="Installments info"
-                    onClick={() =>
-                      showToast("Split your payment over 2 fortnightly installments with 0% interest.")
-                    }
-                  >
-                    ⓘ
-                  </button>
-                </p>
 
                 {/* Duties and shipping disclaimer */}
                 <p className="cart-shipping-disclaimer">
@@ -751,7 +687,7 @@ export default function CartClient() {
                 <Link href="/checkout" className="cart-primary-checkout-btn">
                   <span className="cart-primary-btn-label">Continue to Checkout</span>
                   <span className="cart-primary-btn-divider" aria-hidden="true">|</span>
-                  <span className="cart-primary-btn-total">${finalTotal.toFixed(2)}</span>
+                  <span className="cart-primary-btn-total">₾{finalTotal.toFixed(2)}</span>
                 </Link>
 
                 {/* Express Pay Options: BOG, TBC, Google Pay, Apple Pay */}
@@ -767,7 +703,14 @@ export default function CartClient() {
                     onClick={() => triggerPaymentAction("BOG Pay (Bank of Georgia)")}
                     aria-label="Pay with BOG Bank of Georgia"
                   >
-                    <BogLogo />
+                    <Image
+                      src="/georgianbanks/bogbank.png"
+                      alt=""
+                      width={28}
+                      height={28}
+                      className="bank-pay-logo bog-pay-logo"
+                    />
+                    <span className="bank-pay-label">BOG pay</span>
                   </button>
 
                   {/* TBC Bank */}
@@ -777,7 +720,14 @@ export default function CartClient() {
                     onClick={() => triggerPaymentAction("TBC Pay (TBC Bank)")}
                     aria-label="Pay with TBC Bank"
                   >
-                    <TbcLogo />
+                    <Image
+                      src="/georgianbanks/Tbc.jpg"
+                      alt=""
+                      width={28}
+                      height={28}
+                      className="bank-pay-logo tbc-pay-logo"
+                    />
+                    <span className="bank-pay-label">TBC pay</span>
                   </button>
 
                   {/* GOOGLE PAY */}
@@ -825,10 +775,10 @@ export default function CartClient() {
                   <div className="cart-rec-info">
                     <h3 className="cart-rec-name">{prod.name}</h3>
                     <div className="cart-rec-price-row">
-                      <span className="cart-rec-price">${prod.price.toFixed(2)}</span>
+                      <span className="cart-rec-price">₾{prod.price.toFixed(2)}</span>
                       {prod.originalPrice && (
                         <span className="cart-rec-strikethrough">
-                          ${prod.originalPrice.toFixed(2)}
+                          ₾{prod.originalPrice.toFixed(2)}
                         </span>
                       )}
                     </div>

@@ -9,7 +9,7 @@ const FAQ_DATA = [
   {
     category: "Orders & Shipping",
     q: "How long will my order take to arrive?",
-    a: "Orders placed before 2:00 PM EST on business days are dispatched same-day. Standard domestic shipping arrives within 3 to 5 business days. Express shipping delivers in 1 to 2 business days. Free standard shipping applies to all domestic orders over $60."
+    a: "Orders placed before 2:00 PM EST on business days are dispatched same-day. Standard domestic shipping arrives within 3 to 5 business days. Express shipping delivers in 1 to 2 business days. Free standard shipping applies to all domestic orders over ₾60."
   },
   {
     category: "Orders & Shipping",
@@ -63,7 +63,7 @@ const FAQ_DATA = [
   {
     category: "Returns & Exchanges",
     q: "What is the return process for refunds?",
-    a: "For standard refunds to your original payment method, a flat $6.95 return shipping fee is deducted from your refund when using our prepaid return label. Alternatively, you can opt for 100% store credit with zero return fees."
+    a: "For standard refunds to your original payment method, a flat ₾6.95 return shipping fee is deducted from your refund when using our prepaid return label. Alternatively, you can opt for 100% store credit with zero return fees."
   },
   {
     category: "Returns & Exchanges",

@@ -23,7 +23,7 @@ export default function ShippingReturnsClient() {
           </div>
           <h3 className="cc-card-title">Free Shipping</h3>
           <p className="cc-card-desc">
-            All domestic US orders over $60 automatically unlock free standard shipping at checkout.
+            All domestic US orders over ₾60 automatically unlock free standard shipping at checkout.
           </p>
         </div>
 
@@ -91,31 +91,31 @@ export default function ShippingReturnsClient() {
                 <td><strong>Standard Ground</strong></td>
                 <td>Continental United States</td>
                 <td>3 &ndash; 5 business days</td>
-                <td><strong>FREE</strong> on orders $60+ ($6.95 under $60)</td>
+                <td><strong>FREE</strong> on orders ₾60+ (₾6.95 under ₾60)</td>
               </tr>
               <tr>
                 <td><strong>Express Air</strong></td>
                 <td>Continental United States</td>
                 <td>1 &ndash; 2 business days</td>
-                <td>$12.00 flat rate</td>
+                <td>₾12.00 flat rate</td>
               </tr>
               <tr>
                 <td><strong>Standard International (DDP)</strong></td>
                 <td>Canada &amp; Mexico</td>
                 <td>5 &ndash; 8 business days</td>
-                <td>$14.00 (Duties &amp; taxes included)</td>
+                <td>₾14.00 (Duties &amp; taxes included)</td>
               </tr>
               <tr>
                 <td><strong>Standard International (DDP)</strong></td>
                 <td>UK &amp; European Union</td>
                 <td>6 &ndash; 9 business days</td>
-                <td>$18.00 (Duties &amp; taxes included)</td>
+                <td>₾18.00 (Duties &amp; taxes included)</td>
               </tr>
               <tr>
                 <td><strong>Global Express</strong></td>
                 <td>Australia, Asia &amp; Rest of World</td>
                 <td>7 &ndash; 12 business days</td>
-                <td>$24.00 flat rate</td>
+                <td>₾24.00 flat rate</td>
               </tr>
             </tbody>
           </table>
@@ -177,7 +177,7 @@ export default function ShippingReturnsClient() {
             <ul style={{ margin: 0, paddingLeft: "18px", color: "var(--muted)", fontSize: "13.5px", lineHeight: "1.7" }}>
               <li><strong>Size Exchanges:</strong> 100% free of charge with prepaid shipping labels.</li>
               <li><strong>Store Credit:</strong> Receive full refund value + 10% bonus credit toward your next order.</li>
-              <li><strong>Original Payment Method:</strong> Refund issued minus a $6.95 return shipping fee.</li>
+              <li><strong>Original Payment Method:</strong> Refund issued minus a ₾6.95 return shipping fee.</li>
               <li>Refund processing takes 3 to 5 business days upon warehouse arrival.</li>
             </ul>
           </div>
