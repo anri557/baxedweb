@@ -1080,7 +1080,7 @@ export default function Home() {
           </thead>
           <tbody>
             <tr>
-              <th scope="row">No Parabens</th>
+              <th scope="row">Made for Everyday Wear</th>
               <td>
                 <span className="why-check" role="img" aria-label="Yes">
                   <svg className="why-check-icon" viewBox="0 0 34 34" fill="none" aria-hidden="true">
@@ -1097,7 +1097,7 @@ export default function Home() {
               </td>
             </tr>
             <tr>
-              <th scope="row">No Sulfates</th>
+              <th scope="row">Comfort-First Fabrics</th>
               <td>
                 <span className="why-check" role="img" aria-label="Yes">
                   <svg className="why-check-icon" viewBox="0 0 34 34" fill="none" aria-hidden="true">
@@ -1114,7 +1114,7 @@ export default function Home() {
               </td>
             </tr>
             <tr>
-              <th scope="row">Full Ingredient Transparency</th>
+              <th scope="row">Modern Athletic Fit</th>
               <td>
                 <span className="why-check" role="img" aria-label="Yes">
                   <svg className="why-check-icon" viewBox="0 0 34 34" fill="none" aria-hidden="true">
@@ -1131,7 +1131,7 @@ export default function Home() {
               </td>
             </tr>
             <tr>
-              <th scope="row">Formulated &amp; Filled in USA</th>
+              <th scope="row">Free Size Exchanges</th>
               <td>
                 <span className="why-check" role="img" aria-label="Yes">
                   <svg className="why-check-icon" viewBox="0 0 34 34" fill="none" aria-hidden="true">
