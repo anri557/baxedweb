@@ -7879,18 +7879,17 @@ footer {
 
 .checkout-express-icon {
   display: block;
+  height: 20px;
   object-fit: contain;
   pointer-events: none;
 }
 
 .checkout-express-icon.apple-icon {
-  height: 20px;
   width: auto;
   transform: translateY(-1px);
 }
 
 .checkout-express-icon.google-icon {
-  height: 19px;
   width: auto;
 }
 
@@ -7898,6 +7897,8 @@ footer {
 .checkout-express-google span {
   display: inline-block;
   line-height: 1;
+  font-size: 22px;
+  font-weight: 500;
 }
 
 .checkout-or {
