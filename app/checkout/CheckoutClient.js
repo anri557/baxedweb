@@ -327,32 +327,7 @@ export default function CheckoutClient() {
         </Link>
         <span className="checkout-masthead-divider" aria-hidden="true" />
         <div className="checkout-proof">
-          <div className="checkout-proof-left">
-            <div className="checkout-proof-avatars" aria-hidden="true">
-              <img
-                src="/checkout-assets/checkout-avatars.png"
-                alt="Customers"
-                width="128"
-                height="64"
-                className="checkout-avatars-img"
-              />
-            </div>
-            <div className="checkout-proof-stars" aria-label="5 out of 5 stars">
-              {[...Array(5)].map((_, i) => (
-                <svg
-                  key={i}
-                  className="checkout-star-icon"
-                  width="13"
-                  height="13"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  aria-hidden="true"
-                >
-                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                </svg>
-              ))}
-            </div>
-          </div>
+
           <div className="checkout-proof-right">
             <div className="checkout-proof-heading">
               <div>Chosen By <span>3,000,000+</span></div>

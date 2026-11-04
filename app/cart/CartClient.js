@@ -689,8 +689,6 @@ export default function CartClient() {
                   <span className="cart-primary-btn-divider" aria-hidden="true">|</span>
                   <span className="cart-primary-btn-total">₾{finalTotal.toFixed(2)}</span>
                 </Link>
-
-
                 <div className="cart-pay-options-divider">
                   <span>OR PAY WITH</span>
                 </div>
