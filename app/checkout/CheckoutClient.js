@@ -34,6 +34,44 @@ function formatPrice(value) {
   return `${Number(value || 0).toFixed(2).replace(".", ",")}₾`;
 }
 
+function detectCardBrand(num) {
+  const digits = (num || "").replace(/\D/g, "");
+  if (!digits) return null;
+  if (/^4/.test(digits)) return "visa";
+  if (/^(5[1-5]|2[2-7])/.test(digits) || /^5/.test(digits)) return "mastercard";
+  if (/^3[47]/.test(digits)) return "amex";
+  if (/^(6011|65|64[4-9]|622)/.test(digits)) return "discover";
+  if (/^35/.test(digits)) return "jcb";
+  if (/^3(0[0-5]|[68])/.test(digits)) return "diners";
+  if (/^62/.test(digits)) return "unionpay";
+  return "unknown";
+}
+
+function formatCardNumber(value) {
+  const digits = value.replace(/\D/g, "");
+  if (/^3[47]/.test(digits)) {
+    const limited = digits.slice(0, 15);
+    const p1 = limited.slice(0, 4);
+    const p2 = limited.slice(4, 10);
+    const p3 = limited.slice(10, 15);
+    return [p1, p2, p3].filter(Boolean).join(" ");
+  }
+  const limited = digits.slice(0, 16);
+  const parts = [];
+  for (let i = 0; i < limited.length; i += 4) {
+    parts.push(limited.slice(i, i + 4));
+  }
+  return parts.join(" ");
+}
+
+function formatCardExpiry(value) {
+  const digits = value.replace(/\D/g, "").slice(0, 4);
+  if (digits.length >= 3) {
+    return `${digits.slice(0, 2)} / ${digits.slice(2, 4)}`;
+  }
+  return digits;
+}
+
 export default function CheckoutClient() {
   const router = useRouter();
   const [items, setItems] = useState(INITIAL_CART);
@@ -43,6 +81,11 @@ export default function CheckoutClient() {
   const [showBottomDiscount, setShowBottomDiscount] = useState(false);
   const [notice, setNotice] = useState("");
   const [paymentMethod, setPaymentMethod] = useState("card");
+  const [cardNumber, setCardNumber] = useState("");
+  const [cardExpiry, setCardExpiry] = useState("");
+  const [cardCvv, setCardCvv] = useState("");
+
+  const cardBrand = useMemo(() => detectCardBrand(cardNumber), [cardNumber]);
   const noticeTimerRef = useRef(null);
 
   const showNotice = (msg, duration = 3000) => {
@@ -130,7 +173,8 @@ export default function CheckoutClient() {
         apartment: formData.get("apartment"),
         city: formData.get("city"),
         postalCode: formData.get("postalCode"),
-        country: formData.get("country"),
+        country: "Georgia",
+        region: formData.get("region") || "Tbilisi",
       },
       items,
       discountCode: discountRate ? discountCode.trim().toUpperCase() : "",
@@ -496,13 +540,34 @@ export default function CheckoutClient() {
               <section className="checkout-section">
                 <h2>Delivery</h2>
                 <div className="checkout-select-wrap">
-                  <span className="checkout-floating-label">Country/Region</span>
-                  <select id="country" name="country" className="checkout-field checkout-select" defaultValue="Georgia">
-                    <option>Georgia</option>
-                    <option>United States</option>
-                    <option>United Kingdom</option>
+                  <span className="checkout-floating-label">Region</span>
+                  <select id="region" name="region" className="checkout-field checkout-select" defaultValue="Tbilisi">
+                    <option value="Tbilisi">Tbilisi (თბილისი)</option>
+                    <option value="Adjara">Adjara / Batumi (აჭარა / ბათუმი)</option>
+                    <option value="Imereti">Imereti / Kutaisi (იმერეთი / ქუთაისი)</option>
+                    <option value="Kvemo Kartli">Kvemo Kartli / Rustavi (ქვემო ქართლი / რუსთავი)</option>
+                    <option value="Kakheti">Kakheti / Telavi (კახეთი / თელავი)</option>
+                    <option value="Shida Kartli">Shida Kartli / Gori (შიდა ქართლი / გორი)</option>
+                    <option value="Samegrelo">Samegrelo / Zugdidi (სამეგრელო / ზუგდიდი)</option>
+                    <option value="Samtskhe-Javakheti">Samtskhe-Javakheti (სამცხე-ჯავახეთი)</option>
+                    <option value="Mtskheta-Mtianeti">Mtskheta-Mtianeti (მცხეთა-მთიანეთი)</option>
+                    <option value="Guria">Guria / Ozurgeti (გურია / ოზურგეთი)</option>
+                    <option value="Racha-Lechkhumi">Racha-Lechkhumi (რაჭა-ლეჩხუმი)</option>
                   </select>
-                  <span className="checkout-select-arrow" aria-hidden="true">⌄</span>
+                  <span className="checkout-select-arrow" aria-hidden="true">
+                    <svg
+                      width="13"
+                      height="13"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2.4"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="m6 9 6 6 6-6" />
+                    </svg>
+                  </span>
                 </div>
 
                 <div className="checkout-field-row">
@@ -554,10 +619,21 @@ export default function CheckoutClient() {
                     />
                     <span>Credit card</span>
                     <div className="checkout-card-brands" aria-hidden="true">
-                      <span className="brand-pill visa">VISA</span>
-                      <span className="brand-pill mc" />
-                      <span className="brand-pill amex">AMEX</span>
-                      <span className="brand-pill more">+5</span>
+                      {cardBrand === "visa" && <span className="brand-pill visa">VISA</span>}
+                      {cardBrand === "mastercard" && <span className="brand-pill mc" title="Mastercard" />}
+                      {cardBrand === "amex" && <span className="brand-pill amex">AMEX</span>}
+                      {cardBrand === "discover" && <span className="brand-pill discover">DISCOVER</span>}
+                      {cardBrand === "jcb" && <span className="brand-pill jcb">JCB</span>}
+                      {cardBrand === "diners" && <span className="brand-pill diners">DINERS</span>}
+                      {cardBrand === "unionpay" && <span className="brand-pill unionpay">UNIONPAY</span>}
+                      {(!cardBrand || cardBrand === "unknown") && (
+                        <>
+                          <span className="brand-pill visa">VISA</span>
+                          <span className="brand-pill mc" />
+                          <span className="brand-pill amex">AMEX</span>
+                          <span className="brand-pill more">+5</span>
+                        </>
+                      )}
                     </div>
                   </label>
                   {paymentMethod === "card" && (
@@ -568,31 +644,36 @@ export default function CheckoutClient() {
                           placeholder="Card number"
                           inputMode="numeric"
                           autoComplete="cc-number"
+                          name="cardNumber"
+                          value={cardNumber}
+                          onChange={(e) => setCardNumber(formatCardNumber(e.target.value))}
                           required={paymentMethod === "card"}
                         />
-                        <span className="checkout-field-icon lock" aria-hidden="true"> <span className="checkout-trust-icon" aria-hidden="true">
+                        <span className="checkout-field-icon lock" aria-hidden="true">
                           <svg
-                            width="17"
-                            height="17"
+                            width="16"
+                            height="16"
                             viewBox="0 0 24 24"
                             fill="none"
-                            stroke="currentColor"
+                            stroke="#8525dc"
                             strokeWidth="2.2"
                             strokeLinecap="round"
                             strokeLinejoin="round"
-                            className="checkout-lock-icon"
-                            aria-hidden="true"
                           >
                             <rect x="3" y="10" width="18" height="12" rx="4" />
                             <path d="M7 10V7a5 5 0 0 1 10 0v3" />
                           </svg>
-                        </span></span>
+                        </span>
                       </div>
                       <div className="checkout-field-row">
                         <input
                           className="checkout-field"
                           placeholder="Expiration date (MM / YY)"
                           autoComplete="cc-exp"
+                          name="cardExpiry"
+                          value={cardExpiry}
+                          onChange={(e) => setCardExpiry(formatCardExpiry(e.target.value))}
+                          maxLength={7}
                           required={paymentMethod === "card"}
                         />
                         <div className="checkout-input-wrap">
@@ -601,6 +682,10 @@ export default function CheckoutClient() {
                             placeholder="Security code"
                             inputMode="numeric"
                             autoComplete="cc-csc"
+                            name="cardCvv"
+                            value={cardCvv}
+                            onChange={(e) => setCardCvv(e.target.value.replace(/\D/g, "").slice(0, 4))}
+                            maxLength={4}
                             required={paymentMethod === "card"}
                           />
                           <span className="checkout-field-icon" aria-hidden="true">?</span>
@@ -610,6 +695,7 @@ export default function CheckoutClient() {
                         className="checkout-field"
                         placeholder="Name on card"
                         autoComplete="cc-name"
+                        name="cardName"
                         required={paymentMethod === "card"}
                       />
                       <label className="checkout-checkbox">

@@ -8054,10 +8054,17 @@ footer {
   position: absolute;
   top: 50%;
   right: 13px;
-  transform: translateY(-55%);
+  transform: translateY(-50%);
   color: #666;
-  font-size: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   pointer-events: none;
+}
+
+.checkout-select-arrow svg {
+  display: block;
+  stroke: #666;
 }
 
 .checkout-field-row {
@@ -8205,6 +8212,30 @@ footer {
 .brand-pill.amex {
   background: #016fd0;
   border-color: #016fd0;
+  color: #fff;
+}
+
+.brand-pill.discover {
+  background: #ff6000;
+  border-color: #ff6000;
+  color: #fff;
+}
+
+.brand-pill.jcb {
+  background: #0066b2;
+  border-color: #0066b2;
+  color: #fff;
+}
+
+.brand-pill.diners {
+  background: #0079be;
+  border-color: #0079be;
+  color: #fff;
+}
+
+.brand-pill.unionpay {
+  background: #d8232a;
+  border-color: #d8232a;
   color: #fff;
 }
 
