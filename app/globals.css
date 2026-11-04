@@ -7315,9 +7315,9 @@ footer {
   box-sizing: border-box;
   align-items: center;
   justify-content: center;
-  gap: clamp(10px, 1.8vw, 24px);
+  gap: clamp(8px, 1.2vw, 16px);
   margin: 0 auto;
-  padding: 16px clamp(10px, 2.5vw, 32px);
+  padding: 12px clamp(8px, 1.6vw, 20px);
   background: #ffffff;
   border-bottom: 1px solid #ededed;
   overflow-x: clip;
@@ -7334,7 +7334,7 @@ footer {
 
 .checkout-logo-svg {
   display: block;
-  height: clamp(32px, 4vw, 44px);
+  height: clamp(18px, 2.2vw, 26px);
   width: auto;
   transition: transform 0.2s ease, filter 0.2s ease;
 }
@@ -7346,7 +7346,7 @@ footer {
 
 .checkout-masthead-divider {
   width: 1px;
-  height: clamp(36px, 4.5vw, 54px);
+  height: clamp(24px, 3vw, 36px);
   background: #e2e2e2;
   flex-shrink: 0;
 }
@@ -7354,7 +7354,7 @@ footer {
 .checkout-proof {
   display: flex;
   align-items: center;
-  gap: clamp(8px, 1.5vw, 18px);
+  gap: clamp(6px, 1.1vw, 14px);
   min-width: 0;
   max-width: 100%;
 }
@@ -7405,7 +7405,7 @@ footer {
 
 .checkout-proof-heading {
   font-family: var(--font-montserrat), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  font-size: clamp(18px, 2.9vw, 38px);
+  font-size: clamp(16px, 2.2vw, 30px);
   font-weight: 500;
   letter-spacing: -0.025em;
   line-height: 1.1;
@@ -7415,7 +7415,7 @@ footer {
 
 @media (max-width:700px) {
   .checkout-proof-heading div {
-    font-size: clamp(25px, 4.2vw, 40px);
+    font-size: clamp(15px, 3vw, 22px);
   }
 }
 
@@ -7427,25 +7427,27 @@ footer {
 .checkout-proof-badges {
   display: flex;
   align-items: center;
-  gap: clamp(5px, 0.9vw, 12px);
-  font-size: clamp(9.5px, 1.05vw, 12.5px);
+  gap: clamp(4px, 0.6vw, 8px);
+  font-size: clamp(8px, 0.88vw, 11px);
   font-weight: 400;
   color: #525252;
-  white-space: nowrap;
-  letter-spacing: -0.01em;
+  white-space: nowrap !important;
+  flex-wrap: nowrap !important;
+  letter-spacing: -0.015em;
   max-width: 100%;
 }
 
 .checkout-badge-item {
   display: inline-flex;
   align-items: center;
-  gap: 4.5px;
+  gap: 3.5px;
   flex-shrink: 0;
+  white-space: nowrap !important;
 }
 
 .checkout-badge-icon {
-  width: clamp(10.5px, 1.1vw, 13.5px);
-  height: clamp(10.5px, 1.1vw, 13.5px);
+  width: clamp(9.5px, 0.95vw, 12px);
+  height: clamp(9.5px, 0.95vw, 12px);
   stroke: #444444;
   flex-shrink: 0;
 }
@@ -7455,6 +7457,7 @@ footer {
   font-weight: 300;
   user-select: none;
   flex-shrink: 0;
+  margin: 0 1px;
 }
 
 /* Collapsible Order Summary Bar (Mobile) */
@@ -8002,8 +8005,8 @@ footer {
 }
 
 .checkout-field:focus {
-  border-color: var(--checkout-gold);
-  box-shadow: 0 0 0 1px var(--checkout-gold);
+  border-color: var(--gold1);
+  box-shadow: 0 0 0 1px var(--gold1);
 }
 
 .checkout-field-icon {
@@ -8558,77 +8561,87 @@ footer {
 
 @media (max-width: 680px) {
   .checkout-masthead {
-    gap: 10px;
-    padding: 10px 10px;
-  }
-
-  .checkout-logo-svg {
-    height: 28px;
-  }
-
-  .checkout-masthead-divider {
-    height: 36px;
-  }
-
-  .checkout-proof {
-    gap: 8px;
-  }
-
-  .checkout-avatars-img {
-    height: 26px;
-  }
-
-  .checkout-proof-heading {
-    font-size: 16px;
-    box-sizing: border-box;
-  }
-
-  .checkout-proof-badges {
-    font-size: 9px;
-    gap: 4px;
-  }
-
-  .checkout-badge-icon {
-    width: 10px;
-    height: 10px;
-  }
-}
-
-@media (max-width: 520px) {
-  .checkout-masthead {
     gap: 8px;
     padding: 10px 8px;
   }
 
   .checkout-logo-svg {
-    height: 24px;
+    height: 20px;
   }
 
   .checkout-masthead-divider {
-    height: 32px;
+    height: 26px;
   }
 
-  .checkout-proof-heading {
-    font-size: 14.5px;
+  .checkout-proof {
+    gap: 6px;
   }
 
   .checkout-avatars-img {
     height: 22px;
   }
 
-  .checkout-star-icon {
-    width: 8.5px;
-    height: 8.5px;
+  .checkout-proof-heading {
+    font-size: 15px;
+    box-sizing: border-box;
   }
 
   .checkout-proof-badges {
-    flex-wrap: wrap;
-    gap: 2px 6px;
-    font-size: 8.5px;
+    font-size: 8px;
+    gap: 3px;
+    flex-wrap: nowrap !important;
+    white-space: nowrap !important;
+  }
+
+  .checkout-badge-icon {
+    width: 9px;
+    height: 9px;
+  }
+}
+
+@media (max-width: 520px) {
+  .checkout-masthead {
+    gap: 6px;
+    padding: 8px 6px;
+  }
+
+  .checkout-logo-svg {
+    height: 17px;
+  }
+
+  .checkout-masthead-divider {
+    height: 22px;
+  }
+
+  .checkout-proof-heading {
+    font-size: 13.5px;
+  }
+
+  .checkout-avatars-img {
+    height: 18px;
+  }
+
+  .checkout-star-icon {
+    width: 7.5px;
+    height: 7.5px;
+  }
+
+  .checkout-proof-badges {
+    flex-wrap: nowrap !important;
+    white-space: nowrap !important;
+    gap: 2px;
+    font-size: 7.2px;
+  }
+
+  .checkout-badge-item {
+    gap: 2.5px;
+    white-space: nowrap !important;
   }
 
   .checkout-badge-pipe {
-    display: none;
+    display: inline-block;
+    margin: 0 1px;
+    opacity: 0.6;
   }
 
   .checkout-reviews-row {
@@ -8638,39 +8651,45 @@ footer {
 
 @media (max-width: 420px) {
   .checkout-masthead {
-    gap: 6px;
-    padding: 8px 6px;
+    gap: 5px;
+    padding: 6px 4px;
   }
 
   .checkout-logo-svg {
-    height: 21px;
+    height: 14.5px;
   }
 
   .checkout-masthead-divider {
-    height: 28px;
+    height: 18px;
   }
 
   .checkout-proof-heading {
-    font-size: 13px;
+    font-size: 12px;
   }
 
   .checkout-avatars-img {
-    height: 19px;
+    height: 16px;
   }
 
   .checkout-star-icon {
-    width: 7.5px;
-    height: 7.5px;
+    width: 6.5px;
+    height: 6.5px;
   }
 
   .checkout-proof-badges {
-    font-size: 8px;
-    gap: 2px 5px;
+    font-size: 6.5px;
+    gap: 1.5px;
+    flex-wrap: nowrap !important;
+    white-space: nowrap !important;
+  }
+
+  .checkout-badge-item {
+    gap: 2px;
   }
 
   .checkout-badge-icon {
-    width: 9px;
-    height: 9px;
+    width: 7.5px;
+    height: 7.5px;
   }
 }
 

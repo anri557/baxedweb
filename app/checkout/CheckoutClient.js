@@ -327,7 +327,6 @@ export default function CheckoutClient() {
         </Link>
         <span className="checkout-masthead-divider" aria-hidden="true" />
         <div className="checkout-proof">
-
           <div className="checkout-proof-right">
             <div className="checkout-proof-heading">
               <div>Chosen By <span>3,000,000+</span></div>
@@ -463,7 +462,7 @@ export default function CheckoutClient() {
               <span>OR</span>
             </div>
 
-            <form className="checkout-form" onSubmit={handleSubmit}>
+            <form className="" onSubmit={handleSubmit}>
               <section className="checkout-section">
                 <div className="checkout-section-heading">
                   <h1>Contact</h1>
