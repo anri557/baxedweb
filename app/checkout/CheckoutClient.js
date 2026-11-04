@@ -264,21 +264,13 @@ export default function CheckoutClient() {
       <div className="checkout-trust-list">
         <div className="checkout-trust-item">
           <span className="checkout-trust-icon" aria-hidden="true">
-            <svg
-              width="17"
-              height="17"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2.2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="checkout-lock-icon"
-              aria-hidden="true"
-            >
-              <rect x="3" y="10" width="18" height="12" rx="4" />
-              <path d="M7 10V7a5 5 0 0 1 10 0v3" />
-            </svg>
+            <img
+              src="/checkout-assets/lock-icon.png?v=purple"
+              alt=""
+              width="18"
+              height="20"
+              className="checkout-trust-img lock-icon"
+            />
           </span>
           <div>
             <strong>Secure payments</strong>
@@ -288,10 +280,10 @@ export default function CheckoutClient() {
         <div className="checkout-trust-item">
           <span className="checkout-trust-icon" aria-hidden="true">
             <img
-              src="/checkout-assets/store-guarantee-icon.png"
+              src="/checkout-assets/store-guarantee-icon.png?v=purple"
               alt=""
-              width="19"
-              height="19"
+              width="20"
+              height="20"
               className="checkout-trust-img store-icon"
             />
           </span>
@@ -303,10 +295,10 @@ export default function CheckoutClient() {
         <div className="checkout-trust-item">
           <span className="checkout-trust-icon" aria-hidden="true">
             <img
-              src="/checkout-assets/fast-shipping-icon.png"
+              src="/checkout-assets/fast-shipping-icon.png?v=purple"
               alt=""
-              width="23"
-              height="18"
+              width="24"
+              height="19"
               className="checkout-trust-img truck-icon"
             />
           </span>

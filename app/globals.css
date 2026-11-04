@@ -8451,19 +8451,13 @@ footer {
 }
 
 .checkout-trust-icon {
-  color: #707070;
+  color: #8525dc;
   font-size: 16px;
   line-height: 1.2;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-}
-
-.checkout-trust-icon .checkout-lock-icon {
-  width: 17px;
-  height: 17px;
-  stroke: #707070;
-  display: block;
+  min-height: 20px;
 }
 
 .checkout-trust-img {
@@ -8472,14 +8466,19 @@ footer {
   pointer-events: none;
 }
 
+.checkout-trust-img.lock-icon {
+  width: 18px;
+  height: 20px;
+}
+
 .checkout-trust-img.store-icon {
-  width: 19px;
-  height: 19px;
+  width: 20px;
+  height: 20px;
 }
 
 .checkout-trust-img.truck-icon {
-  width: 22px;
-  height: 18px;
+  width: 24px;
+  height: 19px;
 }
 
 .checkout-trust-item strong {
