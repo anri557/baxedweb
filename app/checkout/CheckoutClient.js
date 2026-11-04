@@ -31,7 +31,7 @@ const CHECKOUT_REVIEWS = [
 const FREE_SHIPPING_GOAL = 100;
 
 function formatPrice(value) {
-  return `${Number(value || 0).toFixed(2).replace(".", ",")} $`;
+  return `${Number(value || 0).toFixed(2).replace(".", ",")}₾`;
 }
 
 export default function CheckoutClient() {
@@ -157,8 +157,13 @@ export default function CheckoutClient() {
     }
   };
 
-  const handleExpressCheckout = () => {
-    showNotice("Express checkout is not configured yet. Use the payment form below.", 3200);
+  const handleExpressCheckout = (provider) => {
+    showNotice(
+      provider
+        ? `${provider} is not configured yet. Please complete your order below.`
+        : "Express checkout is not configured yet. Please complete your order below.",
+      3200
+    );
   };
 
   const renderSummaryDetails = () => (
@@ -227,7 +232,7 @@ export default function CheckoutClient() {
         <div className="checkout-grand-total">
           <strong>Total</strong>
           <span>
-            <small>USD</small>
+            <small>Lari</small>
             <strong>{formatPrice(total)}</strong>
           </span>
         </div>
@@ -299,26 +304,119 @@ export default function CheckoutClient() {
       {/* Static top banner */}
       <div className="checkout-masthead" role="banner">
         <Link href="/" className="checkout-wordmark" aria-label="BAXED home">
-          BAXED
+          <svg
+            viewBox="50 15 920 195"
+            className="checkout-logo-svg"
+            aria-hidden="true"
+          >
+            <defs>
+              <linearGradient id="checkoutBaxedPurpleGrad" x1="0%" y1="0%" x2="100%" y2="85%">
+                <stop offset="0%" stopColor="#5900a8" />
+                <stop offset="30%" stopColor="#8525dc" />
+                <stop offset="65%" stopColor="#d982ff" />
+                <stop offset="85%" stopColor="#ffffff" />
+                <stop offset="100%" stopColor="#9b36ff" />
+              </linearGradient>
+            </defs>
+            <path
+              fill="url(#checkoutBaxedPurpleGrad)"
+              fillRule="evenodd"
+              d="M80 24 L182 24 L207 32 L222 45 L229 58 L231 66 L231 85 L225 100 L215 111 L226 120 L231 128 L235 142 L235 153 L233 164 L228 175 L217 188 L203 197 L186 202 L78 202 L72 197 L70 193 L70 33 L74 27 L80 24 Z M325 24 L351 24 L359 31 L390 104 L428 186 L429 196 L425 201 L392 201 L386 191 L373 159 L301 159 L288 190 L281 201 L250 202 L245 197 L245 189 L285 104 L315 34 L317 30 L325 24 Z M439 24 L468 24 L473 26 L516 82 L520 79 L529 65 L533 62 L560 26 L565 24 L594 24 L600 29 L600 39 L540 110 L540 113 L544 116 L580 164 L599 186 L601 196 L597 201 L561 201 L517 142 L473 200 L469 202 L438 202 L433 198 L433 187 L437 184 L451 164 L493 113 L493 110 L484 101 L480 94 L474 89 L470 82 L454 65 L440 46 L434 41 L432 31 L434 27 L439 24 Z M629 24 L760 24 L764 26 L768 32 L768 54 L766 58 L760 62 L628 62 L621 55 L621 31 L626 25 L629 24 Z M796 24 L887 25 L910 33 L932 50 L945 69 L950 82 L954 104 L954 122 L951 140 L946 154 L939 167 L924 184 L905 196 L884 202 L794 202 L789 198 L787 194 L787 174 L792 166 L877 165 L889 162 L905 150 L913 136 L916 124 L916 101 L913 90 L903 74 L901 74 L894 67 L880 62 L795 62 L791 60 L787 53 L787 33 L790 27 L796 24 Z M109 60 L108 94 L173 95 L185 92 L190 88 L193 82 L193 72 L191 68 L187 64 L180 61 L109 60 Z M338 77 L333 84 L317 123 L358 123 L338 77 Z M630 93 L754 93 L759 95 L763 100 L763 125 L756 132 L628 132 L621 125 L621 100 L625 95 L630 93 Z M109 130 L108 165 L179 165 L191 160 L196 152 L195 140 L191 135 L183 131 L109 130 Z M628 165 L761 165 L767 170 L768 173 L768 195 L761 202 L627 202 L621 196 L621 171 L628 165 Z"
+            />
+          </svg>
         </Link>
+        <span className="checkout-masthead-divider" aria-hidden="true" />
         <div className="checkout-proof">
-          <div className="checkout-proof-top">
-            <div className="checkout-avatars" aria-hidden="true">
-              <span className="checkout-avatar a1" />
-              <span className="checkout-avatar a2" />
-              <span className="checkout-avatar a3" />
+          <div className="checkout-proof-left">
+            <div className="checkout-proof-avatars" aria-hidden="true">
+              <img
+                src="/checkout-assets/checkout-avatars.png"
+                alt="Customers"
+                width="128"
+                height="64"
+                className="checkout-avatars-img"
+              />
             </div>
-            <strong>
-              Chosen By <span>3,000,000+</span>
-            </strong>
+            <div className="checkout-proof-stars" aria-label="5 out of 5 stars">
+              {[...Array(5)].map((_, i) => (
+                <svg
+                  key={i}
+                  className="checkout-star-icon"
+                  width="13"
+                  height="13"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                </svg>
+              ))}
+            </div>
           </div>
-          <div className="checkout-proof-details">
-            <span className="checkout-stars" aria-label="5 out of 5 stars">
-              ★★★★★
-            </span>
-            <span>✓ 60-Day Money Back Guarantee</span>
-            <span>🎧 24/7 Support</span>
-            <span>🛡 Secure Checkout</span>
+          <div className="checkout-proof-right">
+            <div className="checkout-proof-heading">
+              <div>Chosen By <span>3,000,000+</span></div>
+            </div>
+            <div className="checkout-proof-badges">
+              <span className="checkout-badge-item">
+                <svg
+                  className="checkout-badge-icon"
+                  width="13"
+                  height="13"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.8"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                  <path d="m9 12 2 2 4-4" />
+                </svg>
+                60-Day Money Back Guarantee
+              </span>
+              <span className="checkout-badge-pipe" aria-hidden="true">|</span>
+              <span className="checkout-badge-item">
+                <svg
+                  className="checkout-badge-icon"
+                  width="13"
+                  height="13"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.8"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M3 18v-6a9 9 0 0 1 18 0v6" />
+                  <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z" />
+                  <path d="M18 19v1a2 2 0 0 1-2 2h-4" />
+                </svg>
+                24/7 Support
+              </span>
+              <span className="checkout-badge-pipe" aria-hidden="true">|</span>
+              <span className="checkout-badge-item">
+                <svg
+                  className="checkout-badge-icon"
+                  width="13"
+                  height="13"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.8"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                  <rect x="9" y="11" width="6" height="4.5" rx="1" />
+                  <path d="M10 11V9.5a2 2 0 0 1 4 0V11" />
+                </svg>
+                Secure Checkout
+              </span>
+            </div>
           </div>
         </div>
       </div>
@@ -357,14 +455,26 @@ export default function CheckoutClient() {
             <section className="checkout-express" aria-label="Express checkout">
               <p>Express checkout</p>
               <div className="checkout-express-buttons">
-                <button type="button" className="checkout-express-shop" onClick={handleExpressCheckout}>
-                  shop
+                <button
+                  type="button"
+                  className="checkout-express-apple"
+                  onClick={() => handleExpressCheckout("Apple Pay")}
+                >
+                  Apple Pay
                 </button>
-                <button type="button" className="checkout-express-paypal" onClick={handleExpressCheckout}>
-                  PayPal
+                <button
+                  type="button"
+                  className="checkout-express-bog"
+                  onClick={() => handleExpressCheckout("BOG Pay")}
+                >
+                  BOG Pay
                 </button>
-                <button type="button" className="checkout-express-google" onClick={handleExpressCheckout}>
-                  <span className="g-icon" aria-hidden="true">G</span> Pay
+                <button
+                  type="button"
+                  className="checkout-express-tbc"
+                  onClick={() => handleExpressCheckout("TBC Pay")}
+                >
+                  TBC Pay
                 </button>
               </div>
             </section>
@@ -577,7 +687,7 @@ export default function CheckoutClient() {
                     </div>
                   </div>
                   <div className="checkout-bottom-total-right">
-                    <small>USD</small>
+                    <small>Lari</small>
                     <strong>{formatPrice(total)}</strong>
                   </div>
                 </div>

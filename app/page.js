@@ -868,7 +868,7 @@ export default function Home() {
           <div className="hero-title">
             <h1>
               BUILD YOUR<br />
-              <span>OWN SET</span>
+              <span>GRISCH SET</span>
             </h1>
           </div>
           <p>
