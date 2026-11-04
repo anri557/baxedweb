@@ -34,6 +34,59 @@ function formatPrice(value) {
   return `${Number(value || 0).toFixed(2).replace(".", ",")}₾`;
 }
 
+function ApplePayLogo() {
+  return (
+    <svg viewBox="0 0 100 32" className="checkout-express-logo" fill="#FFFFFF" aria-hidden="true">
+      <path d="M12.4 8.7c-.7.8-1.7 1.4-2.7 1.3-.1-1.1.4-2.2 1-2.9.7-.8 1.8-1.4 2.8-1.4.1 1.1-.4 2.2-1.1 3zm.8 1.4c-1.5-.1-2.8.9-3.5.9-.7 0-1.8-.8-3-.8-1.5 0-3 1-3.7 2.4-1.7 2.8-.4 6.9 1.2 9.2.8 1.1 1.7 2.3 3 2.3 1.1 0 1.6-.7 2.9-.7 1.3 0 1.7.7 2.9.7 1.3 0 2.1-1.1 2.9-2.3.9-1.3 1.3-2.6 1.4-2.7-.1 0-2.6-1-2.6-4 .1-2.5 2-3.7 2.1-3.8-1.2-1.7-3-1.9-3.7-1.9z" />
+      <text
+        x="24"
+        y="22.5"
+        fill="#FFFFFF"
+        fontSize="17"
+        fontWeight="600"
+        letterSpacing="-0.02em"
+        fontFamily="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
+      >
+        Pay
+      </text>
+    </svg>
+  );
+}
+
+function GooglePayLogo() {
+  return (
+    <svg viewBox="0 0 100 32" className="checkout-express-logo" aria-hidden="true">
+      <path
+        d="M20.5 16.2c0-.5 0-.9-.1-1.3H11v2.7h5.4c-.2 1.3-1 2.4-2.1 3.1v2.5h3.4c2-1.9 3.2-4.7 3.2-7z"
+        fill="#4285F4"
+      />
+      <path
+        d="M11 25.8c3 0 5.5-1 7.3-2.7l-3.4-2.5c-1 .7-2.3 1.1-3.9 1.1-3 0-5.5-2-6.4-4.7H1.1v2.6C2.9 23.2 6.7 25.8 11 25.8z"
+        fill="#34A853"
+      />
+      <path
+        d="M4.6 17c-.2-.7-.4-1.5-.4-2.3 0-.8.1-1.6.4-2.3V9.8H1.1C.4 11.2 0 12.8 0 14.7s.4 3.5 1.1 4.9L4.6 17z"
+        fill="#FBBC05"
+      />
+      <path
+        d="M11 8.6c1.6 0 3.1.6 4.3 1.7l3.2-3.2C16.5 5.3 14 4.5 11 4.5 6.7 4.5 2.9 7.1 1.1 10.7l3.5 2.6c.9-2.7 3.4-4.7 6.4-4.7z"
+        fill="#EA4335"
+      />
+      <text
+        x="26"
+        y="21.5"
+        fill="#FFFFFF"
+        fontSize="17"
+        fontWeight="600"
+        letterSpacing="-0.02em"
+        fontFamily="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
+      >
+        Pay
+      </text>
+    </svg>
+  );
+}
+
 export default function CheckoutClient() {
   const router = useRouter();
   const [items, setItems] = useState(INITIAL_CART);
@@ -458,23 +511,18 @@ export default function CheckoutClient() {
                 <button
                   type="button"
                   className="checkout-express-apple"
+                  aria-label="Apple Pay"
                   onClick={() => handleExpressCheckout("Apple Pay")}
                 >
-                  Apple Pay
+                  <ApplePayLogo />
                 </button>
                 <button
                   type="button"
-                  className="checkout-express-bog"
-                  onClick={() => handleExpressCheckout("BOG Pay")}
+                  className="checkout-express-google"
+                  aria-label="Google Pay"
+                  onClick={() => handleExpressCheckout("Google Pay")}
                 >
-                  BOG Pay
-                </button>
-                <button
-                  type="button"
-                  className="checkout-express-tbc"
-                  onClick={() => handleExpressCheckout("TBC Pay")}
-                >
-                  TBC Pay
+                  <GooglePayLogo />
                 </button>
               </div>
             </section>

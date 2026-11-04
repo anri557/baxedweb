@@ -873,29 +873,39 @@ header {
 .cart-checkout-btn {
   display: flex;
   width: 100%;
-  min-height: 44px;
+  min-height: 48px;
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  padding: 0 12px;
+  padding: 0 16px;
   border: 0;
+  border-radius: 4px;
   background: linear-gradient(100deg, #5900a8 0%, #8525dc 48%, #e8a7ff 100%);
   color: #ffffff;
-  font: 700 12px/1 Montserrat, sans-serif;
+  font: 700 13px/1 Montserrat, sans-serif;
   text-align: left;
   cursor: pointer;
+  text-decoration: none;
+  flex-wrap: nowrap;
 }
 
 .cart-checkout-btn>span:first-child {
+  display: inline-flex;
+  align-items: center;
   flex: 1 1 auto;
   min-width: 0;
-  line-height: 1.3;
-  transform: translateY(2px);
+  line-height: 1;
 }
 
+.cart-checkout-btn>span:last-child,
 #cartCheckoutTotal {
+  display: inline-flex;
+  align-items: center;
   flex-shrink: 0;
   white-space: nowrap;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1;
 }
 
 .cart-checkout-btn:hover {
@@ -940,20 +950,21 @@ header {
   }
 
   .cart-checkout-btn {
-    flex-wrap: wrap;
     min-height: 48px;
-    padding: 10px 12px;
-    font-size: 11px;
-    row-gap: 4px;
+    padding: 0 14px;
+    font-size: 12px;
+    flex-wrap: nowrap;
   }
 
   .cart-checkout-btn>span:first-child {
-    flex-basis: 100%;
-    width: 100%;
+    flex-basis: auto;
+    width: auto;
   }
 
+  .cart-checkout-btn>span:last-child,
   #cartCheckoutTotal {
-    margin-left: auto;
+    margin-left: 0;
+    font-size: 12px;
   }
 }
 
@@ -1183,28 +1194,28 @@ header {
 
 @media (max-width: 360px) {
   .cart-checkout-btn {
-    display: block;
-    min-height: 0;
-    padding: 12px 14px;
-    font-size: 10px;
-    line-height: 1.3;
-    letter-spacing: 0.06em;
+    display: flex;
+    min-height: 44px;
+    padding: 0 10px;
+    font-size: 11px;
+    flex-wrap: nowrap;
   }
 
   .cart-checkout-btn>span:first-child {
-    display: block;
-    width: 100%;
-    margin: 0 0 6px;
-    white-space: normal;
-    line-height: 1.3;
+    display: inline-flex;
+    width: auto;
+    margin: 0;
+    white-space: nowrap;
+    line-height: 1;
   }
 
+  .cart-checkout-btn>span:last-child,
   #cartCheckoutTotal {
-    display: block;
+    display: inline-flex;
     margin-left: 0;
-    font-size: 24px;
-    line-height: 1.1;
-    letter-spacing: -0.04em;
+    font-size: 11px;
+    line-height: 1;
+    letter-spacing: 0;
   }
 }
 
@@ -7832,44 +7843,40 @@ footer {
   transform: translateY(0);
 }
 
-/* Apple Pay: Solid Black, White Text */
-.checkout-express-apple {
-  grid-column: span 2;
+/* Express buttons: Apple Pay & Google Pay */
+.checkout-express-apple,
+.checkout-express-google {
+  height: 48px;
   background: #000000;
   color: #ffffff;
-  font-size: 17px !important;
+  border: 0;
+  border-radius: 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
+  transition: transform 0.15s ease, opacity 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
 }
 
-.checkout-express-apple:hover {
+.checkout-express-apple:hover,
+.checkout-express-google:hover {
   background: #141414;
+  transform: translateY(-1.5px);
+  opacity: 0.95;
   box-shadow: 0 5px 14px rgba(0, 0, 0, 0.22);
 }
 
-/* Bank of Georgia (BOG): Official Orange, White Text */
-.checkout-express-bog {
-  background: #F36E21;
-  color: #ffffff;
-  font-size: 16px;
-  box-shadow: 0 3px 10px rgba(243, 110, 33, 0.22);
+.checkout-express-apple:active,
+.checkout-express-google:active {
+  transform: translateY(0);
 }
 
-.checkout-express-bog:hover {
-  background: #e05c11;
-  box-shadow: 0 5px 14px rgba(243, 110, 33, 0.32);
-}
-
-/* TBC Bank: Official Cyan Blue, White Text */
-.checkout-express-tbc {
-  background: #00A3E0;
-  color: #ffffff;
-  font-size: 16px;
-  box-shadow: 0 3px 10px rgba(0, 163, 224, 0.22);
-}
-
-.checkout-express-tbc:hover {
-  background: #008dc4;
-  box-shadow: 0 5px 14px rgba(0, 163, 224, 0.32);
+.checkout-express-logo {
+  margin-left: 20px;
+  height: 24px;
+  width: auto;
+  display: block;
 }
 
 .checkout-or {
@@ -8493,14 +8500,10 @@ footer {
     padding: 36px 44px 64px 32px;
   }
 
-  /* 3-in-a-row Express Checkout buttons on desktop */
+  /* Express Checkout buttons on desktop: 2 equal columns */
   .checkout-express-buttons {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-  }
-
-  .checkout-express-apple {
-    grid-column: span 1;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
   }
 
   /* Cream right sidebar */
