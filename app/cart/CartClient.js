@@ -392,7 +392,7 @@ export default function CartClient() {
         cartCount={totalItemCount}
         isNavDrawerOpen={isNavDrawerOpen}
         onMenuToggle={() => setIsNavDrawerOpen((isOpen) => !isOpen)}
-        onCartClick={() => {}}
+        onCartClick={() => { }}
         onAccountClick={() => showToast("Account portal opening soon")}
       />
 
@@ -690,65 +690,41 @@ export default function CartClient() {
                   <span className="cart-primary-btn-total">₾{finalTotal.toFixed(2)}</span>
                 </Link>
 
-                {/* Express Pay Options: BOG, TBC, Google Pay, Apple Pay */}
+
                 <div className="cart-pay-options-divider">
                   <span>OR PAY WITH</span>
                 </div>
 
-                <div className="cart-pay-options-group">
-                  {/* BOG (Bank of Georgia) */}
-                  <button
-                    type="button"
-                    className="cart-pay-btn pay-btn-bog"
-                    onClick={() => triggerPaymentAction("BOG Pay (Bank of Georgia)")}
-                    aria-label="Pay with BOG Bank of Georgia"
-                  >
-                    <Image
-                      src="/georgianbanks/bogbank.png"
-                      alt=""
-                      width={28}
-                      height={28}
-                      className="bank-pay-logo bog-pay-logo"
-                    />
-                    <span className="bank-pay-label">BOG pay</span>
-                  </button>
-
-                  {/* TBC Bank */}
-                  <button
-                    type="button"
-                    className="cart-pay-btn pay-btn-tbc"
-                    onClick={() => triggerPaymentAction("TBC Pay (TBC Bank)")}
-                    aria-label="Pay with TBC Bank"
-                  >
-                    <Image
-                      src="/georgianbanks/Tbc.jpg"
-                      alt=""
-                      width={28}
-                      height={28}
-                      className="bank-pay-logo tbc-pay-logo"
-                    />
-                    <span className="bank-pay-label">TBC pay</span>
-                  </button>
-
-                  {/* GOOGLE PAY */}
-                  <button
-                    type="button"
-                    className="cart-pay-btn pay-btn-google"
-                    onClick={() => triggerPaymentAction("Google Pay")}
-                    aria-label="Pay with Google Pay"
-                  >
-                    <GooglePayLogo />
-                  </button>
-
+                <div className="">
                   {/* Apple Pay */}
-                  <button
-                    type="button"
-                    className="cart-pay-btn pay-btn-apple"
-                    onClick={() => triggerPaymentAction("Apple Pay")}
-                    aria-label="Pay with Apple Pay"
-                  >
-                    <ApplePayLogo />
-                  </button>
+                  <div className="checkout-express-buttons">
+                    <button
+                      type="button"
+                      className="checkout-express-apple"
+                      aria-label="Apple Pay"
+                      onClick={() => handleExpressCheckout("Apple Pay")}
+                    >
+                      <img
+                        src="/applegooglesvg/apple-logo-png-svg.webp"
+                        alt="Apple"
+                        className="checkout-express-icon apple-icon"
+                      />
+                      <span>Pay</span>
+                    </button>
+                    <button
+                      type="button"
+                      className="checkout-express-google"
+                      aria-label="Google Pay"
+                      onClick={() => handleExpressCheckout("Google Pay")}
+                    >
+                      <img
+                        src="/applegooglesvg/google-logo.webp"
+                        alt="Google"
+                        className="checkout-express-icon google-icon"
+                      />
+                      <span>Pay</span>
+                    </button>
+                  </div>
                 </div>
               </div>
             </aside>
