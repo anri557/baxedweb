@@ -7855,6 +7855,11 @@ footer {
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 6px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
   transition: transform 0.15s ease, opacity 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
 }
@@ -7872,11 +7877,27 @@ footer {
   transform: translateY(0);
 }
 
-.checkout-express-logo {
-  margin-left: 30px;
-  height: 30px;
-  width: auto;
+.checkout-express-icon {
   display: block;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+.checkout-express-icon.apple-icon {
+  height: 20px;
+  width: auto;
+  transform: translateY(-1px);
+}
+
+.checkout-express-icon.google-icon {
+  height: 19px;
+  width: auto;
+}
+
+.checkout-express-apple span,
+.checkout-express-google span {
+  display: inline-block;
+  line-height: 1;
 }
 
 .checkout-or {
