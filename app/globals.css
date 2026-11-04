@@ -7334,7 +7334,7 @@ footer {
 
 .checkout-logo-svg {
   display: block;
-  height: clamp(18px, 2.2vw, 26px);
+  height: clamp(26px, 3.6vw, 44px);
   width: auto;
   transition: transform 0.2s ease, filter 0.2s ease;
 }
@@ -7346,7 +7346,7 @@ footer {
 
 .checkout-masthead-divider {
   width: 1px;
-  height: clamp(24px, 3vw, 36px);
+  height: clamp(30px, 4vw, 48px);
   background: #e2e2e2;
   flex-shrink: 0;
 }
@@ -7399,24 +7399,24 @@ footer {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 3px;
+  gap: clamp(3px, 0.4vw, 5px);
   min-width: 0;
 }
 
 .checkout-proof-heading {
   font-family: var(--font-montserrat), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  font-size: clamp(16px, 2.2vw, 30px);
+  font-size: clamp(19px, 2.7vw, 34px);
   font-weight: 500;
-  letter-spacing: -0.025em;
+  letter-spacing: -0.02em;
   line-height: 1.1;
   color: #1a1a1a;
   white-space: nowrap;
+  width: 100%;
 }
 
-@media (max-width:700px) {
-  .checkout-proof-heading div {
-    font-size: clamp(15px, 3vw, 22px);
-  }
+.checkout-proof-heading div {
+  width: 100%;
+  font-size: clamp(26px, 3vw, 34px);
 }
 
 .checkout-proof-heading span {
@@ -7427,8 +7427,10 @@ footer {
 .checkout-proof-badges {
   display: flex;
   align-items: center;
-  gap: clamp(4px, 0.6vw, 8px);
-  font-size: clamp(8px, 0.88vw, 11px);
+  justify-content: space-between;
+  width: 100%;
+  gap: clamp(4px, 0.7vw, 10px);
+  font-size: clamp(8px, 0.9vw, 11px);
   font-weight: 400;
   color: #525252;
   white-space: nowrap !important;
@@ -8449,9 +8451,35 @@ footer {
 }
 
 .checkout-trust-icon {
-  color: var(--checkout-gold);
+  color: #707070;
   font-size: 16px;
   line-height: 1.2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.checkout-trust-icon .checkout-lock-icon {
+  width: 17px;
+  height: 17px;
+  stroke: #707070;
+  display: block;
+}
+
+.checkout-trust-img {
+  display: block;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+.checkout-trust-img.store-icon {
+  width: 19px;
+  height: 19px;
+}
+
+.checkout-trust-img.truck-icon {
+  width: 22px;
+  height: 18px;
 }
 
 .checkout-trust-item strong {
@@ -8566,11 +8594,11 @@ footer {
   }
 
   .checkout-logo-svg {
-    height: 20px;
+    height: 26px;
   }
 
   .checkout-masthead-divider {
-    height: 26px;
+    height: 30px;
   }
 
   .checkout-proof {
@@ -8584,11 +8612,14 @@ footer {
   .checkout-proof-heading {
     font-size: 15px;
     box-sizing: border-box;
+    width: 100%;
   }
 
   .checkout-proof-badges {
     font-size: 8px;
     gap: 3px;
+    justify-content: space-between;
+    width: 100%;
     flex-wrap: nowrap !important;
     white-space: nowrap !important;
   }
@@ -8606,15 +8637,16 @@ footer {
   }
 
   .checkout-logo-svg {
-    height: 17px;
+    height: 22px;
   }
 
   .checkout-masthead-divider {
-    height: 22px;
+    height: 25px;
   }
 
   .checkout-proof-heading {
     font-size: 13.5px;
+    width: 100%;
   }
 
   .checkout-avatars-img {
@@ -8629,6 +8661,8 @@ footer {
   .checkout-proof-badges {
     flex-wrap: nowrap !important;
     white-space: nowrap !important;
+    justify-content: space-between;
+    width: 100%;
     gap: 2px;
     font-size: 7.2px;
   }
@@ -8656,15 +8690,16 @@ footer {
   }
 
   .checkout-logo-svg {
-    height: 14.5px;
+    height: 18px;
   }
 
   .checkout-masthead-divider {
-    height: 18px;
+    height: 21px;
   }
 
   .checkout-proof-heading {
     font-size: 12px;
+    width: 100%;
   }
 
   .checkout-avatars-img {
@@ -8679,6 +8714,8 @@ footer {
   .checkout-proof-badges {
     font-size: 6.5px;
     gap: 1.5px;
+    justify-content: space-between;
+    width: 100%;
     flex-wrap: nowrap !important;
     white-space: nowrap !important;
   }

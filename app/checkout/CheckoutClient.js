@@ -261,35 +261,55 @@ export default function CheckoutClient() {
 
   const renderReviewsAndTrust = () => (
     <>
-      <div className="checkout-reviews-row" aria-label="Customer reviews">
-        {CHECKOUT_REVIEWS.map((review) => (
-          <div className="checkout-review-card" key={review.id}>
-            <p>{review.quote}</p>
-            <strong>- {review.author}</strong>
-            <span className="checkout-review-stars" aria-label="5 out of 5 stars">
-              ★★★★★
-            </span>
-          </div>
-        ))}
-      </div>
-
       <div className="checkout-trust-list">
         <div className="checkout-trust-item">
-          <span className="checkout-trust-icon" aria-hidden="true">🔒</span>
+          <span className="checkout-trust-icon" aria-hidden="true">
+            <svg
+              width="17"
+              height="17"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="checkout-lock-icon"
+              aria-hidden="true"
+            >
+              <rect x="3" y="10" width="18" height="12" rx="4" />
+              <path d="M7 10V7a5 5 0 0 1 10 0v3" />
+            </svg>
+          </span>
           <div>
             <strong>Secure payments</strong>
             <p>We use 100% secure payments to provide you with a simple and safe experience.</p>
           </div>
         </div>
         <div className="checkout-trust-item">
-          <span className="checkout-trust-icon" aria-hidden="true">🏪</span>
+          <span className="checkout-trust-icon" aria-hidden="true">
+            <img
+              src="/checkout-assets/store-guarantee-icon.png"
+              alt=""
+              width="19"
+              height="19"
+              className="checkout-trust-img store-icon"
+            />
+          </span>
           <div>
             <strong>60-Day Money Back Guarantee</strong>
             <p>Return your item within 60 days for a full refund</p>
           </div>
         </div>
         <div className="checkout-trust-item">
-          <span className="checkout-trust-icon" aria-hidden="true">🚚</span>
+          <span className="checkout-trust-icon" aria-hidden="true">
+            <img
+              src="/checkout-assets/fast-shipping-icon.png"
+              alt=""
+              width="23"
+              height="18"
+              className="checkout-trust-img truck-icon"
+            />
+          </span>
           <div>
             <strong>Fast Shipping</strong>
             <p>Receive your order within 3–5 business days.</p>
@@ -558,7 +578,23 @@ export default function CheckoutClient() {
                           autoComplete="cc-number"
                           required={paymentMethod === "card"}
                         />
-                        <span className="checkout-field-icon lock" aria-hidden="true">🔒</span>
+                        <span className="checkout-field-icon lock" aria-hidden="true"> <span className="checkout-trust-icon" aria-hidden="true">
+                          <svg
+                            width="17"
+                            height="17"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2.2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            className="checkout-lock-icon"
+                            aria-hidden="true"
+                          >
+                            <rect x="3" y="10" width="18" height="12" rx="4" />
+                            <path d="M7 10V7a5 5 0 0 1 10 0v3" />
+                          </svg>
+                        </span></span>
                       </div>
                       <div className="checkout-field-row">
                         <input
