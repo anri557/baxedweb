@@ -8562,9 +8562,21 @@ footer:not(.signin-footer):not(.admin-signin-footer) {
 }
 
 .brand-pill.amex {
-  background: #016fd0;
-  border-color: #016fd0;
+  background: #0070cf;
+  border-color: #0070cf;
   color: #fff;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.brand-pill-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 .brand-pill.discover {

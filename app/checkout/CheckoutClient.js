@@ -626,8 +626,15 @@ export default function CheckoutClient() {
                         className={`brand-pill mc ${cardBrand && cardBrand !== "mastercard" ? "is-hidden" : ""}`}
                         title="Mastercard"
                       />
-                      <span className={`brand-pill amex ${cardBrand && cardBrand !== "amex" ? "is-hidden" : ""}`}>
-                        AMEX
+                      <span
+                        className={`brand-pill amex ${cardBrand && cardBrand !== "amex" ? "is-hidden" : ""}`}
+                        title="American Express"
+                      >
+                        <img
+                          src="/checkout-assets/amex-badge.webp"
+                          alt="American Express"
+                          className="brand-pill-img"
+                        />
                       </span>
                       <span className={`brand-pill discover ${cardBrand === "discover" ? "" : "is-hidden"}`}>
                         DISC
