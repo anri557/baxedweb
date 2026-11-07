@@ -2883,7 +2883,7 @@ h2 {
   font: inherit;
 }
 
-footer {
+footer:not(.signin-footer):not(.admin-signin-footer) {
   position: relative;
   overflow: hidden;
   margin-top: 64px;
@@ -9367,21 +9367,35 @@ footer {
   text-decoration: underline;
 }
 
-.admin-signin-terms a:hover {
-  color: #111111;
+.admin-signin-terms a {
+  color: #000000 !important;
+  text-decoration: underline;
 }
 
+.admin-signin-terms a:hover {
+  color: #000000 !important;
+  opacity: 0.75;
+}
+
+footer.admin-signin-footer,
 .admin-signin-footer {
+  position: static !important;
+  overflow: visible !important;
+  margin-top: auto !important;
+  border-top: none !important;
+  border: none !important;
+  background: transparent !important;
+  background-image: none !important;
+  background-color: transparent !important;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 8px;
-  margin-top: auto;
-  padding-top: 24px;
+  padding: 24px 0 0 !important;
 }
 
 .admin-signin-privacy {
-  color: #9c8959;
+  color: #000000 !important;
   font-size: 13px;
   text-decoration: none;
   font-weight: 500;
@@ -9392,18 +9406,20 @@ footer {
 }
 
 .admin-signin-privacy:hover {
+  color: #000000 !important;
   text-decoration: underline;
 }
 
 .admin-signin-return {
-  color: #888888;
+  color: #000000 !important;
   font-size: 12px;
   text-decoration: none;
-  transition: color 0.15s ease;
+  transition: opacity 0.15s ease;
 }
 
 .admin-signin-return:hover {
-  color: #111111;
+  color: #000000 !important;
+  text-decoration: underline;
 }
 
 .admin-signin-spinner {
@@ -9458,7 +9474,7 @@ footer {
 .signin-logo {
   display: inline-flex;
   align-items: center;
-  color: #a78d3c;
+  color: #8525dc;
   text-decoration: none;
   transition: opacity 0.15s ease;
 }
@@ -9467,7 +9483,8 @@ footer {
   opacity: 0.85;
 }
 
-.signin-logo svg {
+.signin-logo svg,
+.signin-logo-svg {
   width: 120px;
   height: auto;
   display: block;
@@ -9529,6 +9546,11 @@ footer {
   letter-spacing: -0.01em;
   margin: 0;
   line-height: 1.2;
+}
+
+.signin-purple-count {
+  color: #8525dc;
+  font-weight: 800;
 }
 
 .signin-trust-subtext {
@@ -9800,18 +9822,31 @@ footer {
   line-height: 1.5;
 }
 
-.signin-terms a {
-  color: #666666;
+.signin-terms a,
+.signin-terms-link {
+  color: #000000 !important;
   text-decoration: underline;
-  transition: color 0.15s ease;
+  font-weight: 500;
+  transition: opacity 0.15s ease;
 }
 
-.signin-terms a:hover {
-  color: #111111;
+.signin-terms a:hover,
+.signin-terms-link:hover {
+  color: #000000 !important;
+  opacity: 0.75;
 }
 
-/* Footer with Privacy Policy */
+/* Footer with Privacy Policy (No black background) */
+footer.signin-footer,
 .signin-footer {
+  position: static !important;
+  overflow: visible !important;
+  margin-top: 0 !important;
+  border-top: none !important;
+  border: none !important;
+  background: transparent !important;
+  background-image: none !important;
+  background-color: transparent !important;
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
@@ -9819,11 +9854,11 @@ footer {
   flex-direction: column;
   align-items: center;
   gap: 10px;
-  padding-top: 32px;
+  padding: 32px 0 0 !important;
 }
 
 .signin-privacy-link {
-  color: #a78d3c;
+  color: #000000 !important;
   font-size: 13px;
   text-decoration: none;
   font-weight: 600;
@@ -9831,19 +9866,23 @@ footer {
 }
 
 .signin-privacy-link:hover {
+  color: #000000 !important;
   text-decoration: underline;
-  opacity: 0.85;
+  opacity: 0.75;
 }
 
 .signin-return-link {
-  color: #888888;
+  color: #000000 !important;
   font-size: 12px;
   text-decoration: none;
-  transition: color 0.15s ease;
+  font-weight: 500;
+  transition: opacity 0.15s ease;
 }
 
 .signin-return-link:hover {
-  color: #111111;
+  color: #000000 !important;
+  text-decoration: underline;
+  opacity: 0.75;
 }
 
 /* Spinner animation */
