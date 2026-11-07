@@ -36,7 +36,7 @@ function formatPrice(value) {
 
 function detectCardBrand(num) {
   const digits = (num || "").replace(/\D/g, "");
-  if (!digits) return null;
+  if (!digits || digits.length < 6) return null;
   if (/^4/.test(digits)) return "visa";
   if (/^(5[1-5]|2[2-7])/.test(digits) || /^5/.test(digits)) return "mastercard";
   if (/^3[47]/.test(digits)) return "amex";
