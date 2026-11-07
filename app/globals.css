@@ -8562,8 +8562,8 @@ footer:not(.signin-footer):not(.admin-signin-footer) {
 }
 
 .brand-pill.amex {
-  background: #0070cf;
-  border-color: #0070cf;
+  background: #006fcf;
+  border-color: #006fcf;
   color: #fff;
   padding: 0;
   display: inline-flex;
