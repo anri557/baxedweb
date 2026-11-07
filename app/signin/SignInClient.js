@@ -98,18 +98,8 @@ export default function SignInClient() {
       {/* Top Header */}
       <header className="signin-header">
         <Link href="/" className="signin-logo" aria-label="BAXED Home">
-          <svg viewBox="50 15 920 195" className="signin-logo-svg" aria-hidden="true">
-            <defs>
-              <linearGradient id="signinBaxedPurpleGrad" x1="0%" y1="0%" x2="100%" y2="85%">
-                <stop offset="0%" stopColor="#5900a8" />
-                <stop offset="30%" stopColor="#8525dc" />
-                <stop offset="65%" stopColor="#d982ff" />
-                <stop offset="85%" stopColor="#ffffff" />
-                <stop offset="100%" stopColor="#9b36ff" />
-              </linearGradient>
-            </defs>
+          <svg viewBox="50 15 920 195" className="signin-logo-svg" fill="#8525dc" aria-hidden="true">
             <path
-              fill="url(#signinBaxedPurpleGrad)"
               fillRule="evenodd"
               d={LOGO_PATH}
             />
