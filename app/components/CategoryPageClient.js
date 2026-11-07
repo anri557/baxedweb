@@ -485,7 +485,6 @@ function CategoryPageContent({ categoryType = "tops" }) {
       syncCategoryCartToStorage(next);
       return next;
     });
-    showToast(`Added ${product.name} to cart`);
     setIsCartDrawerOpen(true);
   };
 
@@ -562,11 +561,6 @@ function CategoryPageContent({ categoryType = "tops" }) {
 
   return (
     <div className="cat-page-wrapper">
-      {/* Toast Notification */}
-      <div className={`toast-notification ${isToastActive ? "active" : ""}`} role="status">
-        {toastMessage}
-      </div>
-
       {/* Primary Site Navbar */}
       <Navbar
         navItems={navItems}
@@ -1019,6 +1013,11 @@ function CategoryPageContent({ categoryType = "tops" }) {
 
       {/* Global Site Footer */}
       <Footer />
+
+      {/* Notification Toast */}
+      <div className={`toast gold ${isToastActive ? "on" : ""}`} id="toast" role="status">
+        {toastMessage}
+      </div>
     </div>
   );
 }
