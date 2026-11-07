@@ -619,21 +619,31 @@ export default function CheckoutClient() {
                     />
                     <span>Credit card</span>
                     <div className="checkout-card-brands" aria-hidden="true">
-                      {cardBrand === "visa" && <span className="brand-pill visa">VISA</span>}
-                      {cardBrand === "mastercard" && <span className="brand-pill mc" title="Mastercard" />}
-                      {cardBrand === "amex" && <span className="brand-pill amex">AMEX</span>}
-                      {cardBrand === "discover" && <span className="brand-pill discover">DISCOVER</span>}
-                      {cardBrand === "jcb" && <span className="brand-pill jcb">JCB</span>}
-                      {cardBrand === "diners" && <span className="brand-pill diners">DINERS</span>}
-                      {cardBrand === "unionpay" && <span className="brand-pill unionpay">UNIONPAY</span>}
-                      {(!cardBrand || cardBrand === "unknown") && (
-                        <>
-                          <span className="brand-pill visa">VISA</span>
-                          <span className="brand-pill mc" />
-                          <span className="brand-pill amex">AMEX</span>
-                          <span className="brand-pill more">+5</span>
-                        </>
-                      )}
+                      <span className={`brand-pill visa ${cardBrand && cardBrand !== "visa" ? "is-hidden" : ""}`}>
+                        VISA
+                      </span>
+                      <span
+                        className={`brand-pill mc ${cardBrand && cardBrand !== "mastercard" ? "is-hidden" : ""}`}
+                        title="Mastercard"
+                      />
+                      <span className={`brand-pill amex ${cardBrand && cardBrand !== "amex" ? "is-hidden" : ""}`}>
+                        AMEX
+                      </span>
+                      <span className={`brand-pill discover ${cardBrand === "discover" ? "" : "is-hidden"}`}>
+                        DISC
+                      </span>
+                      <span className={`brand-pill jcb ${cardBrand === "jcb" ? "" : "is-hidden"}`}>
+                        JCB
+                      </span>
+                      <span className={`brand-pill diners ${cardBrand === "diners" ? "" : "is-hidden"}`}>
+                        DINERS
+                      </span>
+                      <span className={`brand-pill unionpay ${cardBrand === "unionpay" ? "" : "is-hidden"}`}>
+                        UPI
+                      </span>
+                      <span className={`brand-pill more ${cardBrand ? "is-hidden" : ""}`}>
+                        +5
+                      </span>
                     </div>
                   </label>
                   {paymentMethod === "card" && (
@@ -655,7 +665,7 @@ export default function CheckoutClient() {
                             height="16"
                             viewBox="0 0 24 24"
                             fill="none"
-                            stroke="#8525dc"
+                            stroke="#9ca3af"
                             strokeWidth="2.2"
                             strokeLinecap="round"
                             strokeLinejoin="round"

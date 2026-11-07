@@ -8030,7 +8030,14 @@ footer {
 
 .checkout-field-icon.lock {
   border: 0;
-  font-size: 13px;
+  color: #9ca3af;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.checkout-field-icon.lock svg {
+  stroke: #9ca3af;
 }
 
 /* Country Floating Label Select */
@@ -8159,22 +8166,55 @@ footer {
 .checkout-card-brands {
   display: flex;
   align-items: center;
-  gap: 4px;
   margin-left: auto;
+  overflow: visible;
 }
 
 .brand-pill {
   display: inline-flex;
   height: 22px;
   min-width: 34px;
+  max-width: 44px;
   align-items: center;
   justify-content: center;
   padding: 0 5px;
+  margin-left: 4px;
   border: 1px solid #e2e2e2;
   border-radius: 4px;
   background: #fff;
   font-size: 9px;
   font-weight: 800;
+  box-sizing: border-box;
+  overflow: hidden;
+  white-space: nowrap;
+  opacity: 1;
+  transform: scale(1);
+  will-change: transform, opacity, max-width, margin;
+  transition:
+    max-width 0.45s cubic-bezier(0.25, 1, 0.5, 1),
+    min-width 0.45s cubic-bezier(0.25, 1, 0.5, 1),
+    opacity 0.35s ease,
+    margin 0.45s cubic-bezier(0.25, 1, 0.5, 1),
+    padding 0.45s cubic-bezier(0.25, 1, 0.5, 1),
+    border-width 0.45s ease,
+    transform 0.45s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.brand-pill:first-child {
+  margin-left: 0;
+}
+
+.brand-pill.is-hidden {
+  opacity: 0;
+  max-width: 0 !important;
+  min-width: 0 !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  border: none !important;
+  transform: scale(0.7);
+  pointer-events: none;
 }
 
 .brand-pill.visa {
@@ -8424,11 +8464,6 @@ footer {
   font-size: 15px;
   font-weight: 600;
   cursor: pointer;
-  transition: background 120ms ease;
-}
-
-.checkout-submit:hover {
-  background: #a48b3d;
 }
 
 /* Customer Review Cards */
