@@ -848,7 +848,14 @@ function CategoryPageContent({ categoryType = "tops" }) {
           ) : (
             cartItems.map((item) => (
               <div key={item.id} className="cart-drawer-item">
-                <img src={item.image} alt={item.name} className="cart-item-thumb" />
+                <img
+                  src={item.image || "/ShopTop.jpeg"}
+                  alt={item.name}
+                  className="cart-item-thumb"
+                  width={76}
+                  height={76}
+                  style={{ width: "76px", height: "76px", objectFit: "cover", flexShrink: 0, borderRadius: "8px" }}
+                />
                 <div className="cart-item-details">
                   <div className="cart-item-top">
                     <h3 className="cart-item-title">{item.name}</h3>
